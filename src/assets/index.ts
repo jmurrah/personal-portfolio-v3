@@ -1,0 +1,42 @@
+import CalendarIcon from '@/assets/icons/CalendarIcon.svg';
+import CodeIcon from '@/assets/icons/CodeIcon.svg';
+import GitHubIcon from '@/assets/icons/GitHubIcon.svg';
+import LinkedInIcon from '@/assets/icons/LinkedInIcon.svg';
+import MailIcon from '@/assets/icons/MailIcon.svg';
+import MapPinIcon from '@/assets/icons/MapPinIcon.svg';
+import MenuIcon from '@/assets/icons/MenuIcon.svg';
+import ArrowUpRightIcon from '@/assets/icons/ArrowUpRightIcon.svg';
+import ArrowRightIcon from '@/assets/icons/ArrowRightIcon.svg';
+import ArrowLeftIcon from '@/assets/icons/ArrowLeftIcon.svg';
+import ClockIcon from '@/assets/icons/ClockIcon.svg';
+import ResumeIcon from '@/assets/icons/ResumeIcon.svg';
+
+import GraduationHeadshotPhoto from '@/assets/photos/GraduationHeadshot.webp';
+import AdtranLogo from '@/assets/logos/adtran.png';
+import AttLogo from '@/assets/logos/att.png';
+import AuburnLogo from '@/assets/logos/auburn.png';
+
+export const ICONS = {
+  calendar: CalendarIcon,
+  code: CodeIcon,
+  gitHub: GitHubIcon,
+  linkedIn: LinkedInIcon,
+  mail: MailIcon,
+  arrowUpRight: ArrowUpRightIcon,
+  arrowRight: ArrowRightIcon,
+  arrowLeft: ArrowLeftIcon,
+  mapPin: MapPinIcon,
+  menu: MenuIcon,
+  clock: ClockIcon,
+  resume: ResumeIcon,
+} as const;
+
+export const PHOTOS = {
+  graduationHeadshot: GraduationHeadshotPhoto,
+} as const;
+
+export const LOGOS = {
+  adtran: AdtranLogo,
+  att: AttLogo,
+  auburn: AuburnLogo,
+} as const;

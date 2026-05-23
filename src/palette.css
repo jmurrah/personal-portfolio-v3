@@ -1,0 +1,148 @@
+:root {
+  /* Warm Precision — sharpened */
+
+  /* Base — cooler, less coffee-shop */
+  --bg: #f5f6f7;
+  --surface: #ffffff;
+  --surface-muted: #eceff2;
+
+  /* Text */
+  --text: #181512;
+  --muted: #4f4a43;
+  --muted-light: #746d63;
+
+  /* Structure */
+  --border: #e2e6ea;
+  --border-strong: #ced4da;
+
+  /* Technical blue */
+  --blue: #1d4ed8;
+  --blue-hover: #1e40af;
+  --blue-soft: #e8f0fe;
+  --blue-border: #b8d0f9;
+
+  /* Human/status orange */
+  --orange: #c2410c;
+  --orange-hover: #9a3412;
+  --orange-soft: #fef0e4;
+  --orange-border: #f5c09a;
+
+  /* Rare live/shipped/code green */
+  --green: #0f766e;
+  --green-soft: #e6fffa;
+  --green-border: #b7f3ea;
+
+  /* Code */
+  --code-bg: #eceff2;
+  --code-text: var(--green);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(24, 21, 18, 0.05);
+  --shadow-md: 0 8px 24px rgba(24, 21, 18, 0.07);
+
+  /* Existing app aliases */
+  --accent: var(--blue);
+  --accent-hover: var(--blue-hover);
+  --accent-soft: var(--blue-soft);
+  --accent-border: var(--blue-border);
+
+  --signal: var(--orange);
+  --signal-hover: var(--orange-hover);
+  --signal-soft: var(--orange-soft);
+  --signal-border: var(--orange-border);
+
+  --success: var(--green);
+  --success-soft: var(--green-soft);
+  --success-border: var(--green-border);
+
+  --text-muted: var(--muted);
+  --primary: var(--blue);
+  --primary-muted: var(--blue-hover);
+  --danger: var(--orange);
+
+  --status-active: var(--green);
+  --status-passive: var(--orange);
+  --status-shutdown: var(--muted);
+
+  --color-accent: var(--blue);
+  --color-accent-hover: var(--blue-hover);
+}
+
+/*
+:root {
+  Parchment / Stone Hybrid
+
+  Base
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --surface-muted: #f5f1ea;
+
+  Text
+  --text: #1c1611;
+  --text-soft: #292524;
+  --muted: #78716c;
+  --muted-light: #a8a29e;
+
+  Structure
+  --border: #e7e1d8;
+  --border-strong: #d6cec2;
+
+  Technical blue
+  --blue: #2563eb;
+  --blue-hover: #1d4ed8;
+  --blue-soft: #dbeafe;
+  --blue-border: #bfdbfe;
+
+  Human/status orange
+  --orange: #c2410c;
+  --orange-hover: #9a3412;
+  --orange-soft: #ffedd5;
+  --orange-border: #fed7aa;
+
+  Rare live/shipped/code green
+  --green: #0f766e;
+  --green-soft: #ccfbf1;
+  --green-border: #99f6e4;
+
+  Code
+  --code-bg: #f5f1ea;
+  --code-text: var(--green);
+
+  Shadows
+  --shadow-sm: 0 1px 2px rgba(28, 22, 17, 0.05);
+  --shadow-md: 0 8px 24px rgba(28, 22, 17, 0.08);
+
+  Existing app aliases
+  --accent: var(--blue);
+  --accent-hover: var(--blue-hover);
+  --accent-soft: var(--blue-soft);
+  --accent-border: var(--blue-border);
+
+  --signal: var(--orange);
+  --signal-hover: var(--orange-hover);
+  --signal-soft: var(--orange-soft);
+  --signal-border: var(--orange-border);
+
+  --success: var(--green);
+  --success-soft: var(--green-soft);
+  --success-border: var(--green-border);
+
+  --text-muted: var(--muted);
+  --primary: var(--blue);
+  --primary-muted: var(--blue-hover);
+  --danger: var(--orange);
+
+  --status-active: var(--green);
+  --status-passive: var(--orange);
+  --status-shutdown: var(--muted);
+
+  --color-accent: var(--blue);
+  --color-accent-hover: var(--blue-hover);
+}
+*/
+
+html,
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}

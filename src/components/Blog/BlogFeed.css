@@ -1,0 +1,13 @@
+.blog-card {
+  background: var(--surface);
+}
+
+.blog-card__date {
+  white-space: nowrap;
+}
+
+.blog-card:hover,
+.blog-card:focus-within {
+  background: var(--blue-soft);
+  border-color: var(--blue-border);
+}
