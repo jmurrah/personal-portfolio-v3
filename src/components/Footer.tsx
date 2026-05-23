@@ -67,7 +67,9 @@ export default function Footer() {
                 src={link.icon}
                 alt={link.label}
                 size="xsmall"
-                color="currentColor"
+                color="var(--text-muted)"
+                hoverColor="var(--blue)"
+                className="transition-transform duration-150 hover:-translate-y-0.5"
               />
             ))}
           </div>

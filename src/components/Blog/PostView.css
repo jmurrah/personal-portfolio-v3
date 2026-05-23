@@ -47,6 +47,21 @@
 }
 .post-title-link {
   display: inline;
+  color: var(--text);
+  text-decoration-line: underline;
+  text-decoration-color: var(--blue-border);
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: auto;
+  transition:
+    color 100ms ease,
+    text-decoration-color 100ms ease;
+}
+
+.post-title-link:hover,
+.post-title-link:focus-visible {
+  color: var(--blue-hover);
+  text-decoration-color: currentColor;
 }
 
 .post-subtitle {
@@ -151,7 +166,7 @@
   margin: 0;
   padding: 10px 12px;
   border-left: 3px solid var(--orange);
-  background: var(--surface-muted);
+  background: color-mix(in srgb, var(--surface-muted) 50%, var(--orange-soft) 50%);
   color: inherit;
 }
 

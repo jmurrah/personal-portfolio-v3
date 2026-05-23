@@ -25,7 +25,7 @@ export default function BlogPost() {
   if (!post) {
     return (
       <section className="flex flex-col gap-3">
-        <Link className="back-nav-link" to="/writing">
+        <Link className="back-nav-link text-md" to="/writing">
           <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
           <span>Back to posts</span>
         </Link>

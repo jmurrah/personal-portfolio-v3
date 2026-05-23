@@ -80,7 +80,11 @@ Current site direction:
 - Reusable styles belong in CSS files imported by components.
 - Inline Tailwind classes are fine for local layout and one-off spacing.
 - Preserve accessibility: focus states, aria labels, descriptive alt text, and readable contrast.
-- Text links should use `--text` for the label with an always-on underline in `--muted`; on hover/focus, promote the underline to `--text` rather than recoloring the label itself.
+- Do not use one global link style for every surface. Keep separate treatments for nav links, clustered/meta links, inline sentence links, and long-form prose links.
+- Meta, inline, and prose text links should use `--blue-border` for the resting underline and transition both label and underline together to `--blue-hover` with a fast `100ms` color-only transition and fixed underline thickness. Keep `--blue-hover` dark enough to reach roughly `10:1` contrast on the light site surfaces while preserving the existing blue family.
+- Header nav links should stay neutral and undecorated at rest; use color change for hover/focus and reserve underlines there for active route indication only.
+- Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
+- Keep non-link controls such as menu toggles and close buttons on separate classes so link underline styling only applies to actual links.
 
 ## Typography
 
@@ -112,7 +116,8 @@ Current site direction:
 - Blog CSS should follow Warm Precision:
   - Cards use `--surface` and `--border`.
   - Card interaction can use `--blue-soft` and `--blue-border`.
-  - Blockquotes use `--surface-muted` with `--orange`.
+  - Linked blog card titles and linked post titles should keep a subtle `--blue-border` underline at rest and promote to `--blue-hover` on hover/focus.
+  - Blockquotes should carry a subtly warm surface derived from `--surface-muted` and `--orange-soft`, not neutral gray alone.
   - Code uses `--code-bg`, `--code-text`, and `--border`.
   - Metadata uses `--muted`.
 

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCachedBlogPosts } from '@/components/Blog/feedService';
 import type { FeedPost } from '@/components/Blog/types';
-import React from 'react';
 
 const RECENT_POSTS_LIMIT = 3;
 const RECENT_POSTS_ALL_POSTS_PATH = '/writing';
@@ -34,8 +34,8 @@ function HeroSection() {
       <h1 className="text-5xl font-semibold">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
-          If you're a recruiter or want my story, read my{' '}
-          <Link className="text-link" to="/signals">
+          If you're a recruiter or curious what shaped me, read my{' '}
+          <Link className="inline-link" to="/signals">
             signals
           </Link>
           .
@@ -49,11 +49,11 @@ function HeroSection() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-link gap-0.5 flex items-center"
+              className="meta-link gap-0.5 flex items-center"
             >
               <span>{link.label}</span>
             </a>
-            {index < HERO_LINKS.length - 1 && <span>·</span>}
+            {index < HERO_LINKS.length - 1 && <span>&middot;</span>}
           </React.Fragment>
         ))}
       </div>

@@ -132,7 +132,7 @@ export default function PostView({ post, onBack }: PostViewProps) {
   return (
     <article className="post-view">
       <div className="post-shell">
-        <button type="button" onClick={onBack} className="back-nav-link back-nav-button">
+        <button type="button" onClick={onBack} className="back-nav-link text-md back-nav-button">
           <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
           <span>Back to Writing</span>
         </button>
@@ -146,7 +146,7 @@ export default function PostView({ post, onBack }: PostViewProps) {
                 rel="noopener noreferrer"
                 className="post-title-link"
               >
-                <span className="text-link">{post.title}</span>
+                <span>{post.title}</span>
               </a>
             ) : (
               <h1 className="post-title">{post.title}</h1>
@@ -155,7 +155,7 @@ export default function PostView({ post, onBack }: PostViewProps) {
           </div>
           <div className="post-byline">
             <a
-              className="post-author text-link"
+              className="post-author meta-link"
               href="https://jacobmurrah.substack.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -180,7 +180,7 @@ export default function PostView({ post, onBack }: PostViewProps) {
             href={post.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="post-link-btn post-bottom-link text-link"
+            className="post-link-btn post-bottom-link inline-link"
           >
             Read on Substack
           </a>

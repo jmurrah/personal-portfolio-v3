@@ -18,7 +18,7 @@ const signals = [
   {
     age: 20,
     title: 'Top 1% Valorant Player',
-    desc: "Skills have carryover, don't take your experiences for granted.",
+    desc: "Skills have carryover. Don't take your experiences for granted.",
   },
   {
     age: 21,
@@ -30,8 +30,16 @@ const signals = [
     title: 'Married my kindhearted wife',
     desc: 'Communication is essential to success in all aspects of life.',
   },
-  { age: 22, title: 'Graduated from Auburn with 4 internships', desc: 'finish this' },
-  { age: 23, title: 'Accepted into Georgia Tech', desc: 'finish this' },
+  {
+    age: 22,
+    title: 'Graduated from Auburn with 4 internships',
+    desc: 'Make the most of the environment you are in.',
+  },
+  {
+    age: 23,
+    title: 'Accepted into Georgia Tech',
+    desc: 'Stopped wondering if I belonged. The ability was always there.',
+  },
   { age: 23, title: 'Today', desc: 'Refining my daily routines to do more with less time.' },
 ];
 
@@ -57,13 +65,15 @@ function Signal({ age, title, desc }: SignalProps) {
 export default function Signals() {
   return (
     <section>
-      <Link className="back-nav-link" to="/">
+      <Link className="back-nav-link text-md" to="/">
         <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
         <span>Back to Home</span>
       </Link>
-      <h1 className="mb-6 text-4xl font-semibold">Signals</h1>
+      <h1 className="mb-2 text-4xl font-semibold">Signals</h1>
 
-      <p className="mb-6 text-[color:var(--muted)]">Add page description here.</p>
+      <p className="mb-6 text-[color:var(--muted)]">
+        A timeline of moments that have shaped my standards, habits, and perspective.
+      </p>
 
       <div className="signals-list">
         {signals.map((signal, index) => (

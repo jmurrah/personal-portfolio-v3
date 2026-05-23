@@ -25,7 +25,7 @@ export default function BlogFeed() {
       <p className="text-[color:var(--muted)]">
         All posts come from my{' '}
         <a
-          className="text-link"
+          className="inline-link"
           href="https://jacobmurrah.substack.com"
           target="_blank"
           rel="noopener noreferrer"
@@ -49,9 +49,7 @@ export default function BlogFeed() {
                 aria-label={post.title ? `Read ${post.title}` : 'Read post'}
               >
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="blog-card__title text-lg font-semibold">
-                    <span className="text-link">{post.title}</span>
-                  </h3>
+                  <h3 className="blog-card__title text-lg font-semibold">{post.title}</h3>
                   <div className="blog-card__date flex shrink-0 items-center gap-2 text-sm text-[color:var(--muted)]">
                     {publishedOn && <span>{publishedOn}</span>}
                   </div>

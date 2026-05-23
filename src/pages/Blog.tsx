@@ -6,11 +6,11 @@ import SvgIcon from '@/components/SvgIcon';
 export default function Blog() {
   return (
     <section>
-      <Link className="back-nav-link" to="/">
+      <Link className="back-nav-link text-md" to="/">
         <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
         <span>Back to Home</span>
       </Link>
-      <h1 className="mb-6 text-4xl font-semibold">Writing</h1>
+      <h1 className="mb-2 text-4xl font-semibold">Writing</h1>
       <BlogContent />
     </section>
   );

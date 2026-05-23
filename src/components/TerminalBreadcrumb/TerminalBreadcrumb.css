@@ -16,7 +16,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: 14px;
   line-height: 1.2;
 }
 
@@ -40,7 +39,7 @@
 
 .terminal-breadcrumb__link:hover,
 .terminal-breadcrumb__link:focus-visible {
-  color: inherit;
+  color: var(--blue-hover);
 }
 
 .terminal-breadcrumb__cursor {

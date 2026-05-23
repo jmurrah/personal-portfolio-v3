@@ -90,8 +90,10 @@ a {
   color: inherit;
 }
 
-.svg-icon-link:hover .svg-icon {
-  background-color: currentColor;
+.svg-icon-link:hover .svg-icon,
+.svg-icon-link:focus-visible .svg-icon {
+  color: var(--icon-hover-color, var(--blue-hover));
+  background-color: var(--icon-hover-color, var(--blue-hover));
 }
 
 .svg-icon {
@@ -174,21 +176,34 @@ a {
 .nav-link {
   color: var(--muted);
   font-family: var(--font-family-mono);
-  transition: none !important;
+  text-decoration: none;
+  transition: color 100ms ease;
 }
 
-.nav-link:hover {
-  color: var(--text) !important;
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--blue-hover) !important;
   cursor: pointer;
 }
 
 .nav-link-active {
-  color: var(--text) !important;
+  color: var(--blue-hover) !important;
   text-decoration-line: underline;
   text-decoration-color: currentColor;
-  text-decoration-thickness: 0.12rem;
-  text-underline-offset: 0.35rem;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.18em;
   text-decoration-skip-ink: auto;
+}
+
+.nav-control {
+  color: var(--muted);
+  font-family: var(--font-family-mono);
+  transition: color 100ms ease;
+}
+
+.nav-control:hover,
+.nav-control:focus-visible {
+  color: var(--text);
 }
 
 .custom-margin {
@@ -215,23 +230,42 @@ strong {
   line-height: 1.5;
 }
 
-.interactive-link,
-.text-link,
+.meta-link {
+  color: var(--text);
+  text-decoration-line: underline;
+  text-decoration-color: var(--blue-border);
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: auto;
+  transition:
+    color 100ms ease,
+    text-decoration-color 100ms ease;
+}
+
+.meta-link:hover,
+.meta-link:focus-visible {
+  color: var(--blue-hover);
+  text-decoration-color: currentColor;
+}
+
+.inline-link,
 .post-content a {
   color: var(--text);
   text-decoration-line: underline;
-  text-decoration-color: var(--muted);
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.2em;
+  text-decoration-color: var(--blue-border);
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.18em;
   text-decoration-skip-ink: auto;
+  transition:
+    color 100ms ease,
+    text-decoration-color 100ms ease;
 }
 
-.interactive-link:hover,
-.interactive-link:focus-visible,
-.text-link:hover,
-.text-link:focus-visible,
+.inline-link:hover,
+.inline-link:focus-visible,
 .post-content a:hover,
 .post-content a:focus-visible {
+  color: var(--blue-hover);
   text-decoration-color: currentColor;
 }
 
@@ -241,15 +275,13 @@ strong {
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 2rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
   width: fit-content;
   transition: color 160ms ease;
 }
 
 .back-nav-link:hover,
 .back-nav-link:focus-visible {
-  color: var(--text);
+  color: var(--blue-hover);
 }
 
 .back-nav-button {
@@ -262,9 +294,9 @@ strong {
   text-align: left;
 }
 
-.text-link,
-.post-content a {
-  line-height: 1.7rem;
+.meta-link,
+.inline-link {
+  line-height: inherit;
   display: inline;
 }
 
