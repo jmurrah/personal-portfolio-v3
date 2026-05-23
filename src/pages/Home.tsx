@@ -34,13 +34,37 @@ function HeroSection() {
       <h1 className="text-5xl font-semibold">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
-          If you're a recruiter or curious what shaped me, read my{' '}
+          Curious about what has shaped me? Read my{' '}
           <Link className="inline-link" to="/signals">
             signals
           </Link>
           .
         </p>
-        <p>I'm a Software Engineer at AT&T with 2+ years of experience.</p>
+        <p className="text-[var(--muted)]">
+          <span className="text-[var(--text)]">Software Engineer</span> at{' '}
+          <a
+            href="https://www.att.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="meta-link gap-0.5 flex items-center"
+          >
+            <span>AT&T</span>
+          </a>{' '}
+          in <span className="text-[var(--text)]">Atlanta</span>, working on network analytics and
+          automation. I bring modern engineering practices to legacy systems.
+        </p>
+        <p className="text-[var(--muted)]">
+          Pursuing a master's at{' '}
+          <a
+            href="https://www.gatech.edu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="meta-link gap-0.5 flex items-center"
+          >
+            <span>Georgia Tech</span>
+          </a>{' '}
+          while navigating fatherhood, hitting the gym, and optimizing my daily routines.
+        </p>
       </div>
       <div className="flex flex-wrap gap-x-4 justify-start">
         {HERO_LINKS.map((link, index) => (

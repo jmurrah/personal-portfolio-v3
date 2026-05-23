@@ -13,32 +13,32 @@ const signals = [
   {
     age: 17,
     title: 'Top 0.1% Fortnite Player',
-    desc: 'Learned what it takes to compete with the best in the world.',
+    desc: 'Learned what separates the good from the elite.',
   },
   {
     age: 20,
     title: 'Top 1% Valorant Player',
-    desc: "Skills have carryover. Don't take your experiences for granted.",
+    desc: 'Expertise in one area makes learning another much easier.',
   },
   {
     age: 21,
     title: '1000-lb Powerlifting Total',
-    desc: 'You can do anything you set your mind to.',
+    desc: 'Long term goals are only achievable through consistency.',
   },
   {
     age: 22,
     title: 'Married my kindhearted wife',
-    desc: 'Communication is essential to success in all aspects of life.',
+    desc: 'Clear communication prevents most conflicts.',
   },
   {
     age: 22,
     title: 'Graduated from Auburn with 4 internships',
-    desc: 'Make the most of the environment you are in.',
+    desc: 'Your environment does not determine growth, effort does.',
   },
   {
     age: 23,
     title: 'Accepted into Georgia Tech',
-    desc: 'Stopped wondering if I belonged. The ability was always there.',
+    desc: 'Stopped wondering if I belonged in the rooms I was in.',
   },
   { age: 23, title: 'Today', desc: 'Refining my daily routines to do more with less time.' },
 ];
