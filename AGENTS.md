@@ -21,7 +21,7 @@ This is a Vite + React single-page app for a personal portfolio and writing/blog
 
 Current site direction:
 
-- Home route intentionally renders no body content for now.
+- Home route renders hero copy plus a concise experience timeline.
 - The layout still renders header, route outlet, and footer.
 - The public writing route is `/writing`; legacy `/blog` URLs redirect to `/writing`.
 - Projects route, project navigation, theme switching, and contact section have been removed.
@@ -58,6 +58,9 @@ Current site direction:
 - New route: `src/pages/<Name>.tsx`, or `src/pages/<Name>/` when it needs page-only subcomponents.
 - Page-only helpers/components: colocate under the page folder.
 - Reusable UI: `src/components/<Component>.tsx` plus CSS if needed.
+- Reused timeline-style sections should live in a shared component with shared CSS rather than duplicating page-local timeline markup.
+- Timeline row spacing should be configurable on the shared `Timeline` component via a single prop rather than hardcoded per page or repeated per item.
+- The home experience timeline should show role, company, location, right-aligned dates on the same row, and summary only; keep nothing to the left of the timeline line, and do not reintroduce company logos or technology tag pills there.
 - Blog-specific reusable UI/helpers: `src/components/Blog/`.
 - Static data: `src/constants/<name>.json|ts`.
 - Build/CI utilities: `scripts/*.ts`.
@@ -84,7 +87,7 @@ Current site direction:
 - Meta, inline, and prose text links should use `--blue-border` for the resting underline and transition both label and underline together to `--blue-hover` with a fast `100ms` color-only transition and fixed underline thickness. Keep `--blue-hover` dark enough to reach roughly `10:1` contrast on the light site surfaces while preserving the existing blue family.
 - Header nav links should stay neutral and undecorated at rest; use color change for hover/focus and reserve underlines there for active route indication only.
 - Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
-- Keep non-link controls such as menu toggles and close buttons on separate classes so link underline styling only applies to actual links.
+- Keep non-link controls such as the hamburger/menu toggle and close button on separate classes so link underline styling only applies to actual links; their hover/focus state should use `--blue-hover` and show a pointer cursor.
 
 ## Typography
 

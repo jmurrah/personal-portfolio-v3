@@ -1,66 +1,73 @@
 import { Link } from 'react-router-dom';
 import { ICONS } from '@/assets';
+import Timeline, { type TimelineItem } from '@/components/Timeline';
 import SvgIcon from '@/components/SvgIcon';
-import './Signals.css';
 
-const signals = [
+const signals: TimelineItem[] = [
   {
-    age: 10,
+    id: 'wrestling',
+    label: 'Age 10',
     title: 'Alabama Youth Wrestling State Champion',
-    desc: "Competing is kind of fun, let's keep challenging myself.",
+    description: "Competing is kind of fun, let's keep challenging myself.",
+    isFilled: false,
   },
-  { age: 14, title: 'Sub-6 Minute Mile', desc: 'Leave nothing in the tank by the end of a race.' },
   {
-    age: 17,
+    id: 'mile',
+    label: 'Age 14',
+    title: 'Sub-6 Minute Mile',
+    description: 'Leave nothing in the tank by the end of a race.',
+    isFilled: false,
+  },
+  {
+    id: 'fortnite',
+    label: 'Age 17',
     title: 'Top 0.1% Fortnite Player',
-    desc: 'Learned what separates the good from the elite.',
+    description: 'Learned what separates the good from the elite.',
+    isFilled: false,
   },
   {
-    age: 20,
+    id: 'valorant',
+    label: 'Age 20',
     title: 'Top 1% Valorant Player',
-    desc: 'Expertise in one area makes learning another much easier.',
+    description: 'Expertise in one area makes learning another much easier.',
+    isFilled: false,
   },
   {
-    age: 21,
+    id: 'powerlifting',
+    label: 'Age 21',
     title: '1000-lb Powerlifting Total',
-    desc: 'Long term goals are only achievable through consistency.',
+    description: 'Long term goals are only achievable through consistency.',
+    isFilled: false,
   },
   {
-    age: 22,
+    id: 'married',
+    label: 'Age 22',
     title: 'Married my kindhearted wife',
-    desc: 'Clear communication prevents most conflicts.',
+    description: 'Clear communication prevents most conflicts.',
+    isFilled: false,
   },
   {
-    age: 22,
+    id: 'auburn',
+    label: 'Age 22',
     title: 'Graduated from Auburn with 4 internships',
-    desc: 'Your environment does not determine growth, effort does.',
+    description: 'Your environment does not determine growth, effort does.',
+    isFilled: false,
   },
   {
-    age: 23,
+    id: 'gatech',
+    label: 'Age 23',
     title: 'Accepted into Georgia Tech',
-    desc: 'Stopped wondering if I belonged in the rooms I was in.',
+    description: 'Stopped wondering if I belonged in the rooms I was in.',
+    isFilled: false,
   },
-  { age: 23, title: 'Today', desc: 'Refining my daily routines to do more with less time.' },
+  {
+    id: 'today',
+    label: 'Age 23',
+    title: 'Today',
+    description: 'Optimizing my daily routines to do more with less time.',
+    isFilled: true,
+  },
 ];
-
-type SignalProps = {
-  age: number;
-  title: string;
-  desc: string;
-};
-
-function Signal({ age, title, desc }: SignalProps) {
-  return (
-    <div className="signal-row flex items-start">
-      <p className="w-20 text-[var(--muted)] shrink-0 mt-2.5">Age {age}</p>
-      <div className="signal-marker" aria-hidden="true" />
-      <div className="signal-timeline ml-1 pb-12">
-        <h2 className="text-lg mt-2">{title}</h2>
-        <p className="text-[var(--muted)]">{desc}</p>
-      </div>
-    </div>
-  );
-}
 
 export default function Signals() {
   return (
@@ -75,11 +82,7 @@ export default function Signals() {
         A timeline of moments that have shaped my standards, habits, and perspective.
       </p>
 
-      <div className="signals-list">
-        {signals.map((signal, index) => (
-          <Signal key={index} age={signal.age} title={signal.title} desc={signal.desc} />
-        ))}
-      </div>
+      <Timeline items={signals} sectionGap="3rem" />
     </section>
   );
 }

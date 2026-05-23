@@ -1,13 +1,17 @@
-import { useMemo } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCachedBlogPosts } from '@/components/Blog/feedService';
-import type { FeedPost } from '@/components/Blog/types';
-
-const RECENT_POSTS_LIMIT = 3;
-const RECENT_POSTS_ALL_POSTS_PATH = '/writing';
+import Timeline, { type TimelineItem } from '@/components/Timeline';
 
 type HeroLink = { label: string; href: string };
+type ExperienceItem = {
+  company: string;
+  companyLink: string;
+  location: string;
+  role: string;
+  dates: string;
+  summary: React.ReactNode;
+};
+
 const HERO_LINKS: HeroLink[] = [
   { label: 'email', href: 'mailto:jacob@murrah.dev' },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/jacobmurrah/' },
@@ -15,18 +19,83 @@ const HERO_LINKS: HeroLink[] = [
   { label: 'resume', href: '/JacobMurrahResume.pdf' },
 ];
 
-type RecentPostsPreview = {
-  posts: FeedPost[];
-  allPostsPath: typeof RECENT_POSTS_ALL_POSTS_PATH;
-};
+const EXPERIENCES: ExperienceItem[] = [
+  {
+    company: 'AT&T',
+    companyLink: 'https://www.att.com/',
+    location: 'Atlanta, GA',
+    role: 'Software Engineer I',
+    dates: 'Jan. 2026 - Present',
+    summary: 'Network analytics and automation.',
+  },
+  {
+    company: 'Auburn University',
+    companyLink: 'https://www.auburn.edu/',
+    location: 'Auburn, AL',
+    role: 'UG Research Assistant',
+    dates: 'Aug. 2025 - Dec. 2025',
+    summary: (
+      <>
+        Worked with{' '}
+        <a
+          href="https://scholar.google.com/citations?user=Q1yTMQQAAAAJ"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="meta-link"
+        >
+          Dr. Rongxuan Wang
+        </a>{' '}
+        in the AMICS lab.
+      </>
+    ),
+  },
+  {
+    company: 'AT&T',
+    companyLink: 'https://www.att.com/',
+    location: 'Atlanta, GA',
+    role: 'Software Engineer Intern',
+    dates: 'Jun. 2025 - Aug. 2025',
+    summary: 'Web application for monitoring store inventory.',
+  },
+  {
+    company: 'Adtran',
+    companyLink: 'https://www.adtran.com/',
+    location: 'Huntsville, AL',
+    role: 'Software Engineer Co-op',
+    dates: 'May 2023 - Dec. 2024',
+    summary: 'Developer tooling and SaaS for network monitoring.',
+  },
+];
 
-const getRecentPostsPreview = (): RecentPostsPreview => {
-  const posts = getCachedBlogPosts() ?? [];
-  return {
-    posts: posts.slice(0, RECENT_POSTS_LIMIT),
-    allPostsPath: RECENT_POSTS_ALL_POSTS_PATH,
-  };
-};
+const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
+  id: `${experience.company}-${experience.role}-${experience.dates}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, ''),
+  title: (
+    <span>
+      {experience.role} <span className="text-[var(--muted)]">@</span>{' '}
+      <a
+        href={experience.companyLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="meta-link"
+      >
+        {experience.company}
+      </a>
+    </span>
+  ),
+  description: (
+    <>
+      <div className="flex items-baseline gap-3">
+        <span>{experience.location}</span>
+        <span className="ml-auto whitespace-nowrap">{experience.dates}</span>
+      </div>
+      <div>{experience.summary}</div>
+    </>
+  ),
+  isFilled: experience.dates.includes('Present'),
+}));
 
 function HeroSection() {
   return (
@@ -85,14 +154,20 @@ function HeroSection() {
   );
 }
 
-export default function Home() {
-  const recentPostsPreview = useMemo(getRecentPostsPreview, []);
-
-  void recentPostsPreview;
-
+function ExperienceSection() {
   return (
-    <section>
+    <div className="flex flex-col gap-6">
+      <h2 className="text-2xl">Experience</h2>
+      <Timeline items={EXPERIENCE_ITEMS} sectionGap="2rem" titleAs="h3" />
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <section className="flex flex-col gap-16">
       <HeroSection />
+      <ExperienceSection />
     </section>
   );
 }

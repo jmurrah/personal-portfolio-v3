@@ -197,13 +197,14 @@ a {
 
 .nav-control {
   color: var(--muted);
+  cursor: pointer;
   font-family: var(--font-family-mono);
   transition: color 100ms ease;
 }
 
 .nav-control:hover,
 .nav-control:focus-visible {
-  color: var(--text);
+  color: var(--blue-hover);
 }
 
 .custom-margin {
