@@ -13,14 +13,6 @@
   gap: 16px;
 }
 
-.post-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 .post-link-btn {
   color: inherit;
   font-weight: 600;

@@ -59,6 +59,7 @@
   --primary: var(--blue);
   --primary-muted: var(--blue-hover);
   --danger: var(--orange);
+  --underline: var(--border-strong);
 
   --status-active: var(--green);
   --status-passive: var(--orange);

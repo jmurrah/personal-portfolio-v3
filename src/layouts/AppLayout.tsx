@@ -19,6 +19,7 @@ export default function AppLayout() {
 
   const mainNavItems: NavItem[] = [
     { title: 'Home', href: '/' },
+    { title: 'Signals', href: '/signals' },
     { title: 'Writing', href: '/writing' },
     { title: 'Resume', href: '/JacobMurrahResume.pdf', external: true },
   ];
@@ -248,7 +249,6 @@ export default function AppLayout() {
             })}
           </ul>
         </nav>
-
       </aside>
 
       <main className="w-full max-w-2xl px-8">

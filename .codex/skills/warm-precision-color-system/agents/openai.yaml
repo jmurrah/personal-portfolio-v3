@@ -1,4 +1,4 @@
 interface:
-  display_name: "Warm Precision Color System"
+  display_name: 'Warm Precision Color System'
   short_description: "Apply Jacob's warm precision portfolio color system."
-  default_prompt: "Use the warm precision color system for this portfolio UI change."
+  default_prompt: 'Use the warm precision color system for this portfolio UI change.'

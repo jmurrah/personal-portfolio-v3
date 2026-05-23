@@ -10,7 +10,16 @@ const SEGMENT_LABELS: Record<string, string> = {
   writing: 'Writing',
 };
 
-const getSegmentLabel = (segment: string) => SEGMENT_LABELS[segment] ?? segment;
+const capitalizeFirstLetter = (value: string) =>
+  value.length > 0 ? `${value.charAt(0).toUpperCase()}${value.slice(1)}` : value;
+
+const getSegmentLabel = (segment: string, index: number, segments: string[]) => {
+  if (segments[0] === 'writing' && index > 0) {
+    return segment;
+  }
+
+  return SEGMENT_LABELS[segment] ?? capitalizeFirstLetter(segment);
+};
 
 export default function TerminalBreadcrumb() {
   const { pathname } = useLocation();
@@ -72,7 +81,7 @@ export default function TerminalBreadcrumb() {
                   }
                 }}
               >
-                {getSegmentLabel(segment)}/
+                {getSegmentLabel(segment, index, segments)}/
               </Link>
             </li>
           );

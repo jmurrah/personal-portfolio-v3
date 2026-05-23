@@ -80,12 +80,14 @@ Current site direction:
 - Reusable styles belong in CSS files imported by components.
 - Inline Tailwind classes are fine for local layout and one-off spacing.
 - Preserve accessibility: focus states, aria labels, descriptive alt text, and readable contrast.
+- Text links should use `--text` for the label with an always-on underline in `--muted`; on hover/focus, promote the underline to `--text` rather than recoloring the label itself.
 
 ## Typography
 
 - Inter is the main prose/body font.
 - Geist Mono is the engineering signal font.
 - Use Geist Mono for high-signal identity/display elements: nav, terminal breadcrumb, tags, code/pre, route/page `h1` headers, identity/tagline elements, top-level post titles, and blog article `h2` section headings.
+- Global typography should assign Geist Mono to semantic `h1` and `h2` elements by default; do not rely on per-element utility classes just to correct their font family.
 - Do not use Geist Mono for every heading. Smaller blog headings such as `h3`/`h4`, post card titles, metadata, bylines, action labels, and article bodies should stay in Inter unless the user explicitly asks for a terminal/README feel.
 - Geist Mono labels and headings should use natural capitalization such as `Writing`, not forced lowercase, unless the text is intentionally code-like or URL-like.
 - Use the global tokens:

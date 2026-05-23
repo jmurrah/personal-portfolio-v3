@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { getCachedBlogPosts } from '@/components/Blog/feedService';
 import type { FeedPost } from '@/components/Blog/types';
 import React from 'react';
 
 const RECENT_POSTS_LIMIT = 3;
 const RECENT_POSTS_ALL_POSTS_PATH = '/writing';
-
 
 type HeroLink = { label: string; href: string };
 const HERO_LINKS: HeroLink[] = [
@@ -31,9 +31,15 @@ const getRecentPostsPreview = (): RecentPostsPreview => {
 function HeroSection() {
   return (
     <div className="w-full flex flex-col gap-4">
-      <h1 className="mono-heading text-5xl font-semibold">Jacob Murrah</h1>
+      <h1 className="text-5xl font-semibold">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
-        <p>If you are a recruiter</p>
+        <p className="text-[var(--muted)]">
+          If you're a recruiter or want my story, read my{' '}
+          <Link className="text-link" to="/signals">
+            signals
+          </Link>
+          .
+        </p>
         <p>I'm a Software Engineer at AT&T with 2+ years of experience.</p>
       </div>
       <div className="flex flex-wrap gap-x-4 justify-start">
@@ -43,7 +49,7 @@ function HeroSection() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="arrow-link group gap-0.5 flex items-center"
+              className="text-link gap-0.5 flex items-center"
             >
               <span>{link.label}</span>
             </a>
@@ -55,7 +61,6 @@ function HeroSection() {
   );
 }
 
-
 export default function Home() {
   const recentPostsPreview = useMemo(getRecentPostsPreview, []);
 
@@ -63,7 +68,7 @@ export default function Home() {
 
   return (
     <section>
-      <HeroSection/>
+      <HeroSection />
     </section>
   );
 }

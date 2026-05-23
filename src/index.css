@@ -8,9 +8,8 @@
   font-style: normal;
   font-display: swap;
   unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
-    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-    U+FEFF, U+FFFD;
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -21,9 +20,8 @@
   font-style: italic;
   font-display: swap;
   unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
-    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-    U+FEFF, U+FFFD;
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -34,9 +32,8 @@
   font-style: normal;
   font-display: swap;
   unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
-    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-    U+FEFF, U+FFFD;
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 :root {
@@ -61,6 +58,12 @@ body {
   min-height: 100%;
   font-size: 16px;
   font-family: var(--font-family);
+}
+
+h1,
+h2 {
+  font-family: var(--font-family-mono);
+  letter-spacing: 0;
 }
 
 :root.app-loading #root {
@@ -212,14 +215,55 @@ strong {
   line-height: 1.5;
 }
 
+.interactive-link,
 .text-link,
 .post-content a {
-  color: inherit;
+  color: var(--text);
   text-decoration-line: underline;
-  text-decoration-color: currentColor;
+  text-decoration-color: var(--muted);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.2em;
   text-decoration-skip-ink: auto;
+}
+
+.interactive-link:hover,
+.interactive-link:focus-visible,
+.text-link:hover,
+.text-link:focus-visible,
+.post-content a:hover,
+.post-content a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.back-nav-link {
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: fit-content;
+  transition: color 160ms ease;
+}
+
+.back-nav-link:hover,
+.back-nav-link:focus-visible {
+  color: var(--text);
+}
+
+.back-nav-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: inherit;
+  padding: 0;
+  text-align: left;
+}
+
+.text-link,
+.post-content a {
   line-height: 1.7rem;
   display: inline;
 }

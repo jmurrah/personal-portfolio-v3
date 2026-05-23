@@ -132,31 +132,10 @@ export default function PostView({ post, onBack }: PostViewProps) {
   return (
     <article className="post-view">
       <div className="post-shell">
-        <div className="post-topbar">
-          <button
-            type="button"
-            onClick={onBack}
-            className="post-link-btn text-link flex items-center gap-0.5"
-          >
-            <SvgIcon
-              src={ICONS.arrowLeft}
-              alt="Back to posts"
-              size="2xsmall"
-              color="currentColor"
-            />
-            back to posts
-          </button>
-          {post.link && (
-            <a
-              className="post-link-btn text-link"
-              href={post.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read on Substack
-            </a>
-          )}
-        </div>
+        <button type="button" onClick={onBack} className="back-nav-link back-nav-button">
+          <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
+          <span>Back to Writing</span>
+        </button>
 
         <header className="post-header">
           <div className="post-title-block">

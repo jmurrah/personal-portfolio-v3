@@ -1,28 +1,75 @@
+import { Link } from 'react-router-dom';
+import { ICONS } from '@/assets';
+import SvgIcon from '@/components/SvgIcon';
+import './Signals.css';
+
 const signals = [
-  { value: 10, title: "Alabama Youth Wrestling State Champion", desc: "" },
-  { value: 14, title: "Sub-6 Minute Mile", desc: "" },
-  { value: 17, title: "Top 0.1% Fortnite Player", desc: "" },
-  { value: 20, title: "Top 1% Valorant Player", desc: "" },
-  { value: 21, title: "1000-lb Powerlifting Total", desc: "" },
-  { value: 22, title: "Married my Kindhearted Wife", desc: "" },
-  { value: 22, title: "Graduated from Auburn with 4 Internships", desc: "" },
-  { value: 23, title: "Accepted into Georgia Tech", desc: "" },
-  { value: 23, title: "Today" },
+  {
+    age: 10,
+    title: 'Alabama Youth Wrestling State Champion',
+    desc: "Competing is kind of fun, let's keep challenging myself.",
+  },
+  { age: 14, title: 'Sub-6 Minute Mile', desc: 'Leave nothing in the tank by the end of a race.' },
+  {
+    age: 17,
+    title: 'Top 0.1% Fortnite Player',
+    desc: 'Learned what it takes to compete with the best in the world.',
+  },
+  {
+    age: 20,
+    title: 'Top 1% Valorant Player',
+    desc: "Skills have carryover, don't take your experiences for granted.",
+  },
+  {
+    age: 21,
+    title: '1000-lb Powerlifting Total',
+    desc: 'You can do anything you set your mind to.',
+  },
+  {
+    age: 22,
+    title: 'Married my kindhearted wife',
+    desc: 'Communication is essential to success in all aspects of life.',
+  },
+  { age: 22, title: 'Graduated from Auburn with 4 internships', desc: 'finish this' },
+  { age: 23, title: 'Accepted into Georgia Tech', desc: 'finish this' },
+  { age: 23, title: 'Today', desc: 'Refining my daily routines to do more with less time.' },
 ];
+
+type SignalProps = {
+  age: number;
+  title: string;
+  desc: string;
+};
+
+function Signal({ age, title, desc }: SignalProps) {
+  return (
+    <div className="signal-row flex items-start">
+      <p className="w-20 text-[var(--muted)] shrink-0 mt-2.5">Age {age}</p>
+      <div className="signal-marker" aria-hidden="true" />
+      <div className="signal-timeline ml-1 pb-12">
+        <h2 className="text-lg mt-2">{title}</h2>
+        <p className="text-[var(--muted)]">{desc}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function Signals() {
   return (
     <section>
-        <h1 className="mono-heading mb-6 text-4xl font-semibold">Signals</h1>
-        <p className="text-[color:var(--muted)] mb-6">
-          This page is a list of signals you can use to assess
-        </p>
-        {signals.map((signal) => (
-          <div key={signal.value}>
-            <p>{signal.value}: {signal.title}</p>
-            <p>{signal.desc}</p>
-          </div>
+      <Link className="back-nav-link" to="/">
+        <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
+        <span>Back to Home</span>
+      </Link>
+      <h1 className="mb-6 text-4xl font-semibold">Signals</h1>
+
+      <p className="mb-6 text-[color:var(--muted)]">Add page description here.</p>
+
+      <div className="signals-list">
+        {signals.map((signal, index) => (
+          <Signal key={index} age={signal.age} title={signal.title} desc={signal.desc} />
         ))}
+      </div>
     </section>
   );
 }
