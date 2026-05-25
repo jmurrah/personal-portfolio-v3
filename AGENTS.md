@@ -85,9 +85,11 @@ Current site direction:
 - Preserve accessibility: focus states, aria labels, descriptive alt text, and readable contrast.
 - Do not use one global link style for every surface. Keep separate treatments for nav links, clustered/meta links, inline sentence links, and long-form prose links.
 - Meta, inline, and prose text links should use `--blue-border` for the resting underline and transition both label and underline together to `--blue-hover` with a fast `100ms` color-only transition and fixed underline thickness. Keep `--blue-hover` dark enough to reach roughly `10:1` contrast on the light site surfaces while preserving the existing blue family.
+- Reuse shared link underline utilities from `src/index.css` such as `.meta-link`, `.inline-link`, and `.link-underline`; do not redefine the same underline token logic in component-local CSS when an existing shared class fits.
 - Header nav links should stay neutral and undecorated at rest; use color change for hover/focus and reserve underlines there for active route indication only.
 - Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
 - Keep non-link controls such as the hamburger/menu toggle and close button on separate classes so link underline styling only applies to actual links; their hover/focus state should use `--blue-hover` and show a pointer cursor.
+- Footer social icons should stay `xsmall` by default, with the Substack icon intentionally overridden to `17px` square for visual balance.
 
 ## Typography
 
@@ -123,6 +125,10 @@ Current site direction:
   - Blockquotes should carry a subtly warm surface derived from `--surface-muted` and `--orange-soft`, not neutral gray alone.
   - Code uses `--code-bg`, `--code-text`, and `--border`.
   - Metadata uses `--muted`.
+  - Writing previews on `/writing` and the home page should share the same Substack-style article row layout: title, short description, and date metadata with normal month capitalization; omit the author name and show a right-side thumbnail when available.
+  - Writing preview titles should promote to the shared hover state when any part of the preview card is hovered or keyboard-focused, not only when the title text itself is hovered.
+  - The home page writing section should render only the two most recent posts from the shared preview component and link to `/writing` for the full archive.
+  - `src/components/Blog/BlogFeed.css` should keep only blog-specific typography rules that are not already covered by shared utilities in `src/index.css`; handle BlogFeed spacing, margins, padding, sizing, and shared link underline behavior inline or via existing shared classes.
 
 ## React Conventions
 

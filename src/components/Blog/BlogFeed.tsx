@@ -5,55 +5,66 @@ import { getPostPath, getPostSlug } from './postRouting';
 import type { FeedPost } from './types';
 import './BlogFeed.css';
 
-const formatDate = (value: string) => {
+type BlogFeedProps = {
+  limit?: number;
+};
+
+const formatPreviewDate = (value: string) => {
   if (!value) return '';
   const parsed = new Date(value);
-  return Number.isNaN(parsed.getTime()) ? value : parsed.toLocaleDateString();
+  if (Number.isNaN(parsed.getTime())) return value;
+
+  return parsed.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 };
 
 const getPostId = (post: FeedPost, slug: string) => post.guid || post.link || slug;
+const getPreviewImage = (post: FeedPost) => post.thumbnail || post.enclosure.link;
 
-export default function BlogFeed() {
-  const posts = useMemo(() => getCachedBlogPosts(), []);
+export default function BlogFeed({ limit }: BlogFeedProps) {
+  const posts = useMemo(() => {
+    const allPosts = getCachedBlogPosts();
+    return typeof limit === 'number' ? allPosts.slice(0, limit) : allPosts;
+  }, [limit]);
 
   if (!posts.length) {
     return <div>No posts found.</div>;
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <p className="text-[color:var(--muted)]">
-        All posts come from my{' '}
-        <a
-          className="inline-link"
-          href="https://jacobmurrah.substack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation?.()}
-        >
-          Substack
-        </a>
-        . Read them here or at the source!
-      </p>
-      <ul className="flex flex-col">
+    <div className="blog-feed">
+      <ul className="blog-preview-list flex flex-col gap-3">
         {posts.map((post) => {
           const slug = getPostSlug(post);
           const id = getPostId(post, slug);
-          const publishedOn = formatDate(post.pubDate);
+          const publishedOn = formatPreviewDate(post.pubDate);
+          const previewImage = getPreviewImage(post);
 
           return (
-            <li key={id}>
+            <li key={id} className="blog-preview-list__item">
               <Link
                 to={getPostPath(post)}
-                className="blog-card block w-full border-t-2 border-[var(--border)] bg-[var(--surface)] p-3"
+                className="blog-preview-card flex flex-col gap-3 sm:flex-row sm:items-start"
                 aria-label={post.title ? `Read ${post.title}` : 'Read post'}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="blog-card__title text-lg font-semibold">{post.title}</h3>
-                  <div className="blog-card__date flex shrink-0 items-center gap-2 text-sm text-[color:var(--muted)]">
-                    {publishedOn && <span>{publishedOn}</span>}
+                <div className="blog-preview-card__body min-w-0 flex-1">
+                  <div className="flex">
+                    <h3 className="blog-preview-card__title link-underline">{post.title}</h3>
+                    <p className="ml-auto text-sm text-[var(--muted)]">{publishedOn}</p>
                   </div>
+                  <p className="text-[var(--muted)]">{post.description}</p>
                 </div>
+                {previewImage ? (
+                  <img
+                    src={previewImage}
+                    alt={`Thumbnail for ${post.title}`}
+                    className="h-auto w-full rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] object-cover sm:w-44 sm:flex-none"
+                    loading="lazy"
+                  />
+                ) : null}
               </Link>
             </li>
           );

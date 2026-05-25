@@ -131,8 +131,8 @@ a {
 }
 
 .svg-icon-2xsmall {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .svg-icon-3xsmall {
@@ -231,24 +231,8 @@ strong {
   line-height: 1.5;
 }
 
-.meta-link {
-  color: var(--text);
-  text-decoration-line: underline;
-  text-decoration-color: var(--blue-border);
-  text-decoration-thickness: 0.12em;
-  text-underline-offset: 0.18em;
-  text-decoration-skip-ink: auto;
-  transition:
-    color 100ms ease,
-    text-decoration-color 100ms ease;
-}
-
-.meta-link:hover,
-.meta-link:focus-visible {
-  color: var(--blue-hover);
-  text-decoration-color: currentColor;
-}
-
+.link-underline,
+.meta-link,
 .inline-link,
 .post-content a {
   color: var(--text);
@@ -262,6 +246,10 @@ strong {
     text-decoration-color 100ms ease;
 }
 
+.link-underline:hover,
+.link-underline:focus-visible,
+.meta-link:hover,
+.meta-link:focus-visible,
 .inline-link:hover,
 .inline-link:focus-visible,
 .post-content a:hover,
@@ -295,6 +283,7 @@ strong {
   text-align: left;
 }
 
+.link-underline,
 .meta-link,
 .inline-link {
   line-height: inherit;

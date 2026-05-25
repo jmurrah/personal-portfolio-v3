@@ -14,6 +14,7 @@ const SOCIAL_LINKS: SocialLink[] = [
   { label: 'Email', href: 'mailto:jacob@murrah.dev', icon: ICONS.mail },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacobmurrah/', icon: ICONS.linkedIn },
   { label: 'GitHub', href: 'https://github.com/jmurrah', icon: ICONS.gitHub },
+  { label: 'Substack', href: 'https://jacobmurrah.substack.com/', icon: ICONS.substack },
   { label: 'Resume', href: '/JacobMurrahResume.pdf', icon: ICONS.resume },
 ];
 
@@ -53,7 +54,7 @@ export default function Footer() {
       <div className="flex flex-col flex-wrap justify-between items-center gap-x-4 gap-y-2 min-[480px]:flex-row">
         <span className="whitespace-nowrap">© {year} Jacob Murrah</span>
         <div className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-x-4 justify-center items-center">
-          <div className="mono-label flex items-center gap-1.5 text-xs">
+          <div className="mono-label flex items-center gap-1.5 text-xs hidden sm:flex">
             <SvgIcon src={ICONS.clock} alt="Clock" size="3xsmall" color="var(--muted)" />
             <span className="text-[var(--muted)]">{time}</span>
             <span className="text-[color:var(--muted)]">{TIME_ZONE_NAME}</span>
@@ -66,7 +67,7 @@ export default function Footer() {
                 href={link.href}
                 src={link.icon}
                 alt={link.label}
-                size="xsmall"
+                size={link.label === 'Substack' ? '2xsmall' : 'xsmall'}
                 color="var(--text-muted)"
                 hoverColor="var(--blue)"
                 className="transition-transform duration-150 hover:-translate-y-0.5"

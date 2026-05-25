@@ -7,4 +7,9 @@ export type FeedPost = {
   guid: string;
   author: string;
   thumbnail: string;
+  enclosure: {
+    link: string;
+    type: string;
+  };
+  categories: string[];
 };

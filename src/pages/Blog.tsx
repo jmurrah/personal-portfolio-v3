@@ -11,6 +11,19 @@ export default function Blog() {
         <span>Back to Home</span>
       </Link>
       <h1 className="mb-2 text-4xl font-semibold">Writing</h1>
+      <p className="text-[color:var(--muted)] mb-6">
+          I write on my{' '}
+          <a
+            className="inline-link"
+            href="https://jacobmurrah.substack.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation?.()}
+          >
+            Substack
+          </a>
+          , all posts are mirrored here.
+      </p>
       <BlogContent />
     </section>
   );

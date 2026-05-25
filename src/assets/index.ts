@@ -1,6 +1,7 @@
 import CalendarIcon from '@/assets/icons/CalendarIcon.svg';
 import CodeIcon from '@/assets/icons/CodeIcon.svg';
 import GitHubIcon from '@/assets/icons/GitHubIcon.svg';
+import SubstackIcon from '@/assets/icons/SubstackIcon.svg';
 import LinkedInIcon from '@/assets/icons/LinkedInIcon.svg';
 import MailIcon from '@/assets/icons/MailIcon.svg';
 import MapPinIcon from '@/assets/icons/MapPinIcon.svg';
@@ -20,6 +21,7 @@ export const ICONS = {
   calendar: CalendarIcon,
   code: CodeIcon,
   gitHub: GitHubIcon,
+  substack: SubstackIcon,
   linkedIn: LinkedInIcon,
   mail: MailIcon,
   arrowUpRight: ArrowUpRightIcon,

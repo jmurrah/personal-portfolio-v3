@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BlogFeed from '@/components/Blog/BlogFeed';
 import Timeline, { type TimelineItem } from '@/components/Timeline';
 
 type HeroLink = { label: string; href: string };
@@ -16,6 +17,7 @@ const HERO_LINKS: HeroLink[] = [
   { label: 'email', href: 'mailto:jacob@murrah.dev' },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/jacobmurrah/' },
   { label: 'github', href: 'https://github.com/jmurrah' },
+  { label: 'substack', href: 'https://jacobmurrah.substack.com/' },
   { label: 'resume', href: '/JacobMurrahResume.pdf' },
 ];
 
@@ -114,7 +116,7 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
 
 function HeroSection() {
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 mt-8">
       <h1 className="text-5xl font-semibold">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
@@ -172,8 +174,49 @@ function HeroSection() {
 function ExperienceSection() {
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-2xl">Experience</h2>
-      <Timeline items={EXPERIENCE_ITEMS} sectionGap="2rem" titleAs="h3" />
+      <div>
+        <h2 className="text-2xl mb-2">Experience</h2>
+        <p className="text-[color:var(--muted)]">
+          For a more technical view of my experiences, read my{' '}
+          <a
+            href="/JacobMurrahResume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="meta-link gap-0.5 flex items-center"
+          >
+            <span>resume</span>
+          </a>
+          .
+        </p>
+      </div>
+      <Timeline items={EXPERIENCE_ITEMS} sectionGap="1.5rem" titleAs="h3" />
+    </div>
+  );
+}
+
+function WritingSection() {
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h2 className="text-2xl mb-2">Writing</h2>
+        <p className="text-[color:var(--muted)]">
+          Recent posts from my{' '}
+          <a
+            className="inline-link"
+            href="https://jacobmurrah.substack.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Substack
+          </a>
+          . Read more on my{' '}
+          <Link className="inline-link" to="/writing">
+            writing
+          </Link>{' '}
+          page.
+        </p>
+      </div>
+      <BlogFeed limit={3} />
     </div>
   );
 }
@@ -183,6 +226,7 @@ export default function Home() {
     <section className="flex flex-col gap-16">
       <HeroSection />
       <ExperienceSection />
+      <WritingSection />
     </section>
   );
 }

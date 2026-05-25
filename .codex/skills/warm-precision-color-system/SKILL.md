@@ -119,6 +119,8 @@ If the user asks for neutral links, keep links inheriting text color but preserv
 
 Active navigation should become primary text and use an underline. Inactive navigation can use `--muted`.
 
+In this repo, prefer reusing the shared underline utilities already defined in `src/index.css` such as `.meta-link`, `.inline-link`, and `.link-underline`. Do not duplicate the same `--blue-border` and `--blue-hover` underline logic in component-local CSS when an existing shared class fits.
+
 ## Orange Usage
 
 Use orange for human/status emphasis, not normal links:
