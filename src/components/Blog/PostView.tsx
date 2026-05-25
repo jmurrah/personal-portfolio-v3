@@ -132,7 +132,7 @@ export default function PostView({ post, onBack }: PostViewProps) {
   return (
     <article className="post-view">
       <div className="post-shell">
-        <button type="button" onClick={onBack} className="back-nav-link text-md back-nav-button">
+        <button type="button" onClick={onBack} className="back-nav-link text-base back-nav-button">
           <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
           <span>Back to Writing</span>
         </button>

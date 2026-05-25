@@ -108,7 +108,7 @@ export default function AppLayout() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="nav-link inline-flex items-center gap-1 rounded px-2 py-2 text-md font-medium"
+                      className="nav-link inline-flex items-center gap-1 rounded px-2 py-2 text-base font-medium"
                       onClick={closeSidebar}
                     >
                       <span className="inline-flex items-center gap-0.5 text-[color:inherit]">
@@ -121,7 +121,7 @@ export default function AppLayout() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="nav-link rounded px-2 py-2 text-md font-medium"
+                      className="nav-link rounded px-2 py-2 text-base font-medium"
                       onClick={closeSidebar}
                     >
                       {item.title}
@@ -131,7 +131,7 @@ export default function AppLayout() {
                   <Link
                     key={item.title}
                     to={item.href}
-                    className={`nav-link rounded px-2 py-2 text-md font-medium ${
+                    className={`nav-link rounded px-2 py-2 text-base font-medium ${
                       isNavItemActive(item.href, item.external) ? 'nav-link-active' : ''
                     }`.trim()}
                     onClick={(event) => {

@@ -5,6 +5,7 @@ export type TimelineItem = {
   id: string;
   label?: string;
   title: ReactNode;
+  titleMeta?: ReactNode;
   description: ReactNode;
   isFilled?: boolean;
 };
@@ -33,7 +34,12 @@ export default function Timeline({ items, sectionGap, titleAs: TitleTag = 'h2' }
             aria-hidden="true"
           />
           <div className="timeline__content">
-            <TitleTag className="timeline__title text-lg">{item.title}</TitleTag>
+            <div className="timeline__title-row">
+              <TitleTag className="timeline__title text-lg">{item.title}</TitleTag>
+              {item.titleMeta ? (
+                <div className="timeline__title-meta text-sm">{item.titleMeta}</div>
+              ) : null}
+            </div>
             <div className="timeline__description">{item.description}</div>
           </div>
         </div>

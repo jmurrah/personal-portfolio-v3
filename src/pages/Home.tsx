@@ -6,10 +6,10 @@ type HeroLink = { label: string; href: string };
 type ExperienceItem = {
   company: string;
   companyLink: string;
-  location: string;
   role: string;
   dates: string;
   summary: React.ReactNode;
+  reflection: string;
 };
 
 const HERO_LINKS: HeroLink[] = [
@@ -23,47 +23,64 @@ const EXPERIENCES: ExperienceItem[] = [
   {
     company: 'AT&T',
     companyLink: 'https://www.att.com/',
-    location: 'Atlanta, GA',
     role: 'Software Engineer I',
     dates: 'Jan. 2026 - Present',
-    summary: 'Network analytics and automation.',
+    summary: 'Automated network alarm ticketing and disaster recovery.',
+    reflection:
+      'Navigating legacy Java systems that nobody fully understands while improving development processes along the way.',
   },
   {
     company: 'Auburn University',
     companyLink: 'https://www.auburn.edu/',
-    location: 'Auburn, AL',
-    role: 'UG Research Assistant',
+    role: 'Research Assistant',
     dates: 'Aug. 2025 - Dec. 2025',
     summary: (
       <>
-        Worked with{' '}
+        Manufacturing fulfillment marketplace for CAD designers under{' '}
         <a
           href="https://scholar.google.com/citations?user=Q1yTMQQAAAAJ"
           target="_blank"
           rel="noopener noreferrer"
           className="meta-link"
         >
-          Dr. Rongxuan Wang
-        </a>{' '}
-        in the AMICS lab.
+          Dr. Wang
+        </a>
+        .
       </>
     ),
+    reflection:
+      'Led design and implementation in Next.js and learned to translate high-level vision into concrete technical decisions.',
   },
   {
     company: 'AT&T',
     companyLink: 'https://www.att.com/',
-    location: 'Atlanta, GA',
     role: 'Software Engineer Intern',
     dates: 'Jun. 2025 - Aug. 2025',
-    summary: 'Web application for monitoring store inventory.',
+    summary: 'Inventory monitoring application for Cricket Wireless retail stores.',
+    reflection:
+      'Realized how much I can ship when there is only one priority and dove deep into Spring Boot.',
   },
   {
     company: 'Adtran',
     companyLink: 'https://www.adtran.com/',
-    location: 'Huntsville, AL',
     role: 'Software Engineer Co-op',
     dates: 'May 2023 - Dec. 2024',
-    summary: 'Developer tooling and SaaS for network monitoring.',
+    summary: (
+      <>
+        Developer tooling and{' '}
+        <a
+          href="https://www.adtran.com/en/products-and-services/mosaic-one"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="meta-link"
+        >
+          Mosaic One
+        </a>{' '}
+        SaaS for network monitoring.
+      </>
+    ),
+    reflection:
+      'Learned how to enforce development practices to avoid drift and got comfortable with AWS.',
   },
 ];
 
@@ -73,7 +90,7 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, ''),
   title: (
-    <span>
+    <span className="text-base text-[var(--muted)]">
       {experience.role} <span className="text-[var(--muted)]">@</span>{' '}
       <a
         href={experience.companyLink}
@@ -85,14 +102,12 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
       </a>
     </span>
   ),
+  titleMeta: experience.dates,
   description: (
-    <>
-      <div className="flex items-baseline gap-3">
-        <span>{experience.location}</span>
-        <span className="ml-auto whitespace-nowrap">{experience.dates}</span>
-      </div>
-      <div>{experience.summary}</div>
-    </>
+    <div className="flex flex-col gap-3 mt-3">
+      <div className="text-[var(--text)]">{experience.summary}</div>
+      <p>{experience.reflection}</p>
+    </div>
   ),
   isFilled: experience.dates.includes('Present'),
 }));
@@ -119,8 +134,8 @@ function HeroSection() {
           >
             <span>AT&T</span>
           </a>{' '}
-          in <span className="text-[var(--text)]">Atlanta</span>, working on network analytics and
-          automation. I bring modern engineering practices to legacy systems.
+          in <span className="text-[var(--text)]">Atlanta</span>, working on network disaster
+          recover and automated ticketing. I bring modern engineering practices to legacy systems.
         </p>
         <p className="text-[var(--muted)]">
           Pursuing a master's at{' '}

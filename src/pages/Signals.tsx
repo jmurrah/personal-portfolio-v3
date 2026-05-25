@@ -72,7 +72,7 @@ const signals: TimelineItem[] = [
 export default function Signals() {
   return (
     <section>
-      <Link className="back-nav-link text-md" to="/">
+      <Link className="back-nav-link text-base" to="/">
         <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
         <span>Back to Home</span>
       </Link>

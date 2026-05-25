@@ -53,7 +53,7 @@ export default function TerminalBreadcrumb() {
   return (
     <nav className="terminal-breadcrumb" aria-label="Breadcrumbs">
       <ul className="terminal-breadcrumb__list">
-        <li className="terminal-breadcrumb__item text-md">
+        <li className="terminal-breadcrumb__item text-base">
           <Link
             className="terminal-breadcrumb__link terminal-breadcrumb__link--home"
             to="/"
