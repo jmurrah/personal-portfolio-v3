@@ -21,7 +21,7 @@ const signals: TimelineItem[] = [
   {
     id: 'fortnite',
     label: 'Age 17',
-    title: 'Top 0.1% Fortnite Player',
+    title: 'Top 0.01% Fortnite Player',
     description: 'Learned what separates the good from the elite.',
     isFilled: false,
   },
