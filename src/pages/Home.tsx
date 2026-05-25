@@ -118,13 +118,6 @@ function HeroSection() {
       <h1 className="text-5xl font-semibold">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
-          Curious about what has shaped me? Read my{' '}
-          <Link className="inline-link" to="/signals">
-            signals
-          </Link>
-          .
-        </p>
-        <p className="text-[var(--muted)]">
           <span className="text-[var(--text)]">Software Engineer</span> at{' '}
           <a
             href="https://www.att.com/"
@@ -135,7 +128,7 @@ function HeroSection() {
             <span>AT&T</span>
           </a>{' '}
           in <span className="text-[var(--text)]">Atlanta</span>, working on network disaster
-          recover and automated ticketing. I bring modern engineering practices to legacy systems.
+          recovery and automated ticketing. I bring modern engineering practices to legacy systems.
         </p>
         <p className="text-[var(--muted)]">
           Pursuing a master's at{' '}
@@ -148,6 +141,13 @@ function HeroSection() {
             <span>Georgia Tech</span>
           </a>{' '}
           while navigating fatherhood, hitting the gym, and optimizing my daily routines.
+        </p>
+        <p className="text-[var(--muted)]">
+          Curious about what has shaped me? Read my{' '}
+          <Link className="inline-link" to="/signals">
+            signals
+          </Link>
+          .
         </p>
       </div>
       <div className="flex flex-wrap gap-x-4 justify-start">

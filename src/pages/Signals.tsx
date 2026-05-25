@@ -8,7 +8,7 @@ const signals: TimelineItem[] = [
     id: 'wrestling',
     label: 'Age 10',
     title: 'Alabama Youth Wrestling State Champion',
-    description: "Competing is kind of fun, let's keep challenging myself.",
+    description: "Competing is fun, let's keep challenging myself.",
     isFilled: false,
   },
   {
@@ -59,13 +59,6 @@ const signals: TimelineItem[] = [
     title: 'Accepted into Georgia Tech',
     description: 'Stopped wondering if I belonged in the rooms I was in.',
     isFilled: false,
-  },
-  {
-    id: 'today',
-    label: 'Age 23',
-    title: 'Today',
-    description: 'Optimizing my daily routines to do more with less time.',
-    isFilled: true,
   },
 ];
 
