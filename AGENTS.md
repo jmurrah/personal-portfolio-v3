@@ -126,6 +126,8 @@ Current site direction:
   - Code uses `--code-bg`, `--code-text`, and `--border`.
   - Metadata uses `--muted`.
   - Writing previews on `/writing` and the home page should share the same Substack-style article row layout: title, short description, and date metadata with normal month capitalization; omit the author name and show a right-side thumbnail when available.
+  - Writing preview thumbnails should render in a consistent fixed-size frame across posts and use `object-cover` so mixed source aspect ratios stay visually uniform.
+  - `src/components/Blog/BlogFeed.tsx` should rely on normalized post data and avoid defensive existence/error guards in preview rendering.
   - Writing preview titles should promote to the shared hover state when any part of the preview card is hovered or keyboard-focused, not only when the title text itself is hovered.
   - The home page writing section should render only the two most recent posts from the shared preview component and link to `/writing` for the full archive.
   - `src/components/Blog/BlogFeed.css` should keep only blog-specific typography rules that are not already covered by shared utilities in `src/index.css`; handle BlogFeed spacing, margins, padding, sizing, and shared link underline behavior inline or via existing shared classes.

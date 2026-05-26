@@ -10,10 +10,7 @@ type BlogFeedProps = {
 };
 
 const formatPreviewDate = (value: string) => {
-  if (!value) return '';
   const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return value;
-
   return parsed.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -30,10 +27,6 @@ export default function BlogFeed({ limit }: BlogFeedProps) {
     return typeof limit === 'number' ? allPosts.slice(0, limit) : allPosts;
   }, [limit]);
 
-  if (!posts.length) {
-    return <div>No posts found.</div>;
-  }
-
   return (
     <div className="blog-feed">
       <ul className="blog-preview-list flex flex-col gap-3">
@@ -47,24 +40,20 @@ export default function BlogFeed({ limit }: BlogFeedProps) {
             <li key={id} className="blog-preview-list__item">
               <Link
                 to={getPostPath(post)}
-                className="blog-preview-card flex flex-col gap-3 sm:flex-row sm:items-start"
+                className="blog-preview-card flex flex-col gap-1.5 sm:flex-row sm:items-start"
                 aria-label={post.title ? `Read ${post.title}` : 'Read post'}
               >
-                <div className="blog-preview-card__body min-w-0 flex-1">
-                  <div className="flex">
-                    <h3 className="blog-preview-card__title link-underline">{post.title}</h3>
-                    <p className="ml-auto text-sm text-[var(--muted)]">{publishedOn}</p>
-                  </div>
+                <div className="min-w-0 flex flex-col gap-1.5 flex-1">
+                  <h3 className="blog-preview-card__title link-underline">{post.title}</h3>
                   <p className="text-[var(--muted)]">{post.description}</p>
+                  <p className="text-sm text-[var(--muted)]">{publishedOn}</p>
                 </div>
-                {previewImage ? (
-                  <img
-                    src={previewImage}
-                    alt={`Thumbnail for ${post.title}`}
-                    className="h-auto w-full rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] object-cover sm:w-44 sm:flex-none"
-                    loading="lazy"
-                  />
-                ) : null}
+                <img
+                  src={previewImage}
+                  alt={`Thumbnail for ${post.title}`}
+                  className="h-44 w-full rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] object-cover sm:block hidden md:h-28 md:w-48 md:flex-none"
+                  loading="lazy"
+                />
               </Link>
             </li>
           );
