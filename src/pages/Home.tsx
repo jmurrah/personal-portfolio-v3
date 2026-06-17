@@ -92,9 +92,7 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, ''),
   title: (
-    <span className="text-base">
-      <span className="text-[var(--text)]">{experience.role}</span>{' '}
-      <span className="text-[var(--muted)]">@</span>{' '}
+    <span className="flex flex-col gap-1">
       <a
         href={experience.companyLink}
         target="_blank"
@@ -103,9 +101,17 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
       >
         {experience.company}
       </a>
+      <span className="text-sm font-normal text-[var(--muted)]">{experience.role}</span>
     </span>
   ),
-  titleMeta: experience.dates,
+  titleMeta: (
+    <span className="flex flex-col gap-1 text-right">
+      <span aria-hidden="true" className="text-lg">
+        &nbsp;
+      </span>
+      <span>{experience.dates}</span>
+    </span>
+  ),
   description: (
     <div className="flex flex-col gap-3 mt-3">
       <div className="text-[var(--text)]">{experience.summary}</div>
