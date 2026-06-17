@@ -60,7 +60,7 @@ Current site direction:
 - Reusable UI: `src/components/<Component>.tsx` plus CSS if needed.
 - Reused timeline-style sections should live in a shared component with shared CSS rather than duplicating page-local timeline markup.
 - Timeline row spacing should be configurable on the shared `Timeline` component via a single prop rather than hardcoded per page or repeated per item.
-- The home experience timeline should show role and linked company inline on the left with right-aligned dates on the same row, with summary below; render the role/company text as a semantic `h3` so it keeps the standard Inter heading treatment there, and keep the dates in a separate right-aligned Inter metadata slot. Keep nothing to the left of the timeline line, do not render location there, and do not reintroduce company logos or technology tag pills there.
+- The home experience timeline should use the shared `Timeline` component's default title/meta rendering: `role @ linked company` on the left, right-aligned dates in the metadata slot, and summary below. Do not render location or company logos there unless explicitly requested.
 - Blog-specific reusable UI/helpers: `src/components/Blog/`.
 - Static data: `src/constants/<name>.json|ts`.
 - Build/CI utilities: `scripts/*.ts`.

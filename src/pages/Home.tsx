@@ -92,8 +92,9 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, ''),
   title: (
-    <span className="text-base text-[var(--muted)]">
-      {experience.role} <span className="text-[var(--muted)]">@</span>{' '}
+    <span className="text-base">
+      <span className="text-[var(--text)]">{experience.role}</span>{' '}
+      <span className="text-[var(--muted)]">@</span>{' '}
       <a
         href={experience.companyLink}
         target="_blank"

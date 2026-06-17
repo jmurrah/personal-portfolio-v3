@@ -75,7 +75,7 @@ export default function Signals() {
         A timeline of moments that have shaped my standards, habits, and perspective.
       </p>
 
-      <Timeline items={signals} sectionGap="3rem" />
+      <Timeline items={signals} sectionGap="3rem" titleAs={'h3'} />
     </section>
   );
 }
