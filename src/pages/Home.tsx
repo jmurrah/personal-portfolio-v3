@@ -58,7 +58,20 @@ const EXPERIENCES: ExperienceItem[] = [
     companyLink: 'https://www.att.com/',
     role: 'Software Engineer Intern',
     dates: 'Jun. 2025 - Aug. 2025',
-    summary: 'Inventory monitoring application for Cricket Wireless retail stores.',
+    summary: (
+      <>
+        Inventory monitoring application for{' '}
+        <a
+          href="https://www.cricketwireless.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="meta-link"
+        >
+          Cricket Wireless
+        </a>{' '}
+        retail stores.
+      </>
+    ),
     reflection:
       'Realized how much I can ship when there is only one priority and dove deep into Spring Boot.',
   },
@@ -145,7 +158,8 @@ function HeroSection() {
             style={{ '--gradient-emphasis-offset': '10%' } as React.CSSProperties}
           >
             Atlanta
-          </span>, working on network disaster recovery and automated ticketing.
+          </span>
+          , working on network disaster recovery and automated ticketing.
         </p>
         <p className="text-[var(--muted)]">
           Pursuing a master's at{' '}
@@ -157,13 +171,14 @@ function HeroSection() {
           >
             <span>Georgia Tech</span>
           </a>{' '}
-          while navigating {' '}
+          while navigating{' '}
           <span
             className="gradient-emphasis gradient-emphasis"
             style={{ '--gradient-emphasis-offset': '95%' } as React.CSSProperties}
           >
             fatherhood
-          </span>, hitting the gym, and optimizing my daily routines.
+          </span>
+          , hitting the gym, and optimizing my daily routines.
         </p>
         <p className="text-[var(--muted)]">
           Curious about what has shaped me? Read my{' '}
