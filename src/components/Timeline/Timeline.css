@@ -79,14 +79,14 @@
 .timeline__content {
   flex: 1;
   min-width: 0;
-  padding-bottom: var(--timeline-row-gap, 1rem);
+  padding-bottom: var(--timeline-row-gap, 0rem);
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
 .timeline__content--experience {
-  padding-left: 1rem;
+  padding-left: 2rem;
 }
 
 .timeline__content--signals {
@@ -94,7 +94,6 @@
 }
 
 @media (min-width: 640px) {
-  .timeline__content--experience,
   .timeline__content--signals {
     padding-left: 2rem;
   }

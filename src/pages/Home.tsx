@@ -232,7 +232,7 @@ function ExperienceSection() {
           .
         </p>
       </div>
-      <Timeline items={EXPERIENCE_ITEMS} sectionGap="2rem" titleAs="h3" />
+      <Timeline items={EXPERIENCE_ITEMS} sectionGap="1.5rem" titleAs="h3" />
     </div>
   );
 }
