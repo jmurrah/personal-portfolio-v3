@@ -100,6 +100,7 @@ Current site direction:
 - Global typography should assign Geist Mono to semantic `h1` and `h2` elements by default; do not rely on per-element utility classes just to correct their font family.
 - Do not use Geist Mono for every heading. Smaller blog headings such as `h3`/`h4`, post card titles, metadata, bylines, action labels, and article bodies should stay in Inter unless the user explicitly asks for a terminal/README feel.
 - Geist Mono labels and headings should use natural capitalization such as `Writing`, not forced lowercase, unless the text is intentionally code-like or URL-like.
+- Route-level page headers such as `Writing` and `Signals` should use the responsive scale `text-3xl sm:text-4xl`; timeline age labels should use `text-sm sm:text-base`.
 - Use the global tokens:
   - `--font-family`
   - `--font-family-mono`

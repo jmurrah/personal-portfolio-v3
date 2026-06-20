@@ -114,7 +114,7 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
       >
         {experience.company}
       </a>
-      <span className="flex items-baseline">
+      <span className="flex items-baseline gap-1">
         <span className="text-sm font-normal text-[var(--muted)]">{experience.role}</span>
         <span className="ml-auto whitespace-nowrap text-sm font-normal text-[var(--muted)]">
           {experience.dates}
@@ -173,15 +173,22 @@ function HeroSection() {
           </a>{' '}
           while navigating{' '}
           <span
-            className="gradient-emphasis gradient-emphasis"
-            style={{ '--gradient-emphasis-offset': '95%' } as React.CSSProperties}
+            className="gradient-emphasis"
+            style={{ '--gradient-emphasis-offset': '85%' } as React.CSSProperties}
           >
             fatherhood
           </span>
           , hitting the gym, and optimizing my daily routines.
         </p>
         <p className="text-[var(--muted)]">
-          Curious about what has shaped me? Read my{' '}
+          Curious about my{' '}
+          <span
+            className="gradient-emphasis gradient-emphasis--reverse"
+            style={{ '--gradient-emphasis-offset': '30%' } as React.CSSProperties}
+          >
+            standards
+          </span>
+          ? Read my{' '}
           <Link className="inline-link" to="/signals">
             signals
           </Link>

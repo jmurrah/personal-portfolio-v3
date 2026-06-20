@@ -10,7 +10,7 @@ export default function Blog() {
         <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
         <span>Back to Home</span>
       </Link>
-      <h1 className="mb-2 text-4xl font-semibold">Writing</h1>
+      <h1 className="mb-2 text-3xl font-semibold sm:text-4xl">Writing</h1>
       <p className="text-[color:var(--muted)] mb-6">
         I write on my{' '}
         <a

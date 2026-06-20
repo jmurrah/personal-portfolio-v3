@@ -28,7 +28,7 @@ export default function Timeline({ items, sectionGap, titleAs: TitleTag = 'h2' }
     >
       {items.map((item) => (
         <div className="timeline__row" key={item.id}>
-          {hasLabels && <p className="timeline__label">{item.label ?? ''}</p>}
+          {hasLabels && <p className="timeline__label text-sm sm:text-base">{item.label ?? ''}</p>}
           <div
             className={`timeline__marker${item.isFilled ? ' timeline__marker--filled' : ''}`}
             aria-hidden="true"
@@ -36,9 +36,7 @@ export default function Timeline({ items, sectionGap, titleAs: TitleTag = 'h2' }
           <div className="timeline__content">
             <div className="timeline__title-row">
               <TitleTag className="timeline__title text-lg">{item.title}</TitleTag>
-              {item.titleMeta ? (
-                <div className="timeline__title-meta text-sm">{item.titleMeta}</div>
-              ) : null}
+              {item.titleMeta ? <div className="timeline__title-meta">{item.titleMeta}</div> : null}
             </div>
             <div className="timeline__description">{item.description}</div>
           </div>
