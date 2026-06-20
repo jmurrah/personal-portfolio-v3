@@ -21,8 +21,8 @@
 }
 
 .timeline--signals {
-  --timeline-line-left: 3.85rem;
-  --timeline-marker-left: 3.375rem;
+  --timeline-line-left: 4.05rem;
+  --timeline-marker-left: 3.6rem;
 }
 
 @media (min-width: 640px) {
@@ -90,13 +90,7 @@
 }
 
 .timeline__content--signals {
-  padding-left: 1.75rem;
-}
-
-@media (min-width: 640px) {
-  .timeline__content--signals {
-    padding-left: 2rem;
-  }
+  padding-left: 2rem;
 }
 
 .timeline__row:last-child .timeline__content {
