@@ -58,9 +58,11 @@ Current site direction:
 - New route: `src/pages/<Name>.tsx`, or `src/pages/<Name>/` when it needs page-only subcomponents.
 - Page-only helpers/components: colocate under the page folder.
 - Reusable UI: `src/components/<Component>.tsx` plus CSS if needed.
-- Reused timeline-style sections should live in a shared component with shared CSS rather than duplicating page-local timeline markup.
-- Timeline row spacing should be configurable on the shared `Timeline` component via a single prop rather than hardcoded per page or repeated per item.
-- The home experience timeline should use the shared `Timeline` component's default title/meta rendering: linked company stacked above muted role on the left, with right-aligned dates visually aligned to the role row rather than the company row, then summary/reflection below. Do not render location or company logos there unless explicitly requested.
+- Reused timeline-style sections should share the same line/marker CSS rather than duplicating timeline visuals.
+- Use `Timeline` for the home experience timeline and `LabeledTimeline` for age-labeled Signals; keep their spacing and responsive behavior separate.
+- Experience timeline content padding should stay fixed at `2.2rem` across breakpoints; only Signals timeline spacing should change responsively.
+- Timeline row spacing should be configurable on timeline components via a single prop rather than hardcoded per page or repeated per item.
+- The home experience timeline should use `Timeline`: linked company stacked above muted role on the left, with right-aligned dates visually aligned to the role row rather than the company row, then summary below. Do not render location or company logos there unless explicitly requested.
 - Blog-specific reusable UI/helpers: `src/components/Blog/`.
 - Static data: `src/constants/<name>.json|ts`.
 - Build/CI utilities: `scripts/*.ts`.
@@ -100,7 +102,7 @@ Current site direction:
 - Global typography should assign Geist Mono to semantic `h1` and `h2` elements by default; do not rely on per-element utility classes just to correct their font family.
 - Do not use Geist Mono for every heading. Smaller blog headings such as `h3`/`h4`, post card titles, metadata, bylines, action labels, and article bodies should stay in Inter unless the user explicitly asks for a terminal/README feel.
 - Geist Mono labels and headings should use natural capitalization such as `Writing`, not forced lowercase, unless the text is intentionally code-like or URL-like.
-- Route-level page headers such as `Writing` and `Signals` should use the responsive scale `text-3xl sm:text-4xl`; timeline age labels should use `text-sm sm:text-base`.
+- Route-level page headers such as `Writing` and `Signals` should use the responsive scale `text-3xl sm:text-4xl`; Signals timeline age labels should use `text-sm sm:text-base`, item titles `text-base sm:text-lg`, and descriptions `text-sm sm:text-base`.
 - Use the global tokens:
   - `--font-family`
   - `--font-family-mono`

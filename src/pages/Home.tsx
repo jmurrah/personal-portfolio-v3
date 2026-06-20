@@ -114,9 +114,9 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
       >
         {experience.company}
       </a>
-      <span className="flex items-baseline gap-1">
-        <span className="text-sm font-normal text-[var(--muted)]">{experience.role}</span>
-        <span className="ml-auto whitespace-nowrap text-sm font-normal text-[var(--muted)]">
+      <span className="flex items-baseline gap-x-6 gap-y-1 flex-wrap">
+        <span className="text-sm font-normal text-[var(--muted)] mr-auto">{experience.role}</span>
+        <span className="whitespace-nowrap text-sm font-normal text-[var(--muted)]">
           {experience.dates}
         </span>
       </span>
@@ -134,7 +134,7 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
 function HeroSection() {
   return (
     <div className="w-full flex flex-col gap-4 mt-8">
-      <h1 className="text-5xl font-semibold">Jacob Murrah</h1>
+      <h1 className="text-5xl font-semibold mb-1">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
           <span

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { ICONS } from '@/assets';
-import Timeline, { type TimelineItem } from '@/components/Timeline';
+import { LabeledTimeline, type LabeledTimelineItem } from '@/components/Timeline';
 import SvgIcon from '@/components/SvgIcon';
 
-const signals: TimelineItem[] = [
+const signals: LabeledTimelineItem[] = [
   {
     id: 'wrestling',
     label: 'Age 10',
@@ -75,7 +75,7 @@ export default function Signals() {
         A timeline of moments that have shaped my habits and standards.
       </p>
 
-      <Timeline items={signals} sectionGap="2rem" titleAs={'h3'} />
+      <LabeledTimeline items={signals} sectionGap="2rem" titleAs={'h3'} />
     </section>
   );
 }
