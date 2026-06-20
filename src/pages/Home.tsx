@@ -92,30 +92,27 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, ''),
   title: (
-    <span className="flex flex-col gap-1">
+    <span className="flex w-full flex-col">
       <a
         href={experience.companyLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="meta-link"
+        className="meta-link w-fit"
       >
         {experience.company}
       </a>
-      <span className="text-sm font-normal text-[var(--muted)]">{experience.role}</span>
-    </span>
-  ),
-  titleMeta: (
-    <span className="flex flex-col gap-1 text-right">
-      <span aria-hidden="true" className="text-lg">
-        &nbsp;
+      <span className="flex items-baseline">
+        <span className="text-sm font-normal text-[var(--muted)]">{experience.role}</span>
+        <span className="ml-auto whitespace-nowrap text-sm font-normal text-[var(--muted)]">
+          {experience.dates}
+        </span>
       </span>
-      <span>{experience.dates}</span>
     </span>
   ),
   description: (
-    <div className="flex flex-col gap-3 mt-3">
-      <div className="text-[var(--text)]">{experience.summary}</div>
-      <p>{experience.reflection}</p>
+    <div className="flex flex-col gap-1.5 mt-2">
+      <div className="text-[var(--muted)]">{experience.summary}</div>
+      {/* <p>{experience.reflection}</p> */}
     </div>
   ),
   isFilled: experience.dates.includes('Present'),
@@ -127,7 +124,13 @@ function HeroSection() {
       <h1 className="text-5xl font-semibold">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
-          <span className="text-[var(--text)]">Software Engineer</span> at{' '}
+          <span
+            className="gradient-emphasis"
+            style={{ '--gradient-emphasis-offset': '90%' } as React.CSSProperties}
+          >
+            Software Engineer
+          </span>{' '}
+          at{' '}
           <a
             href="https://www.att.com/"
             target="_blank"
@@ -136,8 +139,13 @@ function HeroSection() {
           >
             <span>AT&T</span>
           </a>{' '}
-          in <span className="text-[var(--text)]">Atlanta</span>, working on network disaster
-          recovery and automated ticketing. I bring modern engineering practices to legacy systems.
+          in{' '}
+          <span
+            className="gradient-emphasis gradient-emphasis--reverse"
+            style={{ '--gradient-emphasis-offset': '10%' } as React.CSSProperties}
+          >
+            Atlanta
+          </span>, working on network disaster recovery and automated ticketing.
         </p>
         <p className="text-[var(--muted)]">
           Pursuing a master's at{' '}
@@ -149,7 +157,13 @@ function HeroSection() {
           >
             <span>Georgia Tech</span>
           </a>{' '}
-          while navigating fatherhood, hitting the gym, and optimizing my daily routines.
+          while navigating {' '}
+          <span
+            className="gradient-emphasis gradient-emphasis"
+            style={{ '--gradient-emphasis-offset': '95%' } as React.CSSProperties}
+          >
+            fatherhood
+          </span>, hitting the gym, and optimizing my daily routines.
         </p>
         <p className="text-[var(--muted)]">
           Curious about what has shaped me? Read my{' '}
@@ -196,7 +210,7 @@ function ExperienceSection() {
           .
         </p>
       </div>
-      <Timeline items={EXPERIENCE_ITEMS} sectionGap="1.5rem" titleAs="h3" />
+      <Timeline items={EXPERIENCE_ITEMS} sectionGap="2rem" titleAs="h3" />
     </div>
   );
 }

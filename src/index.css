@@ -38,6 +38,8 @@
 
 :root {
   --color-mantle: var(--surface);
+  --link-transition-duration: 100ms;
+  --link-transition-easing: ease;
   --font-family:
     'Inter Variable', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-family-mono:
@@ -242,8 +244,34 @@ strong {
   text-underline-offset: 0.18em;
   text-decoration-skip-ink: auto;
   transition:
-    color 100ms ease,
-    text-decoration-color 100ms ease;
+    color var(--link-transition-duration) var(--link-transition-easing),
+    text-decoration-color var(--link-transition-duration) var(--link-transition-easing);
+}
+
+.gradient-emphasis {
+  --gradient-emphasis-offset: 0%;
+  --gradient-emphasis-start: var(--blue-hover);
+  --gradient-emphasis-mid: var(--blue);
+  --gradient-emphasis-end: var(--orange-hover);
+  background-image: linear-gradient(
+    90deg,
+    var(--gradient-emphasis-start),
+    var(--gradient-emphasis-mid),
+    var(--gradient-emphasis-end)
+  );
+  background-position: var(--gradient-emphasis-offset) 50%;
+  background-size: 220% 100%;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-emphasis--reverse {
+  --gradient-emphasis-start: var(--orange-hover);
+  --gradient-emphasis-mid: var(--blue);
+  --gradient-emphasis-end: var(--blue-hover);
 }
 
 .link-underline:hover,

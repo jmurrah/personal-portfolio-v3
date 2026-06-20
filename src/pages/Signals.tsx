@@ -7,7 +7,7 @@ const signals: TimelineItem[] = [
   {
     id: 'wrestling',
     label: 'Age 10',
-    title: 'Alabama Youth Wrestling State Champion',
+    title: 'Youth Wrestling State Champion',
     description: "Competing is fun, let's keep challenging myself.",
     isFilled: false,
   },
@@ -72,10 +72,10 @@ export default function Signals() {
       <h1 className="mb-2 text-4xl font-semibold">Signals</h1>
 
       <p className="mb-6 text-[color:var(--muted)]">
-        A timeline of moments that have shaped my standards, habits, and perspective.
+        A timeline of moments that have shaped my habits.
       </p>
 
-      <Timeline items={signals} sectionGap="3rem" titleAs={'h3'} />
+      <Timeline items={signals} sectionGap="2rem" titleAs={'h3'} />
     </section>
   );
 }

@@ -1,3 +1,14 @@
+.blog-preview-card {
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  transition: background-color var(--link-transition-duration) var(--link-transition-easing);
+}
+
+.blog-preview-card:hover,
+.blog-preview-card:focus-visible {
+  background-color: var(--blue-soft);
+}
+
 .blog-preview-card__title {
   font-family: var(--font-family);
   font-weight: 600;
@@ -5,6 +16,8 @@
 
 .blog-preview-card:hover .blog-preview-card__title,
 .blog-preview-card:focus-visible .blog-preview-card__title {
+  background-image: none;
   color: var(--blue-hover);
+  -webkit-text-fill-color: currentColor;
   text-decoration-color: currentColor;
 }

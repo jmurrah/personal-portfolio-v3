@@ -19,7 +19,6 @@ const formatPreviewDate = (value: string) => {
 };
 
 const getPostId = (post: FeedPost, slug: string) => post.guid || post.link || slug;
-const getPreviewImage = (post: FeedPost) => post.thumbnail || post.enclosure.link;
 
 export default function BlogFeed({ limit }: BlogFeedProps) {
   const posts = useMemo(() => {
@@ -29,31 +28,28 @@ export default function BlogFeed({ limit }: BlogFeedProps) {
 
   return (
     <div className="blog-feed">
-      <ul className="blog-preview-list flex flex-col gap-3">
+      <ul className="blog-preview-list flex flex-col gap-1">
         {posts.map((post) => {
           const slug = getPostSlug(post);
           const id = getPostId(post, slug);
           const publishedOn = formatPreviewDate(post.pubDate);
-          const previewImage = getPreviewImage(post);
 
           return (
             <li key={id} className="blog-preview-list__item">
               <Link
                 to={getPostPath(post)}
-                className="blog-preview-card flex flex-col gap-1.5 sm:flex-row sm:items-start"
+                className="blog-preview-card flex flex-col gap-1.5"
                 aria-label={post.title ? `Read ${post.title}` : 'Read post'}
               >
-                <div className="min-w-0 flex flex-col gap-1.5 flex-1">
-                  <h3 className="blog-preview-card__title link-underline">{post.title}</h3>
+                <div className="min-w-0 flex flex-col gap-1.5">
+                  <div className="flex flex-wrap">
+                    <h3 className="blog-preview-card__title link-underline text-base mr-auto w-96">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-[var(--muted)] mt-1">{publishedOn}</p>
+                  </div>
                   <p className="text-[var(--muted)]">{post.description}</p>
-                  <p className="text-sm text-[var(--muted)]">{publishedOn}</p>
                 </div>
-                <img
-                  src={previewImage}
-                  alt={`Thumbnail for ${post.title}`}
-                  className="h-44 w-full rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] object-cover sm:block hidden md:h-28 md:w-48 md:flex-none"
-                  loading="lazy"
-                />
               </Link>
             </li>
           );
