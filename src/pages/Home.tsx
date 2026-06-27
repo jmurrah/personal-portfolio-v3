@@ -187,7 +187,7 @@ function HeroSection() {
       <img
         src={PHOTOS.sunset}
         alt="Sunset"
-        className="mt-3 h-12 sm:h-16 w-full rounded object-cover object-center"
+        className="mt-3 h-16 sm:h-20 w-full rounded object-cover object-center"
       />
     </div>
   );
