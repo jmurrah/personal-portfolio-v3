@@ -13,7 +13,7 @@ import ClockIcon from '@/assets/icons/ClockIcon.svg';
 import ResumeIcon from '@/assets/icons/ResumeIcon.svg';
 
 import GraduationHeadshotPhoto from '@/assets/photos/GraduationHeadshot.webp';
-import SunsetPhoto from '@/assets/photos/Sunset.webp';
+import SunsetPhoto from '@/assets/photos/sunset.webp';
 import AdtranLogo from '@/assets/logos/adtran.png';
 import AttLogo from '@/assets/logos/att.png';
 import AuburnLogo from '@/assets/logos/auburn.png';
