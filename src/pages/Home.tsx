@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PHOTOS } from '@/assets';
 import BlogFeed from '@/components/Blog/BlogFeed';
 import Timeline, { type TimelineItem } from '@/components/Timeline';
 
@@ -134,16 +135,10 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
 function HeroSection() {
   return (
     <div className="w-full flex flex-col gap-4 mt-8">
-      <h1 className="text-5xl font-semibold mb-1">Jacob Murrah</h1>
+      <h1 className="text-3xl sm:text-5xl font-semibold whitespace-nowrap mb-1">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
-          <span
-            className="gradient-emphasis"
-            style={{ '--gradient-emphasis-offset': '90%' } as React.CSSProperties}
-          >
-            Software Engineer
-          </span>{' '}
-          at{' '}
+          Software Engineer at{' '}
           <a
             href="https://www.att.com/"
             target="_blank"
@@ -152,14 +147,7 @@ function HeroSection() {
           >
             <span>AT&T</span>
           </a>{' '}
-          in{' '}
-          <span
-            className="gradient-emphasis gradient-emphasis--reverse"
-            style={{ '--gradient-emphasis-offset': '10%' } as React.CSSProperties}
-          >
-            Atlanta
-          </span>
-          , working on network disaster recovery and automated ticketing.
+          in Atlanta, working on network disaster recovery and automated ticketing.
         </p>
         <p className="text-[var(--muted)]">
           Pursuing a master's at{' '}
@@ -171,24 +159,10 @@ function HeroSection() {
           >
             <span>Georgia Tech</span>
           </a>{' '}
-          while navigating{' '}
-          <span
-            className="gradient-emphasis"
-            style={{ '--gradient-emphasis-offset': '85%' } as React.CSSProperties}
-          >
-            fatherhood
-          </span>
-          , hitting the gym, and optimizing my daily routines.
+          while navigating fatherhood, hitting the gym, and optimizing my daily routines.
         </p>
         <p className="text-[var(--muted)]">
-          Curious about my{' '}
-          <span
-            className="gradient-emphasis gradient-emphasis--reverse"
-            style={{ '--gradient-emphasis-offset': '30%' } as React.CSSProperties}
-          >
-            standards
-          </span>
-          ? Read my{' '}
+          Curious about my standards? Read my{' '}
           <Link className="inline-link" to="/signals">
             signals
           </Link>
@@ -210,6 +184,11 @@ function HeroSection() {
           </React.Fragment>
         ))}
       </div>
+      <img
+        src={PHOTOS.sunset}
+        alt="Sunset"
+        className="mt-3 h-12 sm:h-16 w-full rounded object-cover object-center"
+      />
     </div>
   );
 }

@@ -1,44 +1,46 @@
 :root {
-  /* Warm Precision — sharpened */
+  color-scheme: dark;
 
-  /* Base — cooler, less coffee-shop */
-  --bg: #f5f6f7;
-  --surface: #ffffff;
-  --surface-muted: #eceff2;
+  /* Warm Precision — friendly warm builder notebook */
+
+  /* Base — warm builder canvas, not pure black */
+  --bg: #272620;
+  --surface: #302e27;
+  --surface-muted: #3a372f;
 
   /* Text */
-  --text: #181512;
-  --muted: #4f4a43;
-  --muted-light: #746d63;
+  --text: #f4f1e8;
+  --muted: #c7c1b5;
+  --muted-light: #918a7c;
 
   /* Structure */
-  --border: #e2e6ea;
-  --border-strong: #ced4da;
+  --border: #3f3b32;
+  --border-strong: #504b40;
 
   /* Technical blue */
-  --blue: #1d4ed8;
-  --blue-hover: #173280;
-  --blue-soft: #e8f0fe;
-  --blue-border: #b8d0f9;
+  --blue: #95b0fb;
+  --blue-hover: #c1d0ff;
+  --blue-soft: #33394e;
+  --blue-border: #5d6f9f;
 
   /* Human/status orange */
-  --orange: #c2410c;
-  --orange-hover: #9a3412;
-  --orange-soft: #fef0e4;
-  --orange-border: #f5c09a;
+  --orange: #e59a63;
+  --orange-hover: #f1b17d;
+  --orange-soft: #433327;
+  --orange-border: #7b5940;
 
   /* Rare live/shipped/code green */
-  --green: #0f766e;
-  --green-soft: #e6fffa;
-  --green-border: #b7f3ea;
+  --green: #80cdbb;
+  --green-soft: #2d4039;
+  --green-border: #5f8f83;
 
   /* Code */
-  --code-bg: #eceff2;
+  --code-bg: var(--surface-muted);
   --code-text: var(--green);
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(24, 21, 18, 0.05);
-  --shadow-md: 0 8px 24px rgba(24, 21, 18, 0.07);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.26);
 
   /* Existing app aliases */
   --accent: var(--blue);

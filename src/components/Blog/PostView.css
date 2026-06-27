@@ -72,7 +72,7 @@
 }
 
 .post-author {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .post-date {
@@ -92,7 +92,7 @@
   font-family: var(--font-family);
   font-size: 16px;
   line-height: 1.7;
-  color: inherit;
+  color: var(--muted);
 }
 
 .post-content p {
@@ -109,7 +109,11 @@
   margin: 24px 0 0px;
   line-height: 1.25;
   font-weight: 650;
-  color: inherit;
+  color: var(--text);
+}
+
+.post-content strong {
+  color: var(--text);
 }
 
 .post-content h1 {
@@ -156,7 +160,7 @@
   padding: 10px 12px;
   border-left: 3px solid var(--orange);
   background: color-mix(in srgb, var(--surface-muted) 50%, var(--orange-soft) 50%);
-  color: inherit;
+  color: var(--text);
 }
 
 .post-content code {
@@ -266,6 +270,7 @@
 .post-bottom-link {
   margin-top: 4px;
   margin-left: auto;
+  font-weight: 400;
 }
 .post-bottom-link,
 .post-link-btn {

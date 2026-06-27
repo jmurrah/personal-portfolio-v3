@@ -82,6 +82,7 @@ Current site direction:
 - Preserve compatibility aliases in `src/palette.css` when older call sites still need them, but prefer canonical tokens in touched CSS.
 - Use the repo skill `.codex/skills/warm-precision-color-system` for color decisions.
 - Color should be sparse: cool-gray neutrals dominate the canvas, warm text/orange provide human contrast, blue signals technical interaction, and green is rare and operational.
+- The site now uses a friendly warm builder notebook palette by default: warm builder canvas, paper text, restrained technical blue, approachable orange, and rare green.
 - Reusable styles belong in CSS files imported by components.
 - Inline Tailwind classes are fine for local layout and one-off spacing.
 - Preserve accessibility: focus states, aria labels, descriptive alt text, and readable contrast.
@@ -91,6 +92,8 @@ Current site direction:
 - Reuse shared link underline utilities from `src/index.css` such as `.meta-link`, `.inline-link`, and `.link-underline`; do not redefine the same underline token logic in component-local CSS when an existing shared class fits.
 - Header nav links should stay neutral and undecorated at rest; use color change for hover/focus and reserve underlines there for active route indication only.
 - Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
+- Keep `GraduationHeadshot` available as a photo asset, but do not render a headshot in the Home hero unless explicitly requested.
+- The Home hero should render the `sunset` photo below the hero links at full available width with fixed height, `object-cover`, and centered cropping.
 - Keep non-link controls such as the hamburger/menu toggle and close button on separate classes so link underline styling only applies to actual links; their hover/focus state should use `--blue-hover` and show a pointer cursor.
 - Footer social icons should stay `xsmall` by default, with the Substack icon intentionally overridden to `17px` square for visual balance.
 
@@ -127,9 +130,12 @@ Current site direction:
   - Card interaction can use `--blue-soft` and `--blue-border`.
   - Blog preview card background hover/focus timing should use the same `--link-transition-duration` and `--link-transition-easing` tokens as shared link hover transitions.
   - Linked blog card titles and linked post titles should keep a subtle `--blue-border` underline at rest and promote to `--blue-hover` on hover/focus.
-  - Blockquotes should carry a subtly warm surface derived from `--surface-muted` and `--orange-soft`, not neutral gray alone.
+  - Blockquotes should carry a subtly warm surface derived from `--surface-muted` and `--orange-soft`, not neutral gray alone, and their text should use `--text` rather than muted body color.
   - Code uses `--code-bg`, `--code-text`, and `--border`.
   - Metadata uses `--muted`.
+  - Article byline authors should use normal text weight, not bold.
+  - Long-form writing body text should use `--muted`, while article headings and strong text should use `--text`.
+  - Article bottom CTAs such as `Read on Substack` should use normal text weight, not bold.
   - Writing previews on `/writing` and the home page should share the same Substack-style article row layout: title, short description, and date metadata with normal month capitalization; omit the author name and omit preview thumbnails.
   - `src/components/Blog/BlogFeed.tsx` should rely on normalized post data and avoid defensive existence/error guards in preview rendering.
   - Writing preview titles should promote to the shared hover state when any part of the preview card is hovered or keyboard-focused, not only when the title text itself is hovered.
