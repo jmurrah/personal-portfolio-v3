@@ -28,7 +28,7 @@ const EXPERIENCES: ExperienceItem[] = [
     companyLink: 'https://www.att.com/',
     role: 'Software Engineer I',
     dates: 'Jan. 2026 - Present',
-    summary: 'Automated network alarm ticketing and disaster recovery.',
+    summary: 'Network disaster recovery and automated ticketing.',
     reflection:
       'Navigating legacy Java systems that nobody fully understands while improving development processes along the way.',
   },
@@ -180,7 +180,7 @@ function HeroSection() {
             >
               <span>{link.label}</span>
             </a>
-            {index < HERO_LINKS.length - 1 && <span>&middot;</span>}
+            {index < HERO_LINKS.length - 1 && <span className="text-[var(--muted)]">&middot;</span>}
           </React.Fragment>
         ))}
       </div>
