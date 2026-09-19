@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PHOTOS } from '@/assets';
 import BlogFeed from '@/components/Blog/BlogFeed';
+import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
 import Timeline, { type TimelineItem } from '@/components/Timeline';
 
 type HeroLink = { label: string; href: string };
@@ -20,6 +21,12 @@ const HERO_LINKS: HeroLink[] = [
   { label: 'github', href: 'https://github.com/jmurrah' },
   { label: 'substack', href: 'https://jacobmurrah.substack.com/' },
   { label: 'resume', href: '/JacobMurrahResume.pdf' },
+];
+
+const HOME_SECTIONS: SectionRailItem[] = [
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'writing', label: 'Writing' },
 ];
 
 const EXPERIENCES: ExperienceItem[] = [
@@ -117,7 +124,7 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
       </a>
       <span className="flex items-baseline gap-x-6 gap-y-1 flex-wrap">
         <span className="text-sm font-normal text-[var(--muted)] mr-auto">{experience.role}</span>
-        <span className="whitespace-nowrap text-sm font-normal text-[var(--muted)]">
+        <span className="ui-label whitespace-nowrap text-sm font-normal text-[var(--muted-light)]">
           {experience.dates}
         </span>
       </span>
@@ -134,8 +141,8 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
 
 function HeroSection() {
   return (
-    <div className="w-full flex flex-col gap-4 mt-8">
-      <h1 className="text-3xl sm:text-5xl font-semibold whitespace-nowrap mb-1">Jacob Murrah</h1>
+    <section id="about" className="section-rail-target w-full flex flex-col gap-4 mt-8">
+      <h1 className="text-4xl sm:text-5xl font-semibold whitespace-nowrap mb-1">Jacob Murrah</h1>
       <div className="flex flex-col gap-3">
         <p className="text-[var(--muted)]">
           Software Engineer at{' '}
@@ -176,7 +183,7 @@ function HeroSection() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="meta-link gap-0.5 flex items-center"
+              className="meta-link ui-label gap-0.5 flex items-center"
             >
               <span>{link.label}</span>
             </a>
@@ -189,15 +196,15 @@ function HeroSection() {
         alt="Sunset"
         className="mt-3 h-16 sm:h-20 w-full rounded object-cover object-center"
       />
-    </div>
+    </section>
   );
 }
 
 function ExperienceSection() {
   return (
-    <div className="flex flex-col gap-6">
+    <section id="experience" className="section-rail-target flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl mb-2">Experience</h2>
+        <h2 className="text-3xl mb-2">Experience</h2>
         <p className="text-[color:var(--muted)]">
           For a more technical view of my experiences, read my{' '}
           <a
@@ -212,15 +219,15 @@ function ExperienceSection() {
         </p>
       </div>
       <Timeline items={EXPERIENCE_ITEMS} sectionGap="1.5rem" titleAs="h3" />
-    </div>
+    </section>
   );
 }
 
 function WritingSection() {
   return (
-    <div className="flex flex-col gap-6">
+    <section id="writing" className="section-rail-target flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl mb-2">Writing</h2>
+        <h2 className="text-3xl mb-2">Writing</h2>
         <p className="text-[color:var(--muted)]">
           Recent posts from my{' '}
           <a
@@ -239,16 +246,19 @@ function WritingSection() {
         </p>
       </div>
       <BlogFeed limit={3} />
-    </div>
+    </section>
   );
 }
 
 export default function Home() {
   return (
-    <section className="flex flex-col gap-16">
-      <HeroSection />
-      <ExperienceSection />
-      <WritingSection />
-    </section>
+    <>
+      <SectionRail sections={HOME_SECTIONS} />
+      <div className="flex flex-col gap-16 sm:gap-24">
+        <HeroSection />
+        <ExperienceSection />
+        <WritingSection />
+      </div>
+    </>
   );
 }

@@ -1,15 +1,15 @@
 ---
 name: warm-precision-color-system
-description: Color usage system for Jacob Murrah's personal portfolio. Use when editing this portfolio's palette, CSS variables, backgrounds, links, navigation states, cards, badges, buttons, code blocks, blockquotes, status labels, or any UI color decisions so the site stays warm, precise, restrained, and technically credible.
+description: Color usage system for Jacob Murrah's personal portfolio. Use when editing its palette, CSS variables, surfaces, links, navigation states, cards, code, blockquotes, status indicators, or other UI color decisions.
 ---
 
 # Warm Precision Color System
 
-Use color as a signal system, not decoration. The site should feel like a cool-neutral page with warm ink, precise typography, technical blue interaction, burnt orange human/status accents, and very little color overall.
+Reduce the interface to neutral graphite/paper, off-white/dark text, and one muted-blue interaction family. Let photography provide warmth. The only non-blue UI hue is the scoped orange article-blockquote accent.
 
 ## Source Of Truth
 
-Use `src/palette.css` as the only source of exact color values. Do not copy hex/rgb/hsl color values into components, page CSS, or this skill. When a new color is genuinely needed, add a semantic token in `src/palette.css` first, then consume the token elsewhere.
+Keep every exact color in `src/palette.css`. Components and local CSS consume semantic variables only.
 
 Canonical tokens:
 
@@ -24,201 +24,67 @@ Canonical tokens:
 --border;
 --border-strong;
 
-/* Technical interaction */
+/* One interaction hue */
 --blue;
 --blue-hover;
---blue-soft;
 --blue-border;
 
-/* Human/status emphasis */
---orange;
---orange-hover;
---orange-soft;
---orange-border;
-
-/* Rare operational success */
---green;
---green-soft;
---green-border;
-
-/* Code */
---code-bg;
---code-text;
+/* Article-only exception */
+--blockquote-accent;
 
 /* Depth */
 --shadow-sm;
 --shadow-md;
 ```
 
-Compatibility aliases may exist in `src/palette.css` for older call sites, for example `--accent: var(--blue)`, `--signal: var(--orange)`, `--success: var(--green)`, `--primary: var(--blue)`, and `--text-muted: var(--muted)`. Prefer canonical tokens in new or touched CSS.
+Do not add compatibility aliases, colored soft-surface tokens, generic orange tokens, green tokens, status palettes, or decorative accent colors.
 
-## Signal Rules
+## Theme Rules
 
-- Cool-gray neutrals are the default canvas: use `--bg`, `--surface`, `--surface-muted`, `--text`, `--muted`, and borders for most UI.
-- The base neutrals are cool-gray, not warm beige. This keeps accent colors reading as sharp signals rather than blending into a warm background. The text and orange main values remain warm; that contrast between warm ink/signal and cool surface is intentional.
-- Blue means clickable, technical, selected, linked, navigational, focus, or interactive.
-- Orange means current, important, personal, status, editorial emphasis, human signal, or blockquote emphasis.
-- Green means live, healthy, verified, shipped, available, or running. Use it rarely.
-- Avoid blue or orange as large background areas. Use them as small signals.
+- Light is the default `:root` theme.
+- The optional dark alternate is `:root[data-theme='dark']`.
+- Both themes use only different lightness values of their neutral family plus the same muted-blue interaction concept.
+- Large and small UI surfaces remain neutral: `--bg`, `--surface`, or `--surface-muted`.
+- Never use colored card, code, badge, callout, or hover surfaces.
 
-Target ratio:
+## Interaction
 
-```text
-80-85% cool neutral
-8-12% white surfaces
-3-5% blue
-1-2% orange
-<1% green
-```
+- Resting link labels use `--text`, not blue.
+- Resting link underlines may use `--blue-border`.
+- Hover/focus states may use `--blue-hover`.
+- Active navigation keeps neutral text with a `--blue` underline.
+- Blue is otherwise limited to genuinely interactive elements, selected states, the breadcrumb cursor, and browser UI such as the scrollbar.
+- Non-interactive timeline markers and decoration stay neutral.
 
-## Backgrounds And Surfaces
+## Text And Structure
 
-- Page background: `--bg`.
-- Cards and structured content: `--surface` with `1px solid var(--border)`.
-- Code, blockquotes, notes, and low-emphasis callouts: `--surface-muted`.
-- Prefer borders and spacing over heavy shadows or colored blocks.
+- Primary text: `--text`.
+- Secondary text: `--muted`.
+- Dates, captions, and tertiary-only information: `--muted-light`.
+- Structure: `--border` and `--border-strong`.
+- Literal code uses `--surface-muted`, `--text`, and `--border`.
 
-Page background is a cool neutral, not warm cream. This is deliberate: warm text and orange signals read with more precision against a cooler field. Do not drift `--bg` back toward beige; the system depends on this cool base.
+## Article Blockquote Exception
 
-```css
-body {
-  background: var(--bg);
-  color: var(--text);
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-}
-```
-
-## Text
-
-- Primary text uses `--text`.
-- Secondary text, metadata, dates, descriptions, footer text, and inactive breadcrumb/nav text use `--muted`.
-- Avoid pure black.
-- Keep muted gray compatible with the warm text while the canvas stays cool-neutral.
-
-## Links And Navigation
-
-Use blue for intentionally colored technical/clickable interaction:
+Article blockquotes/highlights may use `--blockquote-accent` only as a narrow left border. Their background, remaining border, and text stay neutral.
 
 ```css
-a {
-  color: var(--blue);
-  text-decoration-color: color-mix(in srgb, var(--blue) 35%, transparent);
-}
-
-a:hover {
-  color: var(--blue-hover);
-}
-```
-
-If the user asks for neutral links, keep links inheriting text color but preserve underline/focus affordance.
-
-Active navigation should become primary text and use an underline. Inactive navigation can use `--muted`.
-
-In this repo, prefer reusing the shared underline utilities already defined in `src/index.css` such as `.meta-link`, `.inline-link`, and `.link-underline`. Do not duplicate the same `--blue-border` and `--blue-hover` underline logic in component-local CSS when an existing shared class fits.
-
-## Orange Usage
-
-Use orange for human/status emphasis, not normal links:
-
-- Currently building
-- Featured
-- Now
-- Writing
-- Personal note
-- Blockquote border
-- Small status dots
-
-```css
-.badge-status {
-  background: var(--orange-soft);
-  color: var(--orange);
-  border: 1px solid var(--orange-border);
-}
-
 blockquote {
-  background: var(--surface-muted);
-  border-left: 3px solid var(--orange);
-  color: var(--text);
-}
-```
-
-Do not use orange for all links.
-
-## Green Usage
-
-Use green almost never. It is for operational/shipped signals only:
-
-- Live
-- Healthy
-- Verified
-- Shipped
-- Available
-- Running
-
-Avoid large green backgrounds.
-
-## Buttons, Tags, And Badges
-
-Primary technical action:
-
-```css
-.button-primary {
-  background: var(--blue);
-  color: white;
-}
-```
-
-Secondary action:
-
-```css
-.button-secondary {
   background: var(--surface);
-  color: var(--text);
   border: 1px solid var(--border);
-}
-```
-
-Tag mapping:
-
-```text
-React / TypeScript / ML / Infra = blue
-Essay / Notes / Reflection = neutral
-Currently / Featured / Personal = orange
-Live / Shipped = green
-```
-
-## Code
-
-Code should feel technical but calm:
-
-```css
-code {
-  background: var(--code-bg);
-  color: var(--code-text);
-  border: 1px solid var(--border);
-}
-
-pre {
-  background: var(--code-bg);
-  border: 1px solid var(--border);
+  border-left: 4px solid var(--blockquote-accent);
   color: var(--text);
 }
 ```
 
-Avoid dark code blocks unless the whole site has a dark-mode counterpart.
+Do not use this orange token anywhere else.
 
 ## Final Check
 
-Before finishing color-related work, confirm:
-
-- Exact color values live in `src/palette.css`, not scattered through app files.
-- The page still reads mostly cool neutral.
-- Blue only marks technical/interactive meaning.
-- Orange appears only where attention is deserved.
-- Green is rare and operational.
-- Borders and typography carry more polish than color.
+- Exact colors exist only in `src/palette.css`.
+- No blue/orange/green tinted surfaces exist.
+- Resting links read as normal text first.
+- Blue communicates interaction only.
+- Green UI does not exist.
+- Orange appears only on article blockquote/highlight left borders.
+- Photography provides warmth and visual color.

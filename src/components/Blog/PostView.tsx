@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import SvgIcon from '@/components/SvgIcon';
+import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
 import { ICONS } from '@/assets';
 import type { FeedPost } from './types';
 import './PostView.css';
@@ -8,6 +9,8 @@ interface PostViewProps {
   post: FeedPost;
   onBack: () => void;
 }
+
+const ARTICLE_TITLE_ID = 'article-title';
 
 const formatDate = (value: string) => {
   if (!value) return '';
@@ -56,8 +59,8 @@ const normalizeFootnotes = (doc: Document) => {
   });
 };
 
-const cleanContent = (html: string) => {
-  if (!html) return '';
+const cleanContent = (html: string): { html: string; sections: SectionRailItem[] } => {
+  if (!html) return { html: '', sections: [] };
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   doc
@@ -69,6 +72,25 @@ const cleanContent = (html: string) => {
     el.remove();
   });
   normalizeFootnotes(doc);
+  const usedHeadingIds = new Map<string, number>([[ARTICLE_TITLE_ID, 1]]);
+  const sections = Array.from(doc.querySelectorAll('h2, h3, h4')).map((heading, index) => {
+    const label = heading.textContent?.trim() || `Section ${index + 1}`;
+    const baseId =
+      label
+        .toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '') || `section-${index + 1}`;
+    const occurrence = (usedHeadingIds.get(baseId) ?? 0) + 1;
+    usedHeadingIds.set(baseId, occurrence);
+    const id = occurrence === 1 ? baseId : `${baseId}-${occurrence}`;
+
+    heading.id = id;
+    heading.classList.add('section-rail-target');
+    const depth = Math.min(Number(heading.tagName.slice(1)) - 2, 2) as 0 | 1 | 2;
+    return { id, label, depth };
+  });
   doc.querySelectorAll('a').forEach((link) => {
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#')) {
@@ -83,13 +105,17 @@ const cleanContent = (html: string) => {
     relTokens.add('noreferrer');
     link.setAttribute('rel', Array.from(relTokens).join(' '));
   });
-  return doc.body.innerHTML;
+  return { html: doc.body.innerHTML, sections };
 };
 
 export default function PostView({ post, onBack }: PostViewProps) {
   const publishedOn = formatDate(post.pubDate);
   const rawContent = post.content || post.description || '';
-  const content = cleanContent(rawContent);
+  const { html: content, sections } = useMemo(() => cleanContent(rawContent), [rawContent]);
+  const railSections = useMemo<SectionRailItem[]>(
+    () => [{ id: ARTICLE_TITLE_ID, label: post.title, depth: 0 }, ...sections],
+    [post.title, sections],
+  );
   const subtitle = stripHtml(post.description).trim();
   const contentRef = useRef<HTMLElement | null>(null);
 
@@ -131,13 +157,14 @@ export default function PostView({ post, onBack }: PostViewProps) {
 
   return (
     <article className="post-view">
+      <SectionRail sections={railSections} />
       <div className="post-shell">
         <button type="button" onClick={onBack} className="back-nav-link text-base back-nav-button">
           <SvgIcon src={ICONS.arrowLeft} alt="" size="2xsmall" color="currentColor" />
           <span>Back to Writing</span>
         </button>
 
-        <header className="post-header">
+        <header id={ARTICLE_TITLE_ID} className="post-header section-rail-target">
           <div className="post-title-block">
             {post.link ? (
               <a

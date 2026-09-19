@@ -58,6 +58,7 @@ Current site direction:
 - New route: `src/pages/<Name>.tsx`, or `src/pages/<Name>/` when it needs page-only subcomponents.
 - Page-only helpers/components: colocate under the page folder.
 - Reusable UI: `src/components/<Component>.tsx` plus CSS if needed.
+- Use the reusable `SectionRail` for fixed desktop section navigation. Home entries map to its three major sections. Article rails begin with the article title, followed by entries derived from stable H2-H4 ids. Article marker length and indentation must show heading depth (title/H2 full, H3 nested, H4 nested further). Markers progressively fill blue through each section, completed sections remain blue, and a section starts at 1% fill. Rail hit areas must fill the visual gaps between markers. Hover labels use `--bg` behind the text for legibility. Hide the rail below `900px`.
 - Reused timeline-style sections should share the same line/marker CSS rather than duplicating timeline visuals.
 - Use `Timeline` for the home experience timeline and `LabeledTimeline` for age-labeled Signals; keep their spacing and responsive behavior separate.
 - Experience timeline content padding should stay fixed at `2.2rem` across breakpoints; only Signals timeline spacing should change responsively.
@@ -75,22 +76,22 @@ Current site direction:
 - Do not scatter hex/rgb/hsl values through app CSS or components.
 - Prefer canonical color tokens from the Warm Precision system:
   - Neutrals: `--bg`, `--surface`, `--surface-muted`, `--text`, `--muted`, `--muted-light`, `--border`, `--border-strong`.
-  - Technical interaction: `--blue`, `--blue-hover`, `--blue-soft`, `--blue-border`.
-  - Human/status emphasis: `--orange`, `--orange-hover`, `--orange-soft`, `--orange-border`.
-  - Rare operational success: `--green`, `--green-soft`, `--green-border`.
-  - Code: `--code-bg`, `--code-text`.
-- Preserve compatibility aliases in `src/palette.css` when older call sites still need them, but prefer canonical tokens in touched CSS.
+  - Interaction: `--blue`, `--blue-hover`, `--blue-border`.
+  - Article-only exception: `--blockquote-accent`.
 - Use the repo skill `.codex/skills/warm-precision-color-system` for color decisions.
-- Color should be sparse: cool-gray neutrals dominate the canvas, warm text/orange provide human contrast, blue signals technical interaction, and green is rare and operational.
-- The site now uses a friendly warm builder notebook palette by default: warm builder canvas, paper text, restrained technical blue, approachable orange, and rare green.
+- Color is limited to neutral graphite/paper, off-white/dark text, and one muted-blue interaction family. Photography supplies warmth.
+- Light is the default theme. `:root[data-theme='dark']` provides the optional dark alternate.
+- Keep every UI surface neutral (`--bg`, `--surface`, or `--surface-muted`). Never add colored card, code, badge, or callout fills.
+- Blue is interaction-only: links, active navigation, hover/focus, selected states, interactive controls, and the scrollbar. Non-interactive decoration must use neutral tokens.
+- Orange exists only as `--blockquote-accent` on article blockquote/highlight left borders. Do not use orange elsewhere. Do not introduce green UI tokens or states.
+- Do not add decorative gradients, glassmorphism, pure black, or new accent colors.
 - Reusable styles belong in CSS files imported by components.
 - Inline Tailwind classes are fine for local layout and one-off spacing.
 - Preserve accessibility: focus states, aria labels, descriptive alt text, and readable contrast.
 - Do not use one global link style for every surface. Keep separate treatments for nav links, clustered/meta links, inline sentence links, and long-form prose links.
-- Meta, inline, prose, and shared underlined text links should use `--blue-border` for the resting underline and transition both label and underline together to solid `--blue-hover` with a fast `100ms` color-only transition and fixed underline thickness. Keep `--blue-hover` dark enough to reach roughly `10:1` contrast on the light site surfaces while preserving the existing blue family.
-- Use the `gradient-emphasis` utility intentionally for rare inline emphasis in body/prose text only, not headings, timeline titles, nav, or default link treatment. Its gradient should stay on-palette and readable, currently semibold `--blue-hover` through `--blue` to `--orange-hover`; vary `--gradient-emphasis-offset` per use so similarly sized words do not share the same ending color. Use `gradient-emphasis--reverse` when an emphasized word should begin warm/orange and resolve back into blue.
+- Meta, inline, prose, and shared underlined text links should use `--blue-border` for the resting underline and transition both label and underline together to solid `--blue-hover` with a fast `100ms` color-only transition and fixed underline thickness.
 - Reuse shared link underline utilities from `src/index.css` such as `.meta-link`, `.inline-link`, and `.link-underline`; do not redefine the same underline token logic in component-local CSS when an existing shared class fits.
-- Header nav links should stay neutral and undecorated at rest; use color change for hover/focus and reserve underlines there for active route indication only.
+- Header nav links should stay neutral and undecorated at rest; hover/focus may turn blue. Active nav keeps neutral text with a blue underline.
 - Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
 - Keep `GraduationHeadshot` available as a photo asset, but do not render a headshot in the Home hero unless explicitly requested.
 - The Home hero should render the `sunset` photo below the hero links at full available width with fixed height, `object-cover`, and centered cropping.
@@ -99,19 +100,20 @@ Current site direction:
 
 ## Typography
 
-- Inter is the main prose/body font.
-- Geist Mono is the engineering signal font.
-- Use Geist Mono for high-signal identity/display elements: nav, terminal breadcrumb, tags, code/pre, route/page `h1` headers, identity/tagline elements, top-level post titles, and blog article `h2` section headings.
-- Global typography should assign Geist Mono to semantic `h1` and `h2` elements by default; do not rely on per-element utility classes just to correct their font family.
-- Do not use Geist Mono for every heading. Smaller blog headings such as `h3`/`h4`, post card titles, metadata, bylines, action labels, and article bodies should stay in Inter unless the user explicitly asks for a terminal/README feel.
-- Geist Mono labels and headings should use natural capitalization such as `Writing`, not forced lowercase, unless the text is intentionally code-like or URL-like.
+- Instrument Serif is the display/editorial font. Use it at weight 400 with its native zero letter spacing for `h1`, `h2`, hero/name typography, page titles, article titles, and other major editorial headings. Never bold it, apply custom tracking, or stretch it with `scaleX()`.
+- Inter is the main prose/body font for paragraphs, descriptions, long-form writing, buttons, and normal UI copy.
+- Instrument Sans is the secondary UI font for nav, breadcrumbs, dates, metadata, locations, tags, eyebrow text, status labels, chips, and other small UI elements.
+- Geist Mono is removed and must not be restored as a stylistic font.
+- Literal `code` and `pre` content uses the system monospace stack only.
+- Article headings `h1`-`h4` use Instrument Serif. Smaller headings `h5`/`h6`, post card titles, and article bodies stay in Inter unless explicitly requested otherwise.
 - Route-level page headers such as `Writing` and `Signals` should use the responsive scale `text-3xl sm:text-4xl`; Signals timeline age labels should use `text-sm sm:text-base`, item titles `text-base sm:text-lg`, and descriptions `text-sm sm:text-base`.
 - Use the global tokens:
   - `--font-family`
-  - `--font-family-mono`
-- Reusable mono classes exist in `src/index.css`:
-  - `.mono-heading`
-  - `.mono-label`
+  - `--font-family-display`
+  - `--font-family-ui`
+  - `--font-family-code`
+- Reusable typography classes exist in `src/index.css`:
+  - `.ui-label`
   - `.identity-name`
   - `.h1-tagline`
 
@@ -127,11 +129,11 @@ Current site direction:
 - Sort posts descending by `pubDate`, with explicit deterministic tie-breakers such as `guid` ascending.
 - Blog CSS should follow Warm Precision:
   - Cards use `--surface` and `--border`.
-  - Card interaction can use `--blue-soft` and `--blue-border`.
+  - Card hover/focus backgrounds use neutral `--surface-muted`, never a blue-tinted surface.
   - Blog preview card background hover/focus timing should use the same `--link-transition-duration` and `--link-transition-easing` tokens as shared link hover transitions.
   - Linked blog card titles and linked post titles should keep a subtle `--blue-border` underline at rest and promote to `--blue-hover` on hover/focus.
-  - Blockquotes should carry a subtly warm surface derived from `--surface-muted` and `--orange-soft`, not neutral gray alone, and their text should use `--text` rather than muted body color.
-  - Code uses `--code-bg`, `--code-text`, and `--border`.
+  - Blockquotes use neutral `--surface`, normal `--border`, a `4px` `--blockquote-accent` left border, and `--text`; this is the only orange UI usage.
+  - Code uses `--surface-muted`, `--text`, and `--border`.
   - Metadata uses `--muted`.
   - Article byline authors should use normal text weight, not bold.
   - Long-form writing body text should use `--muted`, while article headings and strong text should use `--text`.

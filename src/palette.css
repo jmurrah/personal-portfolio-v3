@@ -1,148 +1,62 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Warm Precision — friendly warm builder notebook */
-
-  /* Base — warm builder canvas, not pure black */
-  --bg: #272620;
-  --surface: #302e27;
-  --surface-muted: #3a372f;
+  /* Neutral paper */
+  --bg: #f3f4ee;
+  --surface: #fafaf6;
+  --surface-muted: #eaebe4;
 
   /* Text */
-  --text: #f4f1e8;
-  --muted: #c7c1b5;
-  --muted-light: #918a7c;
+  --text: #171a17;
+  --muted: #4a4f49;
+  --muted-light: #666b64;
 
   /* Structure */
-  --border: #3f3b32;
-  --border-strong: #504b40;
+  --border: #d8dad1;
+  --border-strong: #bfc2b7;
 
-  /* Technical blue */
-  --blue: #95b0fb;
-  --blue-hover: #c1d0ff;
-  --blue-soft: #33394e;
-  --blue-border: #5d6f9f;
+  /* Single interaction hue */
+  --blue: #3a55c9;
+  --blue-hover: #2a41a3;
+  --blue-border: #9aa8dc;
 
-  /* Human/status orange */
-  --orange: #e59a63;
-  --orange-hover: #f1b17d;
-  --orange-soft: #433327;
-  --orange-border: #7b5940;
+  /* Article blockquotes only */
+  --blockquote-accent: #b85a14;
 
-  /* Rare live/shipped/code green */
-  --green: #80cdbb;
-  --green-soft: #2d4039;
-  --green-border: #5f8f83;
-
-  /* Code */
-  --code-bg: var(--surface-muted);
-  --code-text: var(--green);
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.26);
-
-  /* Existing app aliases */
-  --accent: var(--blue);
-  --accent-hover: var(--blue-hover);
-  --accent-soft: var(--blue-soft);
-  --accent-border: var(--blue-border);
-
-  --signal: var(--orange);
-  --signal-hover: var(--orange-hover);
-  --signal-soft: var(--orange-soft);
-  --signal-border: var(--orange-border);
-
-  --success: var(--green);
-  --success-soft: var(--green-soft);
-  --success-border: var(--green-border);
-
-  --text-muted: var(--muted);
-  --primary: var(--blue);
-  --primary-muted: var(--blue-hover);
-  --danger: var(--orange);
-  --underline: var(--border-strong);
-
-  --status-active: var(--green);
-  --status-passive: var(--orange);
-  --status-shutdown: var(--muted);
-
-  --color-accent: var(--blue);
-  --color-accent-hover: var(--blue-hover);
+  /* Depth */
+  --shadow-sm: 0 1px 2px rgba(20, 25, 20, 0.08);
+  --shadow-md: 0 10px 30px rgba(20, 25, 20, 0.1);
 }
 
-/*
-:root {
-  Parchment / Stone Hybrid
+:root[data-theme='dark'] {
+  color-scheme: dark;
 
-  Base
-  --bg: #faf8f4;
-  --surface: #ffffff;
-  --surface-muted: #f5f1ea;
+  /* Neutral graphite */
+  --bg: #181a1b;
+  --surface: #1f2222;
+  --surface-muted: #272b2b;
 
-  Text
-  --text: #1c1611;
-  --text-soft: #292524;
-  --muted: #78716c;
-  --muted-light: #a8a29e;
+  /* Text */
+  --text: #f2f3ef;
+  --muted: #b7bbb5;
+  --muted-light: #858b84;
 
-  Structure
-  --border: #e7e1d8;
-  --border-strong: #d6cec2;
+  /* Structure */
+  --border: #303535;
+  --border-strong: #444b49;
 
-  Technical blue
-  --blue: #2563eb;
-  --blue-hover: #1d4ed8;
-  --blue-soft: #dbeafe;
-  --blue-border: #bfdbfe;
+  /* Single interaction hue */
+  --blue: #86a4ff;
+  --blue-hover: #afc1ff;
+  --blue-border: #536b9f;
 
-  Human/status orange
-  --orange: #c2410c;
-  --orange-hover: #9a3412;
-  --orange-soft: #ffedd5;
-  --orange-border: #fed7aa;
+  /* Article blockquotes only */
+  --blockquote-accent: #f0a06a;
 
-  Rare live/shipped/code green
-  --green: #0f766e;
-  --green-soft: #ccfbf1;
-  --green-border: #99f6e4;
-
-  Code
-  --code-bg: #f5f1ea;
-  --code-text: var(--green);
-
-  Shadows
-  --shadow-sm: 0 1px 2px rgba(28, 22, 17, 0.05);
-  --shadow-md: 0 8px 24px rgba(28, 22, 17, 0.08);
-
-  Existing app aliases
-  --accent: var(--blue);
-  --accent-hover: var(--blue-hover);
-  --accent-soft: var(--blue-soft);
-  --accent-border: var(--blue-border);
-
-  --signal: var(--orange);
-  --signal-hover: var(--orange-hover);
-  --signal-soft: var(--orange-soft);
-  --signal-border: var(--orange-border);
-
-  --success: var(--green);
-  --success-soft: var(--green-soft);
-  --success-border: var(--green-border);
-
-  --text-muted: var(--muted);
-  --primary: var(--blue);
-  --primary-muted: var(--blue-hover);
-  --danger: var(--orange);
-
-  --status-active: var(--green);
-  --status-passive: var(--orange);
-  --status-shutdown: var(--muted);
-
-  --color-accent: var(--blue);
-  --color-accent-hover: var(--blue-hover);
+  /* Depth */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.28);
 }
-*/
 
 html,
 body {

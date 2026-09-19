@@ -152,7 +152,7 @@ export default function AppLayout() {
       </header>
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/25 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto"
+          className="fixed inset-0 z-30 bg-[color:var(--bg)]/70 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto"
           onClick={closeSidebar}
           onKeyDown={(event) => {
             if (
@@ -185,7 +185,7 @@ export default function AppLayout() {
         }}
       >
         <div className="border-[color:var(--border)] flex h-16 flex-shrink-0 items-center justify-between border-b p-4">
-          <span className="mono-label text-lg font-semibold">Navigation</span>
+          <span className="ui-label text-lg font-semibold">Navigation</span>
           <button
             type="button"
             onClick={closeSidebar}

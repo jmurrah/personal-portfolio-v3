@@ -1,0 +1,107 @@
+.section-rail {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-50%);
+}
+
+.section-rail-link {
+  --section-rail-indent: 0px;
+  --section-rail-marker-width: 26px;
+  --section-rail-progress: 0%;
+
+  position: relative;
+  display: flex;
+  width: 40px;
+  height: 10px;
+  align-items: center;
+  padding-left: var(--section-rail-indent);
+  color: var(--muted);
+}
+
+.section-rail-link-depth-1 {
+  --section-rail-indent: 6px;
+  --section-rail-marker-width: 20px;
+}
+
+.section-rail-link-depth-2 {
+  --section-rail-indent: 12px;
+  --section-rail-marker-width: 14px;
+}
+
+.section-rail-marker {
+  position: relative;
+  width: var(--section-rail-marker-width);
+  height: 2px;
+  flex: none;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--border-strong);
+  transition:
+    width 150ms ease,
+    background-color 150ms ease;
+}
+
+.section-rail-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--section-rail-progress);
+  border-radius: inherit;
+  background: var(--blue);
+}
+
+.section-rail-label {
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  z-index: 1;
+  padding: 3px 5px;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-family-ui);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: opacity 150ms ease;
+  white-space: nowrap;
+}
+
+.section-rail-link:hover .section-rail-marker,
+.section-rail-link:focus-visible .section-rail-marker {
+  width: calc(40px - var(--section-rail-indent));
+  background: var(--muted);
+}
+
+.section-rail-link:hover .section-rail-label,
+.section-rail-link:focus-visible .section-rail-label {
+  opacity: 1;
+}
+
+.section-rail-link-active .section-rail-marker,
+.section-rail-link-active:hover .section-rail-marker,
+.section-rail-link-active:focus-visible .section-rail-marker {
+  width: calc(40px - var(--section-rail-indent));
+}
+
+.section-rail-target {
+  scroll-margin-top: 8rem;
+}
+
+@media (max-width: 899px) {
+  .section-rail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-rail-marker,
+  .section-rail-label {
+    transition: none;
+  }
+}

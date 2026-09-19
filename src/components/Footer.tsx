@@ -54,10 +54,10 @@ export default function Footer() {
       <div className="flex flex-col flex-wrap justify-between items-center gap-x-4 gap-y-2 min-[480px]:flex-row">
         <span className="whitespace-nowrap">© {year} Jacob Murrah</span>
         <div className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-x-4 justify-center items-center">
-          <div className="mono-label flex items-center gap-1.5 text-xs hidden sm:flex">
-            <SvgIcon src={ICONS.clock} alt="Clock" size="3xsmall" color="var(--muted)" />
-            <span className="text-[var(--muted)]">{time}</span>
-            <span className="text-[color:var(--muted)]">{TIME_ZONE_NAME}</span>
+          <div className="ui-label flex items-center gap-1.5 text-xs hidden sm:flex">
+            <SvgIcon src={ICONS.clock} alt="Clock" size="3xsmall" color="var(--muted-light)" />
+            <span className="text-[var(--muted-light)]">{time}</span>
+            <span className="text-[color:var(--muted-light)]">{TIME_ZONE_NAME}</span>
           </div>
           <span className="hidden h-4 w-px bg-[color:var(--border)] sm:inline-block" />
           <div className="flex items-center gap-3">
@@ -68,7 +68,7 @@ export default function Footer() {
                 src={link.icon}
                 alt={link.label}
                 size={link.label === 'Substack' ? '2xsmall' : 'xsmall'}
-                color="var(--text-muted)"
+                color="var(--muted)"
                 hoverColor="var(--blue)"
                 className="transition-transform duration-150 hover:-translate-y-0.5"
               />

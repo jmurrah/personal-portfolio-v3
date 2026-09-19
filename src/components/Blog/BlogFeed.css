@@ -6,7 +6,7 @@
 
 .blog-preview-card:hover,
 .blog-preview-card:focus-visible {
-  background-color: var(--blue-soft);
+  background-color: var(--surface-muted);
 }
 
 .blog-preview-card__title {

@@ -46,7 +46,7 @@ export default function BlogFeed({ limit }: BlogFeedProps) {
                     <h3 className="blog-preview-card__title link-underline text-base mr-auto w-96">
                       {post.title}
                     </h3>
-                    <p className="text-sm text-[var(--muted)] mt-1">{publishedOn}</p>
+                    <p className="ui-label text-sm text-[var(--muted-light)] mt-1">{publishedOn}</p>
                   </div>
                   <p className="text-[var(--muted)]">{post.description}</p>
                 </div>
