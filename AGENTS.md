@@ -58,7 +58,8 @@ Current site direction:
 - New route: `src/pages/<Name>.tsx`, or `src/pages/<Name>/` when it needs page-only subcomponents.
 - Page-only helpers/components: colocate under the page folder.
 - Reusable UI: `src/components/<Component>.tsx` plus CSS if needed.
-- Use the reusable `SectionRail` for fixed desktop section navigation. Home entries map to its three major sections. Article rails begin with the article title, followed by entries derived from stable H2-H4 ids. Article marker length and indentation must show heading depth (title/H2 full, H3 nested, H4 nested further). Markers progressively fill blue through each section, completed sections remain blue, and a section starts at 1% fill. Rail hit areas must fill the visual gaps between markers. Hover labels use `--bg` behind the text for legibility. Hide the rail below `900px`.
+- Content photography should use the shared `InteractiveImage` treatment and `ImageLightbox`; decorative icons and company logos are excluded.
+- Use the reusable `SectionRail` for fixed desktop section navigation. Home entries map to its three major sections. Article rails begin with the article title, followed by entries derived from stable H2-H4 ids. Article marker length and indentation must show heading depth (title/H2 full, H3 nested, H4 nested further). Markers progressively fill blue through each section, completed sections remain blue, and a section starts at 1% fill. Markers expand only while hovered or keyboard-focused, never merely because they are active. Rail hit areas must fill the visual gaps between markers. Hover labels use `--bg` behind the text for legibility. Hide the rail below `900px`.
 - Reused timeline-style sections should share the same line/marker CSS rather than duplicating timeline visuals.
 - Use `Timeline` for the home experience timeline and `LabeledTimeline` for age-labeled Signals; keep their spacing and responsive behavior separate.
 - Experience timeline content padding should stay fixed at `2.2rem` across breakpoints; only Signals timeline spacing should change responsively.
@@ -77,24 +78,24 @@ Current site direction:
 - Prefer canonical color tokens from the Warm Precision system:
   - Neutrals: `--bg`, `--surface`, `--surface-muted`, `--text`, `--muted`, `--muted-light`, `--border`, `--border-strong`.
   - Interaction: `--blue`, `--blue-hover`, `--blue-border`.
-  - Article-only exception: `--blockquote-accent`.
+  - Scoped content exceptions: `--blockquote-accent`, `--image-corner-accent`.
 - Use the repo skill `.codex/skills/warm-precision-color-system` for color decisions.
 - Color is limited to neutral graphite/paper, off-white/dark text, and one muted-blue interaction family. Photography supplies warmth.
 - Light is the default theme. `:root[data-theme='dark']` provides the optional dark alternate.
 - Keep every UI surface neutral (`--bg`, `--surface`, or `--surface-muted`). Never add colored card, code, badge, or callout fills.
 - Blue is interaction-only: links, active navigation, hover/focus, selected states, interactive controls, and the scrollbar. Non-interactive decoration must use neutral tokens.
-- Orange exists only as `--blockquote-accent` on article blockquote/highlight left borders. Do not use orange elsewhere. Do not introduce green UI tokens or states.
+- Orange exists only as `--blockquote-accent` on article blockquote/highlight left borders and the slightly brighter `--image-corner-accent` on interactive content-image corner marks. Do not use orange elsewhere. Do not introduce green UI tokens or states.
 - Do not add decorative gradients, glassmorphism, pure black, or new accent colors.
 - Reusable styles belong in CSS files imported by components.
 - Inline Tailwind classes are fine for local layout and one-off spacing.
 - Preserve accessibility: focus states, aria labels, descriptive alt text, and readable contrast.
 - Do not use one global link style for every surface. Keep separate treatments for nav links, clustered/meta links, inline sentence links, and long-form prose links.
-- Meta, inline, prose, and shared underlined text links should use `--blue-border` for the resting underline and transition both label and underline together to solid `--blue-hover` with a fast `100ms` color-only transition and fixed underline thickness.
+- Meta, inline, prose, and shared underlined text links should use a dotted `--blue-border` resting underline and transition the label, underline color, and underline style together over `100ms` to a solid `--blue-hover` underline with fixed thickness.
 - Reuse shared link underline utilities from `src/index.css` such as `.meta-link`, `.inline-link`, and `.link-underline`; do not redefine the same underline token logic in component-local CSS when an existing shared class fits.
 - Header nav links should stay neutral and undecorated at rest; hover/focus may turn blue. Active nav keeps neutral text with a blue underline.
 - Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
 - Keep `GraduationHeadshot` available as a photo asset, but do not render a headshot in the Home hero unless explicitly requested.
-- The Home hero should render the `sunset` photo below the hero links at full available width with fixed height, `object-cover`, and centered cropping.
+- The Home hero should render the `sunset` photo through `InteractiveImage` below the hero links at full available width with fixed height, `object-cover`, and centered cropping.
 - Keep non-link controls such as the hamburger/menu toggle and close button on separate classes so link underline styling only applies to actual links; their hover/focus state should use `--blue-hover` and show a pointer cursor.
 - Footer social icons should stay `xsmall` by default, with the Substack icon intentionally overridden to `17px` square for visual balance.
 
@@ -132,7 +133,8 @@ Current site direction:
   - Card hover/focus backgrounds use neutral `--surface-muted`, never a blue-tinted surface.
   - Blog preview card background hover/focus timing should use the same `--link-transition-duration` and `--link-transition-easing` tokens as shared link hover transitions.
   - Linked blog card titles and linked post titles should keep a subtle `--blue-border` underline at rest and promote to `--blue-hover` on hover/focus.
-  - Blockquotes use neutral `--surface`, normal `--border`, a `4px` `--blockquote-accent` left border, and `--text`; this is the only orange UI usage.
+  - Blockquotes use neutral `--surface`, normal `--border`, a `4px` `--blockquote-accent` left border, and `--text`; orange is otherwise limited to interactive content-image corner marks.
+  - Interactive content-image hover/focus uses a subtle neutral outline, restrained scale-up, and four small `--image-corner-accent` L-shaped corner marks. Clicking or pressing Enter/Space opens the shared animated lightbox; any subsequent screen click or Escape closes it. Keep the header above the lightbox, but apply the same tint and slight blur to it while the viewer is open so it recedes with the page. Preserve reduced-motion behavior and apply the same interaction to article media and the Home sunset.
   - Code uses `--surface-muted`, `--text`, and `--border`.
   - Metadata uses `--muted`.
   - Article byline authors should use normal text weight, not bold.

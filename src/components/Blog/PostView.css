@@ -215,15 +215,25 @@
   font-size: 14px;
 }
 
-.post-content a:has(img),
-.post-content a:has(figure) {
-  color: inherit;
-  display: inline;
-  line-height: inherit;
-  pointer-events: none;
-  cursor: default;
-  padding: 0;
-  position: static;
+.post-content .post-image-trigger {
+  width: 100%;
+}
+
+.post-content .post-image-trigger .image2-inset,
+.post-content .post-image-trigger picture {
+  display: flex;
+  width: auto;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-content .post-image-trigger img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
 }
 .post-content .footnote-anchor,
 .post-content .footnote-number {

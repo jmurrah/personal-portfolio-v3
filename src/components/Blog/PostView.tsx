@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { LightboxImage } from '@/components/ImageLightbox';
+import '@/components/InteractiveImage.css';
 import SvgIcon from '@/components/SvgIcon';
 import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
 import { ICONS } from '@/assets';
@@ -11,6 +13,8 @@ interface PostViewProps {
 }
 
 const ARTICLE_TITLE_ID = 'article-title';
+const loadImageLightbox = () => import('@/components/ImageLightbox');
+const ImageLightbox = lazy(loadImageLightbox);
 
 const formatDate = (value: string) => {
   if (!value) return '';
@@ -59,6 +63,52 @@ const normalizeFootnotes = (doc: Document) => {
   });
 };
 
+const normalizeImageTriggers = (doc: Document) => {
+  doc.querySelectorAll('img').forEach((image) => {
+    const sourceLink = image.closest<HTMLAnchorElement>('a');
+    const source = sourceLink?.getAttribute('href') || image.getAttribute('src');
+    if (!source) return;
+
+    let trigger: HTMLElement;
+    if (sourceLink) {
+      trigger = sourceLink;
+    } else {
+      const wrapper = doc.createElement('span');
+      image.replaceWith(wrapper);
+      wrapper.appendChild(image);
+      trigger = wrapper;
+    }
+
+    const alt = image.getAttribute('alt')?.trim() || 'Article image';
+    trigger.classList.add('post-image-trigger');
+    trigger.setAttribute('data-image-src', source);
+    trigger.setAttribute('data-image-alt', alt);
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-label', `Enlarge image: ${alt}`);
+
+    const visual = image.closest('picture') ?? image;
+    if (!visual.parentElement?.classList.contains('post-image-visual')) {
+      const visualWrapper = doc.createElement('span');
+      visualWrapper.classList.add('post-image-visual');
+      visual.replaceWith(visualWrapper);
+      visualWrapper.appendChild(visual);
+      ['top-left', 'top-right', 'bottom-right', 'bottom-left'].forEach((position) => {
+        const corner = doc.createElement('span');
+        corner.classList.add('post-image-corner', `post-image-corner--${position}`);
+        corner.setAttribute('aria-hidden', 'true');
+        visualWrapper.appendChild(corner);
+      });
+    }
+
+    if (sourceLink) {
+      sourceLink.removeAttribute('href');
+      sourceLink.removeAttribute('target');
+      sourceLink.removeAttribute('rel');
+    }
+  });
+};
+
 const cleanContent = (html: string): { html: string; sections: SectionRailItem[] } => {
   if (!html) return { html: '', sections: [] };
   const parser = new DOMParser();
@@ -72,6 +122,7 @@ const cleanContent = (html: string): { html: string; sections: SectionRailItem[]
     el.remove();
   });
   normalizeFootnotes(doc);
+  normalizeImageTriggers(doc);
   const usedHeadingIds = new Map<string, number>([[ARTICLE_TITLE_ID, 1]]);
   const sections = Array.from(doc.querySelectorAll('h2, h3, h4')).map((heading, index) => {
     const label = heading.textContent?.trim() || `Section ${index + 1}`;
@@ -112,12 +163,21 @@ export default function PostView({ post, onBack }: PostViewProps) {
   const publishedOn = formatDate(post.pubDate);
   const rawContent = post.content || post.description || '';
   const { html: content, sections } = useMemo(() => cleanContent(rawContent), [rawContent]);
+  const contentMarkup = useMemo(() => ({ __html: content }), [content]);
   const railSections = useMemo<SectionRailItem[]>(
     () => [{ id: ARTICLE_TITLE_ID, label: post.title, depth: 0 }, ...sections],
     [post.title, sections],
   );
   const subtitle = stripHtml(post.description).trim();
   const contentRef = useRef<HTMLElement | null>(null);
+  const isOpeningImageRef = useRef(false);
+  const [hasOpenedLightbox, setHasOpenedLightbox] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
+
+  const closeLightbox = useCallback(() => {
+    isOpeningImageRef.current = false;
+    setLightboxImage(null);
+  }, []);
 
   useEffect(() => {
     const container = contentRef.current;
@@ -132,7 +192,39 @@ export default function PostView({ post, onBack }: PostViewProps) {
       }
     };
 
+    const openImage = (trigger: HTMLElement) => {
+      if (isOpeningImageRef.current) return;
+      const image =
+        trigger instanceof HTMLImageElement
+          ? trigger
+          : trigger.querySelector<HTMLImageElement>('img');
+      if (!image || !image.complete || !image.naturalWidth) return;
+
+      const src = image.currentSrc || trigger.dataset.imageSrc;
+      if (!src) return;
+
+      isOpeningImageRef.current = true;
+      setHasOpenedLightbox(true);
+      setLightboxImage({
+        src,
+        alt: trigger.dataset.imageAlt || 'Article image',
+        source: image,
+        trigger,
+        objectFit: getComputedStyle(image).objectFit as LightboxImage['objectFit'],
+      });
+    };
+
+    const getImageTrigger = (target: EventTarget | null) =>
+      target instanceof Element ? target.closest<HTMLElement>('.post-image-trigger') : null;
+
     const handleClick = (event: Event) => {
+      const imageTrigger = getImageTrigger(event.target);
+      if (imageTrigger) {
+        event.preventDefault();
+        openImage(imageTrigger);
+        return;
+      }
+
       const anchor = (event.target as HTMLElement)?.closest<HTMLAnchorElement>(
         'a.footnote-anchor, a.footnote-number',
       );
@@ -145,15 +237,42 @@ export default function PostView({ post, onBack }: PostViewProps) {
       scrollToHash(href);
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const imageTrigger = getImageTrigger(event.target);
+      if (!imageTrigger) return;
+      event.preventDefault();
+      openImage(imageTrigger);
+    };
+
+    const preloadLightbox = (event: Event) => {
+      if (getImageTrigger(event.target)) void loadImageLightbox();
+    };
+
     container.addEventListener('click', handleClick);
+    container.addEventListener('keydown', handleKeyDown);
+    container.addEventListener('pointerover', preloadLightbox);
+    container.addEventListener('focusin', preloadLightbox);
     if (window.location.hash) {
       scrollToHash(window.location.hash);
     }
 
     return () => {
       container.removeEventListener('click', handleClick);
+      container.removeEventListener('keydown', handleKeyDown);
+      container.removeEventListener('pointerover', preloadLightbox);
+      container.removeEventListener('focusin', preloadLightbox);
     };
   }, [content]);
+
+  useEffect(() => {
+    if (!lightboxImage) return undefined;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeLightbox();
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [closeLightbox, lightboxImage]);
 
   return (
     <article className="post-view">
@@ -198,7 +317,7 @@ export default function PostView({ post, onBack }: PostViewProps) {
         <section
           ref={contentRef}
           className="post-content"
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={contentMarkup}
           aria-label="Post content"
         />
 
@@ -213,6 +332,12 @@ export default function PostView({ post, onBack }: PostViewProps) {
           </a>
         )}
       </div>
+
+      {hasOpenedLightbox ? (
+        <Suspense fallback={null}>
+          <ImageLightbox image={lightboxImage} onBackdropClick={closeLightbox} />
+        </Suspense>
+      ) : null}
     </article>
   );
 }

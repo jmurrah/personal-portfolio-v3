@@ -5,7 +5,7 @@ description: Color usage system for Jacob Murrah's personal portfolio. Use when 
 
 # Warm Precision Color System
 
-Reduce the interface to neutral graphite/paper, off-white/dark text, and one muted-blue interaction family. Let photography provide warmth. The only non-blue UI hue is the scoped orange article-blockquote accent.
+Reduce the interface to neutral graphite/paper, off-white/dark text, and one muted-blue interaction family. Let photography provide warmth. The only non-blue UI hue is the scoped orange content accent.
 
 ## Source Of Truth
 
@@ -29,8 +29,9 @@ Canonical tokens:
 --blue-hover;
 --blue-border;
 
-/* Article-only exception */
+/* Scoped content exceptions */
 --blockquote-accent;
+--image-corner-accent;
 
 /* Depth */
 --shadow-sm;
@@ -64,9 +65,9 @@ Do not add compatibility aliases, colored soft-surface tokens, generic orange to
 - Structure: `--border` and `--border-strong`.
 - Literal code uses `--surface-muted`, `--text`, and `--border`.
 
-## Article Blockquote Exception
+## Article Accent Exception
 
-Article blockquotes/highlights may use `--blockquote-accent` only as a narrow left border. Their background, remaining border, and text stay neutral.
+Article blockquotes/highlights may use `--blockquote-accent` only as a narrow left border. Interactive content-image hover/focus may use the slightly brighter `--image-corner-accent` for small L-shaped corner marks only. Backgrounds, remaining borders, and text stay neutral.
 
 ```css
 blockquote {
@@ -77,7 +78,7 @@ blockquote {
 }
 ```
 
-Do not use this orange token anywhere else.
+Do not use these orange tokens anywhere else.
 
 ## Final Check
 
@@ -86,5 +87,5 @@ Do not use this orange token anywhere else.
 - Resting links read as normal text first.
 - Blue communicates interaction only.
 - Green UI does not exist.
-- Orange appears only on article blockquote/highlight left borders.
+- Orange appears only on article blockquote/highlight left borders and interactive content-image corner marks.
 - Photography provides warmth and visual color.

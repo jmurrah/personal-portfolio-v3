@@ -20,8 +20,9 @@
   --blue-hover: #2a41a3;
   --blue-border: #9aa8dc;
 
-  /* Article blockquotes only */
+  /* Scoped content accents */
   --blockquote-accent: #b85a14;
+  --image-corner-accent: #d66a16;
 
   /* Depth */
   --shadow-sm: 0 1px 2px rgba(20, 25, 20, 0.08);
@@ -50,8 +51,9 @@
   --blue-hover: #afc1ff;
   --blue-border: #536b9f;
 
-  /* Article blockquotes only */
+  /* Scoped content accents */
   --blockquote-accent: #f0a06a;
+  --image-corner-accent: #ffad73;
 
   /* Depth */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);

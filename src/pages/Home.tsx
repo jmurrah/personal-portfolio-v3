@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PHOTOS } from '@/assets';
 import BlogFeed from '@/components/Blog/BlogFeed';
+import InteractiveImage from '@/components/InteractiveImage';
 import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
 import Timeline, { type TimelineItem } from '@/components/Timeline';
 
@@ -191,10 +192,11 @@ function HeroSection() {
           </React.Fragment>
         ))}
       </div>
-      <img
+      <InteractiveImage
         src={PHOTOS.sunset}
-        alt="Sunset"
-        className="mt-3 h-16 sm:h-20 w-full rounded object-cover object-center"
+        alt="Sunset over the ocean"
+        wrapperClassName="mt-3"
+        className="h-16 sm:h-20 object-cover object-center"
       />
     </section>
   );
