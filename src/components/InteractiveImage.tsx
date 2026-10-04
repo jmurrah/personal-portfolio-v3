@@ -10,8 +10,8 @@ import {
 import type { LightboxImage } from './ImageLightbox';
 import './InteractiveImage.css';
 
-const loadImageLightbox = () => import('./ImageLightbox');
-const ImageLightbox = lazy(loadImageLightbox);
+const imageLightboxModule = import('./ImageLightbox');
+const ImageLightbox = lazy(() => imageLightboxModule);
 
 const CORNERS = ['top-left', 'top-right', 'bottom-right', 'bottom-left'] as const;
 
@@ -31,7 +31,6 @@ export default function InteractiveImage({
   const triggerRef = useRef<HTMLSpanElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const isOpeningRef = useRef(false);
-  const [hasOpened, setHasOpened] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
   const closeLightbox = useCallback(() => {
@@ -43,10 +42,9 @@ export default function InteractiveImage({
     if (isOpeningRef.current) return;
     const trigger = triggerRef.current;
     const image = imageRef.current;
-    if (!trigger || !image || !image.complete || !image.naturalWidth) return;
+    if (!trigger || !image) return;
 
     isOpeningRef.current = true;
-    setHasOpened(true);
     setLightboxImage({
       src: image.currentSrc || src,
       alt,
@@ -81,8 +79,6 @@ export default function InteractiveImage({
           event.preventDefault();
           openLightbox();
         }}
-        onPointerEnter={() => void loadImageLightbox()}
-        onFocus={() => void loadImageLightbox()}
       >
         <span className="post-image-visual">
           <img ref={imageRef} src={src} alt={alt} className={className} {...imageProps} />
@@ -96,11 +92,9 @@ export default function InteractiveImage({
         </span>
       </span>
 
-      {hasOpened ? (
-        <Suspense fallback={null}>
-          <ImageLightbox image={lightboxImage} onBackdropClick={closeLightbox} />
-        </Suspense>
-      ) : null}
+      <Suspense fallback={null}>
+        <ImageLightbox image={lightboxImage} onBackdropClick={closeLightbox} />
+      </Suspense>
     </>
   );
 }

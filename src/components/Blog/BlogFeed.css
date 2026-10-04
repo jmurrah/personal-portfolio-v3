@@ -20,5 +20,5 @@
   color: var(--blue-hover);
   -webkit-text-fill-color: currentColor;
   text-decoration-color: currentColor;
-  text-decoration-style: solid;
+  text-decoration-style: dotted;
 }

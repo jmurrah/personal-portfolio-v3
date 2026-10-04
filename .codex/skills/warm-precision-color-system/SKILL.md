@@ -31,6 +31,7 @@ Canonical tokens:
 
 /* Scoped content exceptions */
 --blockquote-accent;
+--blockquote-bg;
 --image-corner-accent;
 
 /* Depth */
@@ -46,13 +47,13 @@ Do not add compatibility aliases, colored soft-surface tokens, generic orange to
 - The optional dark alternate is `:root[data-theme='dark']`.
 - Both themes use only different lightness values of their neutral family plus the same muted-blue interaction concept.
 - Large and small UI surfaces remain neutral: `--bg`, `--surface`, or `--surface-muted`.
-- Never use colored card, code, badge, callout, or hover surfaces.
+- Never use colored card, code, badge, or hover surfaces. Article blockquotes are the only colored-surface exception.
 
 ## Interaction
 
 - Resting link labels use `--text`, not blue.
-- Resting link underlines may use `--blue-border`.
-- Hover/focus states may use `--blue-hover`.
+- Resting link underlines use dotted `--text` decoration.
+- Hover/focus states keep the dotted underline and transition both label and decoration to `--blue-hover`.
 - Active navigation keeps neutral text with a `--blue` underline.
 - Blue is otherwise limited to genuinely interactive elements, selected states, the breadcrumb cursor, and browser UI such as the scrollbar.
 - Non-interactive timeline markers and decoration stay neutral.
@@ -67,12 +68,12 @@ Do not add compatibility aliases, colored soft-surface tokens, generic orange to
 
 ## Article Accent Exception
 
-Article blockquotes/highlights may use `--blockquote-accent` only as a narrow left border. Interactive content-image hover/focus may use the slightly brighter `--image-corner-accent` for small L-shaped corner marks only. Backgrounds, remaining borders, and text stay neutral.
+Article blockquotes/highlights use `--blockquote-accent` as their only border and light `--blockquote-bg` as their full background. Interactive content-image hover/focus may use the slightly brighter `--image-corner-accent` for small L-shaped corner marks only. Text stays neutral.
 
 ```css
 blockquote {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--blockquote-bg);
+  border: 0;
   border-left: 4px solid var(--blockquote-accent);
   color: var(--text);
 }
@@ -83,9 +84,9 @@ Do not use these orange tokens anywhere else.
 ## Final Check
 
 - Exact colors exist only in `src/palette.css`.
-- No blue/orange/green tinted surfaces exist.
+- No blue/green tinted surfaces exist; orange surfaces are limited to article blockquotes.
 - Resting links read as normal text first.
 - Blue communicates interaction only.
 - Green UI does not exist.
-- Orange appears only on article blockquote/highlight left borders and interactive content-image corner marks.
+- Orange appears only on article blockquote left borders/backgrounds and interactive content-image corner marks.
 - Photography provides warmth and visual color.

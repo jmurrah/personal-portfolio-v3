@@ -114,7 +114,7 @@
 }
 
 .post-content strong {
-  color: var(--text);
+  color: var(--muted);
 }
 
 .post-content h1,
@@ -165,11 +165,12 @@
 }
 
 .post-content blockquote {
+  width: 100%;
   margin: 0;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
+  padding: 1rem;
+  border: 0;
   border-left: 4px solid var(--blockquote-accent);
-  background: var(--surface);
+  background: var(--blockquote-bg);
   color: var(--text);
 }
 

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { LightboxImage } from '@/components/ImageLightbox';
 import '@/components/InteractiveImage.css';
+import '@/components/SectionDivider.css';
 import SvgIcon from '@/components/SvgIcon';
 import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
 import { ICONS } from '@/assets';
@@ -13,8 +14,8 @@ interface PostViewProps {
 }
 
 const ARTICLE_TITLE_ID = 'article-title';
-const loadImageLightbox = () => import('@/components/ImageLightbox');
-const ImageLightbox = lazy(loadImageLightbox);
+const imageLightboxModule = import('@/components/ImageLightbox');
+const ImageLightbox = lazy(() => imageLightboxModule);
 
 const formatDate = (value: string) => {
   if (!value) return '';
@@ -109,6 +110,19 @@ const normalizeImageTriggers = (doc: Document) => {
   });
 };
 
+const normalizeSectionDividers = (doc: Document) => {
+  doc.querySelectorAll('hr').forEach((rule) => {
+    const divider = doc.createElement('div');
+    const ornament = doc.createElement('span');
+    divider.classList.add('section-divider', 'article-section-divider');
+    divider.setAttribute('role', 'separator');
+    ornament.setAttribute('aria-hidden', 'true');
+    ornament.textContent = '✦ ✦ ✦';
+    divider.appendChild(ornament);
+    rule.replaceWith(divider);
+  });
+};
+
 const cleanContent = (html: string): { html: string; sections: SectionRailItem[] } => {
   if (!html) return { html: '', sections: [] };
   const parser = new DOMParser();
@@ -123,6 +137,7 @@ const cleanContent = (html: string): { html: string; sections: SectionRailItem[]
   });
   normalizeFootnotes(doc);
   normalizeImageTriggers(doc);
+  normalizeSectionDividers(doc);
   const usedHeadingIds = new Map<string, number>([[ARTICLE_TITLE_ID, 1]]);
   const sections = Array.from(doc.querySelectorAll('h2, h3, h4')).map((heading, index) => {
     const label = heading.textContent?.trim() || `Section ${index + 1}`;
@@ -171,7 +186,6 @@ export default function PostView({ post, onBack }: PostViewProps) {
   const subtitle = stripHtml(post.description).trim();
   const contentRef = useRef<HTMLElement | null>(null);
   const isOpeningImageRef = useRef(false);
-  const [hasOpenedLightbox, setHasOpenedLightbox] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
   const closeLightbox = useCallback(() => {
@@ -198,13 +212,12 @@ export default function PostView({ post, onBack }: PostViewProps) {
         trigger instanceof HTMLImageElement
           ? trigger
           : trigger.querySelector<HTMLImageElement>('img');
-      if (!image || !image.complete || !image.naturalWidth) return;
+      if (!image) return;
 
       const src = image.currentSrc || trigger.dataset.imageSrc;
       if (!src) return;
 
       isOpeningImageRef.current = true;
-      setHasOpenedLightbox(true);
       setLightboxImage({
         src,
         alt: trigger.dataset.imageAlt || 'Article image',
@@ -245,14 +258,8 @@ export default function PostView({ post, onBack }: PostViewProps) {
       openImage(imageTrigger);
     };
 
-    const preloadLightbox = (event: Event) => {
-      if (getImageTrigger(event.target)) void loadImageLightbox();
-    };
-
     container.addEventListener('click', handleClick);
     container.addEventListener('keydown', handleKeyDown);
-    container.addEventListener('pointerover', preloadLightbox);
-    container.addEventListener('focusin', preloadLightbox);
     if (window.location.hash) {
       scrollToHash(window.location.hash);
     }
@@ -260,8 +267,6 @@ export default function PostView({ post, onBack }: PostViewProps) {
     return () => {
       container.removeEventListener('click', handleClick);
       container.removeEventListener('keydown', handleKeyDown);
-      container.removeEventListener('pointerover', preloadLightbox);
-      container.removeEventListener('focusin', preloadLightbox);
     };
   }, [content]);
 
@@ -333,11 +338,9 @@ export default function PostView({ post, onBack }: PostViewProps) {
         )}
       </div>
 
-      {hasOpenedLightbox ? (
-        <Suspense fallback={null}>
-          <ImageLightbox image={lightboxImage} onBackdropClick={closeLightbox} />
-        </Suspense>
-      ) : null}
+      <Suspense fallback={null}>
+        <ImageLightbox image={lightboxImage} onBackdropClick={closeLightbox} />
+      </Suspense>
     </article>
   );
 }

@@ -257,16 +257,18 @@ strong {
 .post-content a {
   color: var(--text);
   text-decoration-line: underline;
-  text-decoration-color: var(--blue-border);
+  text-decoration-color: var(--text);
   text-decoration-style: dotted;
   text-decoration-thickness: 0.12em;
   text-underline-offset: 0.18em;
   text-decoration-skip-ink: auto;
   transition:
     color var(--link-transition-duration) var(--link-transition-easing),
-    text-decoration-color var(--link-transition-duration) var(--link-transition-easing),
-    text-decoration-style var(--link-transition-duration) var(--link-transition-easing)
-      allow-discrete;
+    text-decoration-color var(--link-transition-duration) var(--link-transition-easing);
+}
+
+.meta-link {
+  text-decoration-thickness: 0.16em;
 }
 
 .link-underline:hover,
@@ -279,7 +281,57 @@ strong {
 .post-content a:focus-visible {
   color: var(--blue-hover);
   text-decoration-color: currentColor;
-  text-decoration-style: solid;
+  text-decoration-style: dotted;
+}
+
+:is(a[href^='http://'], a[href^='https://'], a[href^='//'], a[href^='mailto:'], a[href^='tel:'], a.external-text-link):not(
+    .post-title-link,
+    .svg-icon-link,
+    :has(> .svg-icon:only-child)
+  ) {
+  --link-arrow-image: url('./assets/icons/ArrowUpRightIcon.svg');
+  --link-arrow-size: 1em;
+  --link-arrow-gap: 0.08em;
+  --link-arrow-align: -0.125em;
+  --link-arrow-content: '';
+}
+
+a[href^='/']:not(
+    [href^='//'],
+    [target='_blank'],
+    .svg-icon-link,
+    .blog-preview-card,
+    .terminal-breadcrumb__link--home,
+    .nav-link-active,
+    [aria-current='page'],
+    :has(> .svg-icon:only-child)
+  ),
+.blog-preview-card__title {
+  --link-arrow-image: url('./assets/icons/ArrowRightIcon.svg');
+  --link-arrow-content: '';
+}
+
+:is(a, .back-nav-button, .blog-preview-card__title)::after {
+  content: var(--link-arrow-content, none);
+  display: inline-block;
+  width: var(--link-arrow-size, 0.75em);
+  height: var(--link-arrow-size, 0.75em);
+  margin-left: var(--link-arrow-gap, 0.2em);
+  vertical-align: var(--link-arrow-align, -0.08em);
+  background-color: currentColor;
+  -webkit-mask: var(--link-arrow-image) center / contain no-repeat;
+  mask: var(--link-arrow-image) center / contain no-repeat;
+}
+
+:is(a.flex, a.inline-flex, .back-nav-link)::after {
+  align-self: center;
+}
+
+a.nav-link::after,
+a.section-rail-link::after,
+.site-header a::after,
+.back-nav-link::after {
+  content: none;
 }
 
 .back-nav-link {

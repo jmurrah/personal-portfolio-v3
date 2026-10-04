@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PHOTOS } from '@/assets';
+import { ICONS, LOGOS, PHOTOS } from '@/assets';
 import BlogFeed from '@/components/Blog/BlogFeed';
 import InteractiveImage from '@/components/InteractiveImage';
+import SectionDivider from '@/components/SectionDivider';
 import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
+import SvgIcon from '@/components/SvgIcon';
 import Timeline, { type TimelineItem } from '@/components/Timeline';
 
-type HeroLink = { label: string; href: string };
+type HeroLink = { label: string; href: string; icon: string };
 type ExperienceItem = {
   company: string;
   companyLink: string;
@@ -17,11 +19,11 @@ type ExperienceItem = {
 };
 
 const HERO_LINKS: HeroLink[] = [
-  { label: 'email', href: 'mailto:jacob@murrah.dev' },
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/jacobmurrah/' },
-  { label: 'github', href: 'https://github.com/jmurrah' },
-  { label: 'substack', href: 'https://jacobmurrah.substack.com/' },
-  { label: 'resume', href: '/JacobMurrahResume.pdf' },
+  { label: 'Email', href: 'mailto:jacob@murrah.dev', icon: ICONS.mail },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacobmurrah/', icon: ICONS.linkedIn },
+  { label: 'GitHub', href: 'https://github.com/jmurrah', icon: ICONS.gitHub },
+  { label: 'Substack', href: 'https://jacobmurrah.substack.com/', icon: ICONS.substack },
+  { label: 'Résumé', href: '/JacobMurrahResume.pdf', icon: ICONS.resume },
 ];
 
 const HOME_SECTIONS: SectionRailItem[] = [
@@ -29,6 +31,12 @@ const HOME_SECTIONS: SectionRailItem[] = [
   { id: 'experience', label: 'Experience' },
   { id: 'writing', label: 'Writing' },
 ];
+
+const HERO_PROOF_ITEMS = [
+  { label: 'Software Engineer', image: LOGOS.att, imageAlt: 'AT&T' },
+  { label: 'M.S. CS', mark: 'GT' },
+  { label: 'B.E. Software Engineering', image: LOGOS.auburn, imageAlt: 'Auburn University' },
+] as const;
 
 const EXPERIENCES: ExperienceItem[] = [
   {
@@ -142,60 +150,88 @@ const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
 
 function HeroSection() {
   return (
-    <section id="about" className="section-rail-target w-full flex flex-col gap-4 mt-8">
-      <h1 className="text-4xl sm:text-5xl font-semibold whitespace-nowrap mb-1">Jacob Murrah</h1>
-      <div className="flex flex-col gap-3">
-        <p className="text-[var(--muted)]">
-          Software Engineer at{' '}
+    <section id="about" className="section-rail-target mt-8 flex w-full flex-col">
+      <h1 className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span className="whitespace-nowrap text-4xl font-normal sm:text-5xl">Jacob Murrah</span>
+        <span className="flex items-baseline gap-4 whitespace-nowrap text-xl font-normal text-[var(--muted)] sm:text-2xl">
+          <span aria-hidden="true">/</span>
+          <span>Software Engineer</span>
+          <span aria-hidden="true">/</span>
+          <span>Atlanta</span>
+        </span>
+      </h1>
+
+      <p className="mt-6 max-w-2xl text-[var(--muted)]">
+        Software engineer at{' '}
+        <a
+          href="https://www.att.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="meta-link"
+        >
+          AT&T
+        </a>{' '}
+        building network disaster-recovery and automation systems. Pursuing an M.S. in Computer
+        Science at{' '}
+        <a
+          href="https://www.gatech.edu/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="meta-link"
+        >
+          Georgia Tech
+        </a>
+        .
+      </p>
+
+      <ul
+        className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3"
+        aria-label="Professional overview"
+      >
+        {HERO_PROOF_ITEMS.map((item) => (
+          <li
+            key={item.label}
+            className="ui-label flex items-center gap-2 text-sm font-normal text-[var(--muted)]"
+          >
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center">
+              {'image' in item ? (
+                <img src={item.image} alt={item.imageAlt} className="h-4 w-4 object-contain" />
+              ) : (
+                <span className="ui-label text-[0.6rem] font-semibold" aria-hidden="true">
+                  {item.mark}
+                </span>
+              )}
+            </span>
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-7 flex flex-wrap items-center justify-start gap-5">
+        {HERO_LINKS.map((link) => (
           <a
-            href="https://www.att.com/"
+            key={link.label}
+            href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="meta-link gap-0.5 flex items-center"
+            className="nav-link inline-flex rounded p-1"
+            aria-label={link.label}
+            title={link.label}
           >
-            <span>AT&T</span>
-          </a>{' '}
-          in Atlanta, working on network disaster recovery and automated ticketing.
-        </p>
-        <p className="text-[var(--muted)]">
-          Pursuing a master's at{' '}
-          <a
-            href="https://www.gatech.edu/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="meta-link gap-0.5 flex items-center"
-          >
-            <span>Georgia Tech</span>
-          </a>{' '}
-          while navigating fatherhood, hitting the gym, and optimizing my daily routines.
-        </p>
-        <p className="text-[var(--muted)]">
-          Curious about my standards? Read my{' '}
-          <Link className="inline-link" to="/signals">
-            signals
-          </Link>
-          .
-        </p>
-      </div>
-      <div className="flex flex-wrap gap-x-4 justify-start">
-        {HERO_LINKS.map((link, index) => (
-          <React.Fragment key={link.label}>
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="meta-link ui-label gap-0.5 flex items-center"
-            >
-              <span>{link.label}</span>
-            </a>
-            {index < HERO_LINKS.length - 1 && <span className="text-[var(--muted)]">&middot;</span>}
-          </React.Fragment>
+            <SvgIcon
+              src={link.icon}
+              alt=""
+              size="small"
+              color="currentColor"
+              hoverColor="currentColor"
+            />
+          </a>
         ))}
       </div>
       <InteractiveImage
         src={PHOTOS.sunset}
         alt="Sunset over the ocean"
-        wrapperClassName="mt-3"
+        wrapperClassName="mt-10"
         className="h-16 sm:h-20 object-cover object-center"
       />
     </section>
@@ -213,7 +249,7 @@ function ExperienceSection() {
             href="/JacobMurrahResume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="meta-link gap-0.5 flex items-center"
+            className="meta-link external-text-link"
           >
             <span>resume</span>
           </a>
@@ -256,9 +292,11 @@ export default function Home() {
   return (
     <>
       <SectionRail sections={HOME_SECTIONS} />
-      <div className="flex flex-col gap-16 sm:gap-24">
+      <div className="flex flex-col">
         <HeroSection />
+        <SectionDivider className="home-section-divider" />
         <ExperienceSection />
+        <SectionDivider className="home-section-divider" />
         <WritingSection />
       </div>
     </>

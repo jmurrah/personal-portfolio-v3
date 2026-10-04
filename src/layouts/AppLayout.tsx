@@ -152,7 +152,7 @@ export default function AppLayout() {
       </header>
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-[color:var(--bg)]/70 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto"
+          className="fixed inset-0 z-[120] bg-[color:var(--bg)]/70 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto"
           onClick={closeSidebar}
           onKeyDown={(event) => {
             if (
@@ -173,7 +173,7 @@ export default function AppLayout() {
 
       <aside
         id="sidebar-nav"
-        className="bg-[color:var(--surface)] border-[color:var(--border)] fixed right-0 z-40 flex w-[265px] flex-col overflow-y-auto scrollbar border-l shadow-xl transition-[transform,opacity] duration-300 ease-in-out"
+        className="bg-[color:var(--surface)] border-[color:var(--border)] fixed right-0 z-[130] flex w-[265px] flex-col overflow-y-auto scrollbar border-l shadow-xl transition-[transform,opacity] duration-300 ease-in-out"
         inert={!isSidebarOpen}
         style={{
           top: 0,

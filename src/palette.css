@@ -22,6 +22,7 @@
 
   /* Scoped content accents */
   --blockquote-accent: #b85a14;
+  --blockquote-bg: #f5e3d4;
   --image-corner-accent: #d66a16;
 
   /* Depth */
@@ -53,6 +54,7 @@
 
   /* Scoped content accents */
   --blockquote-accent: #f0a06a;
+  --blockquote-bg: #38271f;
   --image-corner-accent: #ffad73;
 
   /* Depth */

@@ -58,8 +58,8 @@ function ImageDialog({ image, onBackdropClick }: ImageLightboxProps & { image: L
 
     const updateBounds = () => {
       const rect = source.getBoundingClientRect();
-      const naturalWidth = source.naturalWidth || rect.width;
-      const naturalHeight = source.naturalHeight || rect.height;
+      const naturalWidth = source.naturalWidth || rect.width || 1;
+      const naturalHeight = source.naturalHeight || rect.height || 1;
       const scale = Math.min(
         Math.min(window.innerWidth * 0.8, 1024) / naturalWidth,
         (window.innerHeight * 0.8) / naturalHeight,
@@ -78,6 +78,7 @@ function ImageDialog({ image, onBackdropClick }: ImageLightboxProps & { image: L
     };
 
     updateBounds();
+    source.addEventListener('load', updateBounds);
     source.style.visibility = 'hidden';
     dialogRef.current?.focus({ preventScroll: true });
     if (appRoot) appRoot.inert = true;
@@ -85,6 +86,7 @@ function ImageDialog({ image, onBackdropClick }: ImageLightboxProps & { image: L
 
     return () => {
       window.removeEventListener('resize', updateBounds);
+      source.removeEventListener('load', updateBounds);
       source.style.visibility = previousVisibility;
       if (sourceVisual) {
         releaseSourceTimerRef.current = window.setTimeout(() => {
