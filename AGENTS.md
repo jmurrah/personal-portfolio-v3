@@ -21,7 +21,7 @@ This is a Vite + React single-page app for a personal portfolio and writing/blog
 
 Current site direction:
 
-- Home route renders hero copy plus a concise experience timeline.
+- Home route renders hero copy plus a concise expandable experience list.
 - The layout still renders header, route outlet, and footer.
 - The public writing route is `/writing`; legacy `/blog` URLs redirect to `/writing`.
 - Projects route, project navigation, theme switching, and contact section have been removed.
@@ -35,6 +35,7 @@ Current site direction:
 - `src/components/Blog/` - blog feed, post rendering, blog routing helpers.
 - `src/constants/prerenderedPosts.json` - static blog source of truth.
 - `src/assets/` - images/icons referenced by code.
+- `docs/design-references/matthew-trent.md` - durable memory of Matthew’s icon inventory, local assets, and accordion motion reference.
 - `src/palette.css` - exact color token values and compatibility aliases.
 - `src/index.css` - global typography, reset, shared utility styles.
 - `.codex/skills/warm-precision-color-system/` - repo-specific color usage skill.
@@ -61,10 +62,9 @@ Current site direction:
 - Content photography should use the shared `InteractiveImage` treatment and `ImageLightbox`; decorative icons and company logos are excluded.
 - Use the reusable `SectionRail` for fixed desktop section navigation. Home entries map to its three major sections. Article rails begin with the article title, followed by entries derived from stable H2-H4 ids. Article marker length and indentation must show heading depth (title/H2 full, H3 nested, H4 nested further). Markers progressively fill blue through each section, completed sections remain blue, and a section starts at 1% fill. Markers expand only while hovered or keyboard-focused, never merely because they are active. Rail hit areas must fill the visual gaps between markers. Hover labels use `--bg` behind the text for legibility. Section targets must clear the `6rem` sticky header with a `7rem` scroll margin. Hide the rail below `900px`.
 - Reused timeline-style sections should share the same line/marker CSS rather than duplicating timeline visuals.
-- Use `Timeline` for the home experience timeline and `LabeledTimeline` for age-labeled Signals; keep their spacing and responsive behavior separate.
-- Experience timeline content padding should stay fixed at `2.2rem` across breakpoints; only Signals timeline spacing should change responsively.
+- Home experience uses the page-local `ExperienceList` accordion; Signals keeps `LabeledTimeline`. Keep their responsive layouts separate.
 - Timeline row spacing should be configurable on timeline components via a single prop rather than hardcoded per page or repeated per item.
-- The home experience timeline should use `Timeline`: linked company stacked above muted role on the left, with right-aligned dates visually aligned to the role row rather than the company row, then summary below. Do not render location or company logos there unless explicitly requested.
+- Home experience uses five initially collapsed accordion rows: AT&T, Auburn University, Adtran, IS4S, Epic Games. Only one row may be open; opening another closes the previous one, and clicking the open row closes it. Summaries show company, muted role, year, and a neutral plus that rotates to a cross when open. Draw the toggle with two centered bars inside a fixed 12px square; rotate around its exact center and extend the arms to 115% during rotation for a restrained cross size. Desktop uses dotted leaders (2px dots at 8px intervals) and right-aligned dates; mobile stacks the role under company/year. Use whitespace rather than solid row dividers, compact row spacing, and a 450ms height/reveal transition with smooth acceleration and deceleration with immediate reduced-motion behavior. Expanded content includes available summary and company link; do not invent missing skills or achievements. Combine AT&T employment/internship as `2025–present`, with the previous summer 2025 internship noted. Keep surfaces neutral and hover/focus blue; render company names as text without company logos. Do not render technology icons or lists in experience dropdowns. Expanded company links use `0.8125rem` text.
 - Blog-specific reusable UI/helpers: `src/components/Blog/`.
 - Static data: `src/constants/<name>.json|ts`.
 - Build/CI utilities: `scripts/*.ts`.

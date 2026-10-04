@@ -17,6 +17,8 @@ import SunsetPhoto from '@/assets/photos/sunset.webp';
 import AdtranLogo from '@/assets/logos/adtran.png';
 import AttLogo from '@/assets/logos/att.png';
 import AuburnLogo from '@/assets/logos/auburn.png';
+import Is4sLogo from '@/assets/logos/is4s.webp';
+import EpicGamesLogo from '@/assets/logos/epic-games.webp';
 
 export const ICONS = {
   calendar: CalendarIcon,
@@ -43,4 +45,6 @@ export const LOGOS = {
   adtran: AdtranLogo,
   att: AttLogo,
   auburn: AuburnLogo,
+  is4s: Is4sLogo,
+  epicGames: EpicGamesLogo,
 } as const;

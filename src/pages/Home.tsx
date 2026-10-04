@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ICONS, LOGOS, PHOTOS } from '@/assets';
 import BlogFeed from '@/components/Blog/BlogFeed';
@@ -6,17 +5,9 @@ import InteractiveImage from '@/components/InteractiveImage';
 import SectionDivider from '@/components/SectionDivider';
 import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
 import SvgIcon from '@/components/SvgIcon';
-import Timeline, { type TimelineItem } from '@/components/Timeline';
+import ExperienceList, { type ExperienceItem } from './Home/ExperienceList';
 
 type HeroLink = { label: string; href: string; icon: string };
-type ExperienceItem = {
-  company: string;
-  companyLink: string;
-  role: string;
-  dates: string;
-  summary: React.ReactNode;
-  reflection: string;
-};
 
 const HERO_LINKS: HeroLink[] = [
   { label: 'Email', href: 'mailto:jacob@murrah.dev', icon: ICONS.mail },
@@ -41,18 +32,28 @@ const HERO_PROOF_ITEMS = [
 const EXPERIENCES: ExperienceItem[] = [
   {
     company: 'AT&T',
+    logo: LOGOS.att,
     companyLink: 'https://www.att.com/',
     role: 'Software Engineer I',
-    dates: 'Jan. 2026 - Present',
-    summary: 'Network disaster recovery and automated ticketing.',
-    reflection:
-      'Navigating legacy Java systems that nobody fully understands while improving development processes along the way.',
+    dates: '2025 - Present',
+    note: 'Previously intern, summer 2025',
+    technologies: [
+      'Java', 'Python', 'TypeScript', 'Spring Boot', 'Angular', 'Oracle SQL',
+      'MongoDB', 'Microsoft Azure', 'Docker', 'Shell', 'GitHub',
+    ],
+    summary: (
+      <>
+        Network disaster recovery and automated ticketing.
+      </>
+    ),
   },
   {
     company: 'Auburn University',
+    logo: LOGOS.auburn,
     companyLink: 'https://www.auburn.edu/',
     role: 'Research Assistant',
-    dates: 'Aug. 2025 - Dec. 2025',
+    dates: '2025',
+    technologies: ['Python', 'TypeScript', 'FastAPI', 'Next.js', 'Supabase', 'Docker', 'Shell', 'GitHub'],
     summary: (
       <>
         Manufacturing fulfillment marketplace for CAD designers under{' '}
@@ -67,36 +68,14 @@ const EXPERIENCES: ExperienceItem[] = [
         .
       </>
     ),
-    reflection:
-      'Led design and implementation in Next.js and learned to translate high-level vision into concrete technical decisions.',
-  },
-  {
-    company: 'AT&T',
-    companyLink: 'https://www.att.com/',
-    role: 'Software Engineer Intern',
-    dates: 'Jun. 2025 - Aug. 2025',
-    summary: (
-      <>
-        Inventory monitoring application for{' '}
-        <a
-          href="https://www.cricketwireless.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="meta-link"
-        >
-          Cricket Wireless
-        </a>{' '}
-        retail stores.
-      </>
-    ),
-    reflection:
-      'Realized how much I can ship when there is only one priority and dove deep into Spring Boot.',
   },
   {
     company: 'Adtran',
+    logo: LOGOS.adtran,
     companyLink: 'https://www.adtran.com/',
     role: 'Software Engineer Co-op',
-    dates: 'May 2023 - Dec. 2024',
+    dates: '2023 – 2024',
+    technologies: ['Python', 'TypeScript', 'Angular', 'AWS', 'Docker', 'Postman', 'Shell', 'GitHub'],
     summary: (
       <>
         Developer tooling and{' '}
@@ -111,42 +90,29 @@ const EXPERIENCES: ExperienceItem[] = [
         SaaS for network monitoring.
       </>
     ),
-    reflection:
-      'Learned how to enforce development practices to avoid drift and got comfortable with AWS.',
+  },
+  {
+    company: 'IS4S',
+    logo: LOGOS.is4s,
+    companyLink: 'https://www.linkedin.com/company/1414575/',
+    companyLinkLabel: 'LinkedIn',
+    role: 'Technician',
+    dates: '2021 – 2022',
+    note: 'Part-time · Jan. 2021 – Aug. 2022',
+    summary: 'Technician at Integrated Solutions for Systems (IS4S) in Huntsville, Alabama.',
+    technologies: [],
+  },
+  {
+    company: 'Epic Games',
+    logo: LOGOS.epicGames,
+    companyLink: 'https://fortnitetracker.com/profile/kbm/murr%CE%B1h/events?region=GLOBAL',
+    companyLinkLabel: 'Fortnite Tracker',
+    role: 'Fortnite Player',
+    dates: '2019 – 2020',
+    note: 'Full-time · Feb. 2019 – May 2020',
+    technologies: [],
   },
 ];
-
-const EXPERIENCE_ITEMS: TimelineItem[] = EXPERIENCES.map((experience) => ({
-  id: `${experience.company}-${experience.role}-${experience.dates}`
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, ''),
-  title: (
-    <span className="flex w-full flex-col">
-      <a
-        href={experience.companyLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="meta-link w-fit"
-      >
-        {experience.company}
-      </a>
-      <span className="flex items-baseline gap-x-6 gap-y-1 flex-wrap">
-        <span className="text-sm font-normal text-[var(--muted)] mr-auto">{experience.role}</span>
-        <span className="ui-label whitespace-nowrap text-sm font-normal text-[var(--muted-light)]">
-          {experience.dates}
-        </span>
-      </span>
-    </span>
-  ),
-  description: (
-    <div className="flex flex-col gap-1.5 mt-2">
-      <div className="text-[var(--muted)]">{experience.summary}</div>
-      {/* <p>{experience.reflection}</p> */}
-    </div>
-  ),
-  isFilled: experience.dates.includes('Present'),
-}));
 
 function HeroSection() {
   return (
@@ -256,7 +222,7 @@ function ExperienceSection() {
           .
         </p>
       </div>
-      <Timeline items={EXPERIENCE_ITEMS} sectionGap="1.5rem" titleAs="h3" />
+      <ExperienceList experiences={EXPERIENCES} />
     </section>
   );
 }
