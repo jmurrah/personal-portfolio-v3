@@ -9,8 +9,7 @@ export type ExperienceItem = {
   companyLinkLabel?: string;
   role: string;
   dates: string;
-  note?: string;
-  summary?: ReactNode;
+  summary: ReactNode;
   technologies: TechnologyName[];
 };
 
@@ -37,7 +36,7 @@ function ExperienceRow({ experience, isOpen, onToggle }: {
             {experience.company}
           </span>
           <span className="experience-role">{experience.role}</span>
-          <span className="experience-leader" aria-hidden="true" />
+          <span className="experience-leader dotted-leader" aria-hidden="true" />
           <span className="experience-date">{experience.dates}</span>
           <span className="experience-toggle" aria-hidden="true" />
         </button>
@@ -52,8 +51,7 @@ function ExperienceRow({ experience, isOpen, onToggle }: {
       >
         <div className="experience-panel-inner">
           <div className="experience-details">
-            {experience.note ? <p className="experience-note">{experience.note}</p> : null}
-            {experience.summary ? <p className="experience-description">{experience.summary}</p> : null}
+            <p className="experience-description">{experience.summary}</p>
             <div className="experience-footer">
               <a className="meta-link experience-company-link" href={experience.companyLink} target="_blank" rel="noopener noreferrer">
                 {experience.companyLinkLabel ?? 'Website'}

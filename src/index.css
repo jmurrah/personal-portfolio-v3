@@ -251,6 +251,14 @@ strong {
   line-height: 1.5;
 }
 
+.dotted-leader {
+  --leader-dot-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 2'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/svg%3E");
+  height: 2px;
+  background-color: var(--border);
+  -webkit-mask: var(--leader-dot-pattern) left center / 8px 2px repeat-x;
+  mask: var(--leader-dot-pattern) left center / 8px 2px repeat-x;
+}
+
 .link-underline,
 .meta-link,
 .inline-link,
@@ -305,13 +313,12 @@ a[href^='/']:not(
     .nav-link-active,
     [aria-current='page'],
     :has(> .svg-icon:only-child)
-  ),
-.blog-preview-card__title {
+  ) {
   --link-arrow-image: url('./assets/icons/ArrowRightIcon.svg');
   --link-arrow-content: '';
 }
 
-:is(a, .back-nav-button, .blog-preview-card__title)::after {
+:is(a, .back-nav-button)::after {
   content: var(--link-arrow-content, none);
   display: inline-block;
   width: var(--link-arrow-size, 0.75em);

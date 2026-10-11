@@ -36,14 +36,13 @@ const EXPERIENCES: ExperienceItem[] = [
     companyLink: 'https://www.att.com/',
     role: 'Software Engineer I',
     dates: '2025 - Present',
-    note: 'Previously intern, summer 2025',
     technologies: [
       'Java', 'Python', 'TypeScript', 'Spring Boot', 'Angular', 'Oracle SQL',
       'MongoDB', 'Microsoft Azure', 'Docker', 'Shell', 'GitHub',
     ],
     summary: (
       <>
-        Network disaster recovery and automated ticketing.
+        Building network disaster recovery and automated alarm-ticketing systems.
       </>
     ),
   },
@@ -94,12 +93,11 @@ const EXPERIENCES: ExperienceItem[] = [
   {
     company: 'IS4S',
     logo: LOGOS.is4s,
-    companyLink: 'https://www.linkedin.com/company/1414575/',
-    companyLinkLabel: 'LinkedIn',
+    companyLink: 'https://www.is4s.com/',
+    companyLinkLabel: 'Website',
     role: 'Technician',
     dates: '2021 – 2022',
-    note: 'Part-time · Jan. 2021 – Aug. 2022',
-    summary: 'Technician at Integrated Solutions for Systems (IS4S) in Huntsville, Alabama.',
+    summary: 'Built and inspected contamination-control systems for military vehicles.',
     technologies: [],
   },
   {
@@ -109,7 +107,7 @@ const EXPERIENCES: ExperienceItem[] = [
     companyLinkLabel: 'Fortnite Tracker',
     role: 'Fortnite Player',
     dates: '2019 – 2020',
-    note: 'Full-time · Feb. 2019 – May 2020',
+    summary: 'Competed in online Fortnite tournaments, earning $6.7k in prize money.',
     technologies: [],
   },
 ];
@@ -229,7 +227,7 @@ function ExperienceSection() {
 
 function WritingSection() {
   return (
-    <section id="writing" className="section-rail-target flex flex-col gap-6">
+    <section id="writing" className="section-rail-target flex flex-col gap-4">
       <div>
         <h2 className="text-3xl mb-2">Writing</h2>
         <p className="text-[color:var(--muted)]">
