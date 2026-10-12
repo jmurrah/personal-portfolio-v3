@@ -260,10 +260,6 @@ strong {
     text-decoration-color var(--link-transition-duration) var(--link-transition-easing);
 }
 
-.meta-link {
-  text-decoration-thickness: 0.16em;
-}
-
 .link-underline:hover,
 .link-underline:focus-visible,
 .meta-link:hover,
