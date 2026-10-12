@@ -112,7 +112,6 @@
 .timeline__title-row {
   display: flex;
   align-items: baseline;
-  gap: auto;
   margin-top: 0.5rem;
 }
 

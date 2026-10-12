@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './TerminalBreadcrumb.css';
 
 const MAX_SEGMENTS = 4;
@@ -23,7 +23,6 @@ const getSegmentLabel = (segment: string, index: number, segments: string[]) => 
 
 export default function TerminalBreadcrumb() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const segments = getSegments(pathname);
 
   const scrollToTop = (behavior: ScrollBehavior = 'smooth') => {
@@ -44,9 +43,6 @@ export default function TerminalBreadcrumb() {
       event.preventDefault();
       scrollToTop('smooth');
       clearUrlHash();
-    } else {
-      scrollToTop('auto');
-      navigate('/');
     }
   };
 
@@ -66,7 +62,10 @@ export default function TerminalBreadcrumb() {
           const isLast = index === segments.length - 1;
           const href = `/${segments.slice(0, index + 1).join('/')}`;
           return (
-            <li className="terminal-breadcrumb__item" key={`${segment}-${index}`}>
+            <li
+              className={`terminal-breadcrumb__item${isLast ? ' terminal-breadcrumb__item--current' : ''}`}
+              key={`${segment}-${index}`}
+            >
               <Link
                 className={`terminal-breadcrumb__link${isLast ? ' terminal-breadcrumb__current' : ''}`}
                 to={href}
@@ -76,8 +75,6 @@ export default function TerminalBreadcrumb() {
                     event.preventDefault();
                     scrollToTop('smooth');
                     clearUrlHash();
-                  } else {
-                    scrollToTop('auto');
                   }
                 }}
               >

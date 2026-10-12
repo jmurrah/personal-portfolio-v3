@@ -112,16 +112,43 @@ const normalizeImageTriggers = (doc: Document) => {
   });
 };
 
-const normalizeSectionDividers = (doc: Document) => {
-  doc.querySelectorAll('hr').forEach((rule) => {
-    const divider = doc.createElement('div');
-    const ornament = doc.createElement('span');
-    divider.classList.add('section-divider', 'article-section-divider');
-    divider.setAttribute('role', 'separator');
-    ornament.setAttribute('aria-hidden', 'true');
-    ornament.textContent = '✦ ✦ ✦';
-    divider.appendChild(ornament);
-    rule.replaceWith(divider);
+const createArticleDivider = (doc: Document) => {
+  const divider = doc.createElement('div');
+  const ornament = doc.createElement('span');
+  divider.classList.add('section-divider', 'article-section-divider');
+  divider.setAttribute('role', 'separator');
+  ornament.setAttribute('aria-hidden', 'true');
+  ornament.textContent = '✦ ✦ ✦';
+  divider.appendChild(ornament);
+  return divider;
+};
+
+const prepareArticleDividers = (doc: Document) => {
+  doc.querySelectorAll('hr').forEach((rule) => rule.replaceWith(createArticleDivider(doc)));
+
+  const headings = Array.from(doc.querySelectorAll('h2'));
+  const existingDividers = Array.from(doc.querySelectorAll('.section-divider'));
+  const firstHeading = headings[0];
+  if (firstHeading) {
+    const introRange = doc.createRange();
+    introRange.setStart(doc.body, 0);
+    introRange.setEndBefore(firstHeading);
+    const hasDividerBefore = existingDividers.some((divider) =>
+      Boolean(divider.compareDocumentPosition(firstHeading) & Node.DOCUMENT_POSITION_FOLLOWING),
+    );
+    if (introRange.toString().trim() && !hasDividerBefore) {
+      firstHeading.before(createArticleDivider(doc));
+    }
+  }
+
+  headings.slice(1).forEach((heading, index) => {
+    const previousHeading = headings[index];
+    const hasDividerBetween = existingDividers.some(
+      (divider) =>
+        Boolean(previousHeading.compareDocumentPosition(divider) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+        Boolean(divider.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING),
+    );
+    if (!hasDividerBetween) heading.before(createArticleDivider(doc));
   });
 };
 
@@ -190,7 +217,7 @@ const cleanContent = (html: string, postTitle: string): { html: string; sections
   });
   normalizeFootnotes(doc);
   normalizeImageTriggers(doc);
-  normalizeSectionDividers(doc);
+  prepareArticleDividers(doc);
   linkGraduationIntro(doc, postTitle);
   doc.querySelectorAll<HTMLAnchorElement>('a[href="https://murrah.dev/blog"]').forEach((link) => {
     link.setAttribute('href', '/writing');

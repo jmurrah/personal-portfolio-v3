@@ -7,14 +7,14 @@ Inspected 2026-10-04. Source: https://matthewtrent.me/.
 - Text-first collapsible rows with company, muted role, dotted leader, and date. Small screens stack text and remove the leader.
 - His expansion animates measured panel height over 300ms. Grid panel starts at `0fr`; inner content uses `min-height: 0` and clips overflow. Reduced motion opens immediately.
 - Our version keeps at most one row open; opening another closes the previous row, and toggling the open row closes it. It uses 450ms CSS grid height transitions with smooth acceleration and deceleration, subtle opacity/vertical reveal, and a plus rotating to a cross. No solid row borders or row translation.
-- His icon reveal staggers opacity/horizontal motion at 55ms intervals. Our version starts after the 450ms panel expansion, then reveals icons left-to-right at 70ms intervals, fading from 0 to 1 and sliding from a 0.75rem right offset to rest over 550ms. Closing fades the icons out over 200ms without stagger delays. Every opening replays the reveal; reduced motion and keyboard focus bypass the animation.
+- His icon reveal staggers opacity/horizontal motion at 55ms intervals. Our experience rows no longer render technology icons.
 
 ## Technology icons
 
 - Local SVG brand assets under `https://matthewtrent.me/media/tech/<id>.svg`.
 - Small variant is 12px square; normal variant is 14px. `object-fit: contain`, async decoding, no dragging, default eager loading. Each icon has a labeled tooltip; the image itself has empty alt text.
-- Locally saved in `src/assets/icons/tech/`: `aws.svg`, `next.svg`, `postgres.svg`. These are unchanged brand artwork, not UI color tokens. Our experience rows now use 14px icon-only transparent PNGs with technology names in compact custom tooltips above each icon on hover/focus and accessible names.
-- Java and Spring assets could not be fetched from Matthew’s site. Our production technology icons now come from Devicon.
+- Locally saved in `src/assets/icons/tech/`: `aws.svg`, `next.svg`, `postgres.svg`. These are unchanged brand artwork, not UI color tokens. The saved assets remain for reference.
+- Java and Spring assets could not be fetched from Matthew’s site. Our saved PNG variants come from Devicon.
 - Inventory below comes from his technology label mapping. It records source filenames; it does not claim all files are downloaded or available.
 
 | Technology | Source filename |
@@ -86,9 +86,9 @@ Inspected 2026-10-04. Source: https://matthewtrent.me/.
 | Webpack | `webpack.svg` |
 | Zig | `zig.svg` |
 
-## Production PNG technology assets
+## Saved PNG technology assets
 
-Source: https://github.com/devicons/devicon (MIT; source license saved as `src/assets/icons/tech/DEVICON-LICENSE.txt`). Original brand SVGs rasterized to 96px transparent RGBA PNGs with 4px padding, preserving brand artwork. The site displays them at 14px. Oracle and Docker now use the user-supplied PNG marks; the other assets include dark GitHub/Next.js marks suitable for the light background. Shell uses the Bash logo.
+Source: https://github.com/devicons/devicon (MIT; source license saved as `src/assets/icons/tech/DEVICON-LICENSE.txt`). Original brand SVGs rasterized to 96px transparent RGBA PNGs with 4px padding, preserving brand artwork. Oracle and Docker use the user-supplied PNG marks; the other assets include dark GitHub/Next.js marks suitable for the light background. Shell uses the Bash logo.
 
 Technology icons are no longer rendered in experience dropdowns; assets and inventories remain saved for reference. The exact per-company lists live in `src/pages/Home.tsx`; `src/pages/Home/technologyIcons.ts` maps technology labels to local PNG imports. AT&T, Auburn, and Adtran all include Docker. Keep the same relative order across rows: languages, frameworks, databases, cloud, then tools (Docker, Postman, Shell, GitHub). No technology lists for IS4S or Epic Games.
 

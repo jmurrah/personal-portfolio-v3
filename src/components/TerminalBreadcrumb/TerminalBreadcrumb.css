@@ -1,11 +1,13 @@
 .terminal-breadcrumb {
   font-family: var(--font-family-ui);
   color: var(--muted);
+  min-width: 0;
 }
 
 .terminal-breadcrumb__list {
   display: flex;
   align-items: center;
+  width: 100%;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -15,8 +17,20 @@
 .terminal-breadcrumb__item {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 0.25rem;
   line-height: 1.2;
+}
+
+.terminal-breadcrumb__item--current {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.terminal-breadcrumb__current {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .terminal-breadcrumb__link {

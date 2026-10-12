@@ -42,8 +42,7 @@
   color: var(--muted);
 }
 
-.experience-date,
-.experience-technologies {
+.experience-date {
   font-family: var(--font-family-ui);
   font-size: 0.875rem;
   color: var(--muted-light);
@@ -152,90 +151,6 @@
   font-size: 0.8125rem;
 }
 
-.experience-technologies {
-  display: flex;
-  flex: 1 1 12rem;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.6rem 0.8rem;
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  color: var(--muted);
-}
-
-.experience-technologies li {
-  display: inline-flex;
-  align-items: center;
-  opacity: 0;
-  transform: translateX(0.75rem);
-  transition: opacity 200ms ease, transform 200ms ease;
-}
-
-.experience-row--open .experience-technologies li {
-  opacity: 1;
-  transform: translateX(0);
-  transition-duration: 550ms;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(var(--experience-panel-duration) + var(--technology-index, 0) * 70ms);
-}
-
-.experience-row--open .experience-technologies li:focus-within {
-  transition: none;
-  opacity: 1;
-  transform: none;
-}
-
-.experience-technology-icon {
-  display: inline-flex;
-  cursor: default;
-}
-
-.experience-technology-icon:focus-visible {
-  outline: 2px solid var(--blue-border);
-  outline-offset: 4px;
-  border-radius: 2px;
-}
-
-.experience-technology-tooltip {
-  position: fixed;
-  z-index: 120;
-  padding: 0.35rem 0.6rem;
-  border: 1px solid var(--border);
-  border-radius: 0.4rem;
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: var(--shadow-sm);
-  font-family: var(--font-family-ui);
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 1.25;
-  white-space: nowrap;
-  pointer-events: none;
-  transform: translate(-50%, -100%);
-}
-
-.experience-technology-tooltip::after {
-  content: '';
-  position: absolute;
-  left: calc(50% + var(--tooltip-arrow-offset, 0px));
-  bottom: -4px;
-  width: 6px;
-  height: 6px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  transform: translateX(-50%) rotate(45deg);
-}
-
-.experience-technologies img {
-  display: block;
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
-}
-
 @media (max-width: 760px) {
   .experience-summary {
     display: grid;
@@ -271,13 +186,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .experience-technologies li,
-  .experience-row--open .experience-technologies li {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
-
   .experience-panel,
   .experience-details,
   .experience-toggle,

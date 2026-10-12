@@ -51,6 +51,7 @@ Current site direction:
 - Treat `src/constants` data as immutable at runtime; clone before transforming.
 - Scripts run in Node only and are not client dependencies.
 - Keep route definitions centralized in `src/app/routes.tsx`.
+- Let React Router's `ScrollRestoration` handle scroll position across routes. Only manually scroll navigation links when staying on the current page; never reset the departing page before navigation.
 - Use existing blog helpers such as `getPostSlug` and `getPostPath`; do not duplicate slug/path logic.
 - Public writing links should use `/writing`; keep `/blog` only as a legacy redirect.
 
@@ -98,10 +99,11 @@ Current site direction:
 - In “I Got my Bachelor's Degree!”, link the opening Auburn University mention to `auburn.edu` and include its article brand icon.
 - Header nav links should stay neutral and undecorated at rest; hover/focus may turn blue. Active top-nav and mobile drawer links use `--blue-hover` text with a blue underline.
 - Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
+- Keep mobile breadcrumb segments on one line; truncate the current segment when space is tight so the menu control remains visible.
 - Keep `GraduationHeadshot` available as a photo asset, but do not render a headshot in the Home hero unless explicitly requested.
 - The Home hero uses weight-400 `Jacob Murrah` as its sole heading, with no location line. The introduction reads `Software Engineer at AT&T with a focus on automating manual systems. I’m pursuing a master’s at Georgia Tech and navigating fatherhood.` Keep AT&T and Georgia Tech linked with their icons. Follow with one short prompt: `Curious about my standards? Read my signals.` Link only `signals` internally to `/signals`. Left-align its five wrapping icon-label links (Email, LinkedIn, GitHub, Substack, Resume). Use the supplied brand-colored icons for LinkedIn, GitHub, and Substack; reuse footer Mail and Resume icons. Keep all five icons at 16px. Hero link labels use 16px Inter, the shared dotted underline, and the shared 0.08em gap before each muted up-right arrow; keep the icon-label gap at 0.375rem and blue hover/focus feedback. Give the local résumé PDF link the external arrow treatment. Keep the `sunset` photo through `InteractiveImage` at full available width with fixed height, `object-cover`, and centered cropping. Do not restore credential badges, proof bullets, or extended lifestyle copy in the hero.
 - The Home Experience introduction links `Resume` with the existing resume icon inside the anchor.
-- Use the shared centered `✦ ✦ ✦` `SectionDivider` between major Home sections. Normalize intentional article `<hr>` elements to the same ornament with tighter article spacing.
+- Use the shared centered `✦ ✦ ✦` `SectionDivider` between major Home sections. In articles, place the same ornament between H2 sections and before the first H2 when introductory body text precedes it. Normalize intentional `<hr>` elements to the ornament without adding duplicates. Keep article divider spacing tighter than Home.
 - Keep the mobile navigation overlay and drawer above the sticky header so the header cannot obscure its first item or controls. In the mobile drawer, show one separator below the Navigation/Close header and none below the link list.
 - Keep non-link controls such as the hamburger/menu toggle and close button on separate classes so link underline styling only applies to actual links; their hover/focus state should use `--blue-hover` and show a pointer cursor.
 - Footer social icons should stay `xsmall` by default, with the Substack icon intentionally overridden to `17px` square for visual balance.
@@ -137,12 +139,12 @@ Current site direction:
 - Sort posts descending by `pubDate`, with explicit deterministic tie-breakers such as `guid` ascending.
 - Blog CSS should follow Warm Precision:
   - Writing preview rows have no card background, border, or shadow at rest or on hover; keyboard focus uses a `--blue-border` outline. Preview titles match Experience company text: 16px Inter at weight 500, use `--text` at rest and `--blue-hover` on row hover/focus, and have no underline.
-  - Linked post titles keep their existing underline and promote to `--blue-hover` on hover/focus.
+  - Linked post titles keep their existing underline and promote to `--blue-hover` on hover/focus. At widths up to `767px`, article title line-height is `1.25` so wrapped dotted underlines clear the following line.
   - Blockquotes stay within the normal article text width and use light `--blockquote-bg`, a single `4px` `--blockquote-accent` left border, no top/right/bottom borders, and `--text`.
   - Interactive content-image hover/focus uses a subtle neutral outline, restrained scale-up, and four small `--image-corner-accent` L-shaped corner marks. Clicking or pressing Enter/Space opens the shared animated lightbox; any subsequent screen click or Escape closes it. Keep the header above the lightbox, but apply the same tint and slight blur to it while the viewer is open so it recedes with the page. Preserve reduced-motion behavior and apply the same interaction to article media and the Home sunset.
   - Code uses `--surface-muted`, `--text`, and `--border`.
   - Metadata uses `--muted`.
-  - Article byline authors use normal-case Inter at weight 400 with no extra tracking; dates retain their Instrument Sans metadata styling.
+  - Article byline authors use normal-case Inter at weight 400 with no extra tracking; dates retain their Instrument Sans metadata styling. Align author and date on their text baselines.
   - Long-form writing body text and strong text should use `--muted`; bold emphasis comes from weight, not a darker color. Article headings use `--text`.
   - Article bottom CTAs such as `Read on Substack` should use normal text weight, not bold.
   - Writing previews on `/writing` and Home share a three-line publication layout: 12px date above a 16px title with an always-visible 16px right arrow, then a 14px muted description. Keep Experience title sizing while making metadata quieter: 16px date line height, 1.375 title/description line height, 4px between date and title, 2px between title and description, and 12px top/bottom row padding without extra list gaps. Keep 12px horizontal hit-area padding extending beyond the text edge so text aligns with the section heading. Keep 16px between the writing introduction and list. Titles wrap naturally on all screens. Writing titles connect to the right arrow with faint neutral dotted leaders using the shared `.dotted-leader` utility at 60% opacity. Keep the arrow in a fixed 16px column and align the leader and arrow with the first title line when titles wrap. Experience retains its existing dotted leaders. Keep normal month capitalization; omit author names and preview thumbnails.

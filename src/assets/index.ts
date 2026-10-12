@@ -1,13 +1,9 @@
-import CalendarIcon from '@/assets/icons/CalendarIcon.svg';
-import CodeIcon from '@/assets/icons/CodeIcon.svg';
 import GitHubIcon from '@/assets/icons/GitHubIcon.svg';
 import SubstackIcon from '@/assets/icons/SubstackIcon.svg';
 import LinkedInIcon from '@/assets/icons/LinkedInIcon.svg';
 import MailIcon from '@/assets/icons/MailIcon.svg';
-import MapPinIcon from '@/assets/icons/MapPinIcon.svg';
 import MenuIcon from '@/assets/icons/MenuIcon.svg';
 import ArrowUpRightIcon from '@/assets/icons/ArrowUpRightIcon.svg';
-import ArrowRightIcon from '@/assets/icons/ArrowRightIcon.svg';
 import ArrowLeftIcon from '@/assets/icons/ArrowLeftIcon.svg';
 import ClockIcon from '@/assets/icons/ClockIcon.svg';
 import ResumeIcon from '@/assets/icons/ResumeIcon.svg';
@@ -25,16 +21,12 @@ import EpicGamesLogo from '@/assets/logos/epic-games.webp';
 import GeorgiaTechLogo from '@/assets/logos/georgia-tech.png';
 
 export const ICONS = {
-  calendar: CalendarIcon,
-  code: CodeIcon,
   gitHub: GitHubIcon,
   substack: SubstackIcon,
   linkedIn: LinkedInIcon,
   mail: MailIcon,
   arrowUpRight: ArrowUpRightIcon,
-  arrowRight: ArrowRightIcon,
   arrowLeft: ArrowLeftIcon,
-  mapPin: MapPinIcon,
   menu: MenuIcon,
   clock: ClockIcon,
   resume: ResumeIcon,
