@@ -1,10 +1,13 @@
 .hero-links .hero-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
   color: var(--text);
   white-space: nowrap;
   transition: color var(--link-transition-duration) var(--link-transition-easing);
+}
+
+.hero-links .hero-link > :is(img, .svg-icon) {
+  margin-right: 0.375rem;
 }
 
 .hero-links .hero-link-label {
@@ -24,7 +27,6 @@
 
 .hero-links .hero-link::after {
   content: '';
-  margin-left: 0;
   align-self: center;
   color: var(--muted);
 }

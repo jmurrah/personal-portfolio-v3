@@ -196,7 +196,7 @@ export default function AppLayout() {
           </button>
         </div>
 
-        <nav className="p-4 border-b border-[color:var(--border)]">
+        <nav className="mobile-drawer-nav p-4">
           <ul className="space-y-2" role="list">
             {mainNavItems.map((item) => {
               const isActive = isNavItemActive(item.href, item.external);

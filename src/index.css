@@ -200,6 +200,10 @@ a {
   transition: color 100ms ease;
 }
 
+.mobile-drawer-nav .nav-link {
+  font-family: var(--font-family);
+}
+
 .nav-link:hover,
 .nav-link:focus-visible {
   color: var(--blue-hover) !important;
@@ -207,16 +211,12 @@ a {
 }
 
 .nav-link-active {
-  color: var(--text) !important;
+  color: var(--blue-hover) !important;
   text-decoration-line: underline;
   text-decoration-color: var(--blue);
   text-decoration-thickness: 0.12em;
   text-underline-offset: 0.18em;
   text-decoration-skip-ink: auto;
-}
-
-.site-header .nav-link-active {
-  color: var(--blue-hover) !important;
 }
 
 .nav-control {

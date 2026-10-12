@@ -146,7 +146,7 @@ function HeroSection() {
       <nav className="mt-7" aria-label="Contact and profiles">
         <ul className="hero-links flex flex-wrap items-center justify-start gap-x-5 gap-y-3">
           {HERO_LINKS.map((link) => (
-            <li key={link.label} className="ui-label text-base">
+            <li key={link.label} className="text-base">
               <a
                 href={link.href}
                 target="_blank"

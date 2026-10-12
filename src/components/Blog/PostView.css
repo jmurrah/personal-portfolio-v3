@@ -79,7 +79,10 @@
 }
 
 .post-author {
+  font-family: var(--font-family);
   font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .post-date {
