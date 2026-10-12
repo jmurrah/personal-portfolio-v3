@@ -49,11 +49,11 @@ export default function BlogFeed({ limit }: BlogFeedProps) {
                 >
                   {publishedOn}
                 </time>
-                <div className="grid grid-cols-[minmax(0,auto)_minmax(1rem,1fr)_1rem] items-start gap-2">
+                <div className="blog-preview-card__title-row relative grid grid-cols-[minmax(0,1fr)_1rem] items-start gap-2">
+                  <span className="blog-preview-card__leader dotted-leader opacity-60" aria-hidden="true" />
                   <h3 className="blog-preview-card__title min-w-0 text-base leading-snug">
-                    {post.title}
+                    <span className="blog-preview-card__title-text">{post.title}</span>
                   </h3>
-                  <span className="dotted-leader mt-[10px] opacity-60" aria-hidden="true" />
                   <SvgIcon
                     src={ArrowRightIcon}
                     alt=""
