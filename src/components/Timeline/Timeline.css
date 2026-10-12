@@ -52,7 +52,7 @@
   width: 3rem;
   flex-shrink: 0;
   color: var(--muted-light);
-  font-family: var(--font-family-ui);
+  font-family: var(--font-family);
 }
 
 @media (min-width: 640px) {
@@ -133,7 +133,7 @@
 .timeline__title-meta {
   margin-left: auto;
   color: var(--muted);
-  font-family: var(--font-family-ui);
+  font-family: var(--font-family);
   white-space: nowrap;
 }
 

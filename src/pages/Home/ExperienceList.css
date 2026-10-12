@@ -43,7 +43,7 @@
 }
 
 .experience-date {
-  font-family: var(--font-family-ui);
+  font-family: var(--font-family);
   font-size: 0.875rem;
   color: var(--muted-light);
 }

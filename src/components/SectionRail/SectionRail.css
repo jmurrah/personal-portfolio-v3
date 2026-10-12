@@ -61,7 +61,7 @@
   padding: 3px 5px;
   background: var(--bg);
   color: var(--muted);
-  font-family: var(--font-family-ui);
+  font-family: var(--font-family);
   font-size: 12px;
   font-weight: 500;
   line-height: 1;

@@ -82,7 +82,7 @@
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--muted);
-  font-family: var(--font-family-ui);
+  font-family: var(--font-family);
 }
 
 .post-author {

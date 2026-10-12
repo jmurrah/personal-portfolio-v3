@@ -54,7 +54,7 @@ export default function Footer() {
       <div className="flex flex-col flex-wrap justify-between items-center gap-x-4 gap-y-2 min-[480px]:flex-row">
         <span className="whitespace-nowrap">© {year} Jacob Murrah</span>
         <div className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-x-4 justify-center items-center">
-          <div className="ui-label flex items-center gap-1.5 text-xs hidden sm:flex">
+          <div className="flex items-center gap-1.5 text-xs hidden sm:flex">
             <SvgIcon src={ICONS.clock} alt="Clock" size="3xsmall" color="var(--muted-light)" />
             <span className="text-[var(--muted-light)]">{time}</span>
             <span className="text-[color:var(--muted-light)]">{TIME_ZONE_NAME}</span>

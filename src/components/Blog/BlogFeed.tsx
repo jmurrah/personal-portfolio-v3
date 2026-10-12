@@ -44,7 +44,7 @@ export default function BlogFeed({ limit }: BlogFeedProps) {
                 aria-label={`Read ${post.title}`}
               >
                 <time
-                  className="ui-label mb-0.5 text-xs leading-4 text-[var(--muted-light)]"
+                  className="mb-0.5 text-xs leading-4 text-[var(--muted-light)]"
                   dateTime={post.pubDate.slice(0, 10)}
                 >
                   {publishedOn}

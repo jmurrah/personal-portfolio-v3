@@ -185,7 +185,7 @@ export default function AppLayout() {
         }}
       >
         <div className="border-[color:var(--border)] flex h-16 flex-shrink-0 items-center justify-between border-b p-4">
-          <span className="ui-label text-lg font-semibold">Navigation</span>
+          <span className="text-lg font-semibold">Navigation</span>
           <button
             type="button"
             onClick={closeSidebar}

@@ -166,8 +166,7 @@ function HeroSection() {
                     src={link.icon}
                     alt=""
                     size="2xsmall"
-                    color="currentColor"
-                    hoverColor="currentColor"
+                    color="var(--text)"
                   />
                 )}
                 <span className="hero-link-label link-underline">{link.label}</span>
@@ -203,8 +202,7 @@ function ExperienceSection() {
               src={ICONS.resume}
               alt=""
               size="2xsmall"
-              color="currentColor"
-              hoverColor="currentColor"
+              color="var(--text)"
               className="mr-1 align-[-0.125em]"
             />
             <span>Resume</span>

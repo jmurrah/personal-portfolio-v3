@@ -1,5 +1,5 @@
 .terminal-breadcrumb {
-  font-family: var(--font-family-ui);
+  font-family: var(--font-family);
   color: var(--muted);
   min-width: 0;
 }

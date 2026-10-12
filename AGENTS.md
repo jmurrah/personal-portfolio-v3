@@ -101,7 +101,7 @@ Current site direction:
 - Terminal breadcrumb hover/focus states should use `--blue-hover` for the full interactive token, including the `~` home marker and segment labels.
 - Keep mobile breadcrumb segments on one line; truncate the current segment when space is tight so the menu control remains visible.
 - Keep `GraduationHeadshot` available as a photo asset, but do not render a headshot in the Home hero unless explicitly requested.
-- The Home hero uses weight-400 `Jacob Murrah` as its sole heading, with no location line. The introduction reads `Software Engineer at AT&T with a focus on automating manual systems. I’m pursuing a master’s at Georgia Tech and navigating fatherhood.` Keep AT&T and Georgia Tech linked with their icons. Follow with one short prompt: `Curious about my standards? Read my signals.` Link only `signals` internally to `/signals`. Left-align its five wrapping icon-label links (Email, LinkedIn, GitHub, Substack, Resume). Use the supplied brand-colored icons for LinkedIn, GitHub, and Substack; reuse footer Mail and Resume icons. Keep all five icons at 16px. Hero link labels use 16px Inter, the shared dotted underline, and the shared 0.08em gap before each muted up-right arrow; keep the icon-label gap at 0.375rem and blue hover/focus feedback. Give the local résumé PDF link the external arrow treatment. Keep the `sunset` photo through `InteractiveImage` at full available width with fixed height, `object-cover`, and centered cropping. Do not restore credential badges, proof bullets, or extended lifestyle copy in the hero.
+- The Home hero uses weight-400 `Jacob Murrah` as its sole heading, with no location line. The introduction reads `Software Engineer at AT&T with a focus on automating manual systems. I’m pursuing a master’s at Georgia Tech and navigating fatherhood.` Keep AT&T and Georgia Tech linked with their icons. Follow with one short prompt: `Curious about my standards? Read my signals.` Link only `signals` internally to `/signals`. Left-align its five wrapping icon-label links (Email, LinkedIn, GitHub, Substack, Resume). Use the supplied brand-colored icons for LinkedIn, GitHub, and Substack; reuse footer Mail and Resume icons. Keep all five icons at 16px. Hero link labels use 16px Inter, the shared dotted underline, and the shared 0.08em gap before each muted up-right arrow; keep the icon-label gap at 0.375rem and blue hover/focus feedback on labels and arrows. Inline Email and Resume icons, including the Experience résumé icon, stay `--text` on hover/focus; brand image colors stay unchanged. Only footer icons change color on hover/focus. Give the local résumé PDF link the external arrow treatment. Keep the `sunset` photo through `InteractiveImage` at full available width with fixed height, `object-cover`, and centered cropping. Do not restore credential badges, proof bullets, or extended lifestyle copy in the hero.
 - The Home Experience introduction links `Resume` with the existing resume icon inside the anchor.
 - Use the shared centered `✦ ✦ ✦` `SectionDivider` between major Home sections. In articles, place the same ornament between H2 sections and before the first H2 when introductory body text precedes it. Normalize intentional `<hr>` elements to the ornament without adding duplicates. Keep article divider spacing tighter than Home.
 - Keep the mobile navigation overlay and drawer above the sticky header so the header cannot obscure its first item or controls. In the mobile drawer, show one separator below the Navigation/Close header and none below the link list.
@@ -112,7 +112,7 @@ Current site direction:
 
 - Instrument Serif is the display/editorial font. Use it at weight 400 with its native zero letter spacing for `h1`, `h2`, hero/name typography, page titles, article titles, and other major editorial headings. Never bold it, apply custom tracking, or stretch it with `scaleX()`.
 - Inter is the main prose/body font for paragraphs, descriptions, long-form writing, buttons, and normal UI copy.
-- Instrument Sans is the secondary UI font for desktop nav, breadcrumbs, dates, metadata, locations, tags, eyebrow text, status labels, chips, and other small UI elements. Mobile drawer link labels use Inter.
+- Inter is also the UI font for navigation, breadcrumbs, dates, metadata, tags, labels, and controls. Do not reintroduce a separate UI font.
 - Geist Mono is removed and must not be restored as a stylistic font.
 - Literal `code` and `pre` content uses the system monospace stack only.
 - Article headings `h1`-`h4` use Instrument Serif. Smaller headings `h5`/`h6`, post card titles, and article bodies stay in Inter unless explicitly requested otherwise.
@@ -120,10 +120,8 @@ Current site direction:
 - Use the global tokens:
   - `--font-family`
   - `--font-family-display`
-  - `--font-family-ui`
   - `--font-family-code`
 - Reusable typography classes exist in `src/index.css`:
-  - `.ui-label`
   - `.identity-name`
   - `.h1-tagline`
 
@@ -144,7 +142,7 @@ Current site direction:
   - Interactive content-image hover/focus uses a subtle neutral outline, restrained scale-up, and four small `--image-corner-accent` L-shaped corner marks. Clicking or pressing Enter/Space opens the shared animated lightbox; any subsequent screen click or Escape closes it. Keep the header above the lightbox, but apply the same tint and slight blur to it while the viewer is open so it recedes with the page. Preserve reduced-motion behavior and apply the same interaction to article media and the Home sunset.
   - Code uses `--surface-muted`, `--text`, and `--border`.
   - Metadata uses `--muted`.
-  - Article byline authors use normal-case Inter at weight 400 with no extra tracking; dates retain their Instrument Sans metadata styling. Align author and date on their text baselines.
+  - Article byline authors use normal-case Inter at weight 400 with no extra tracking; dates use Inter metadata styling. Align author and date on their text baselines.
   - Long-form writing body text and strong text should use `--muted`; bold emphasis comes from weight, not a darker color. Article headings use `--text`.
   - Article bottom CTAs such as `Read on Substack` should use normal text weight, not bold.
   - Writing previews on `/writing` and Home share a three-line publication layout: 12px date above a 16px title with an always-visible 16px right arrow, then a 14px muted description. Keep Experience title sizing while making metadata quieter: 16px date line height, 1.375 title/description line height, 4px between date and title, 2px between title and description, and 12px top/bottom row padding without extra list gaps. Keep 12px horizontal hit-area padding extending beyond the text edge so text aligns with the section heading. Keep 16px between the writing introduction and list. Titles wrap naturally on all screens. Writing titles connect to the right arrow with faint neutral dotted leaders using the shared `.dotted-leader` utility at 60% opacity. Keep the arrow in a fixed 16px column and align the leader and arrow with the first title line when titles wrap. Experience retains its existing dotted leaders. Keep normal month capitalization; omit author names and preview thumbnails.
