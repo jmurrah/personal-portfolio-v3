@@ -9,7 +9,7 @@ Reduce the interface to neutral graphite/paper, off-white/dark text, and one mut
 
 ## Source Of Truth
 
-Keep every exact color in `src/palette.css`. Components and local CSS consume semantic variables only.
+Keep every exact UI color in `src/palette.css`. Components and local CSS consume semantic variables only. Supplied brand icon artwork may retain its embedded colors.
 
 Canonical tokens:
 
@@ -54,7 +54,8 @@ Do not add compatibility aliases, colored soft-surface tokens, generic orange to
 - Resting link labels use `--text`, not blue.
 - Resting link underlines use dotted `--text` decoration.
 - Hover/focus states keep the dotted underline and transition both label and decoration to `--blue-hover`.
-- Active navigation keeps neutral text with a `--blue` underline.
+- Home hero icon-label links use the shared dotted underline on labels; their labels and arrows turn `--blue-hover` on hover/focus. Supplied brand marks retain their colors.
+- Active top navigation uses `--blue-hover` text with a `--blue` underline; active mobile drawer navigation keeps neutral text with a `--blue` underline.
 - Blue is otherwise limited to genuinely interactive elements, selected states, the breadcrumb cursor, and browser UI such as the scrollbar.
 - Non-interactive timeline markers and decoration stay neutral.
 
@@ -79,14 +80,14 @@ blockquote {
 }
 ```
 
-Do not use these orange tokens anywhere else.
+Do not use these orange tokens anywhere else. The supplied Substack icon retains its original brand orange.
 
 ## Final Check
 
-- Exact colors exist only in `src/palette.css`.
+- Exact UI colors exist only in `src/palette.css`; supplied brand marks retain their embedded colors.
 - No blue/green tinted surfaces exist; orange surfaces are limited to article blockquotes.
 - Resting links read as normal text first.
 - Blue communicates interaction only.
 - Green UI does not exist.
-- Orange appears only on article blockquote left borders/backgrounds and interactive content-image corner marks.
+- Orange appears only on article blockquote left borders/backgrounds, interactive content-image corner marks, and the supplied Substack brand mark.
 - Photography provides warmth and visual color.

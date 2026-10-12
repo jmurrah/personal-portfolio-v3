@@ -64,17 +64,17 @@ export function LabeledTimeline({
     <div className="timeline timeline--signals" style={timelineStyle}>
       {items.map((item) => (
         <div className="timeline__row timeline__row--signals" key={item.id}>
-          <p className="timeline__label text-sm sm:text-base">{item.label}</p>
+          <p className="timeline__label text-sm">{item.label}</p>
           <div
             className={`timeline__marker${item.isFilled ? ' timeline__marker--filled' : ''}`}
             aria-hidden="true"
           />
           <div className="timeline__content timeline__content--signals">
             <div className="timeline__title-row">
-              <TitleTag className="timeline__title text-base sm:text-lg">{item.title}</TitleTag>
+              <TitleTag className="timeline__title text-base font-medium">{item.title}</TitleTag>
               {item.titleMeta ? <div className="timeline__title-meta">{item.titleMeta}</div> : null}
             </div>
-            <div className="timeline__description text-sm sm:text-base">{item.description}</div>
+            <div className="timeline__description text-sm">{item.description}</div>
           </div>
         </div>
       ))}

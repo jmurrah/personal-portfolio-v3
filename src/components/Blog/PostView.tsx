@@ -2,9 +2,11 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } fro
 import type { LightboxImage } from '@/components/ImageLightbox';
 import '@/components/InteractiveImage.css';
 import '@/components/SectionDivider.css';
+import InlineBrandIcon from '@/components/InlineBrandIcon';
 import SvgIcon from '@/components/SvgIcon';
 import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
-import { ICONS } from '@/assets';
+import { BRAND_ICONS, ICONS } from '@/assets';
+import { getArticleBrandIcon } from './articleBrandIcons';
 import type { FeedPost } from './types';
 import './PostView.css';
 
@@ -123,7 +125,58 @@ const normalizeSectionDividers = (doc: Document) => {
   });
 };
 
-const cleanContent = (html: string): { html: string; sections: SectionRailItem[] } => {
+const linkGraduationIntro = (doc: Document, postTitle: string) => {
+  if (postTitle !== "I Got my Bachelor's Degree!") return;
+  const firstParagraph = doc.querySelector('p');
+  const textNode = Array.from(firstParagraph?.childNodes ?? []).find(
+    (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.includes('Auburn University'),
+  );
+  const text = textNode?.textContent;
+  if (!textNode || !text) return;
+
+  const name = 'Auburn University';
+  const index = text.indexOf(name);
+  const link = doc.createElement('a');
+  link.href = 'https://www.auburn.edu/';
+  link.textContent = name;
+  textNode.replaceWith(
+    doc.createTextNode(text.slice(0, index)),
+    link,
+    doc.createTextNode(text.slice(index + name.length)),
+  );
+};
+
+const normalizeArticleBrandLinks = (doc: Document) => {
+  doc.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => {
+    const href = link.getAttribute('href');
+    if (!href || link.classList.contains('post-image-trigger')) return;
+
+    let label = link.textContent?.trim() ?? '';
+    if (label === 'my Substack' && href === 'https://jacobmurrah.substack.com/') {
+      link.before(doc.createTextNode('my '));
+      link.textContent = 'Substack';
+      label = 'Substack';
+    }
+    if (label === 'his Discord' && href.startsWith('https://discord.com/')) {
+      link.before(doc.createTextNode('his '));
+      link.textContent = 'Discord';
+      label = 'Discord';
+    }
+
+    const brandIcon = getArticleBrandIcon(href, label);
+    if (!brandIcon) return;
+    const icon = doc.createElement('img');
+    icon.src = brandIcon.src;
+    icon.alt = '';
+    icon.width = brandIcon.wide ? 20 : 16;
+    icon.height = 16;
+    icon.classList.add('inline-brand-icon');
+    if (brandIcon.wide) icon.classList.add('inline-brand-icon--wide');
+    link.prepend(icon);
+  });
+};
+
+const cleanContent = (html: string, postTitle: string): { html: string; sections: SectionRailItem[] } => {
   if (!html) return { html: '', sections: [] };
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
@@ -138,6 +191,11 @@ const cleanContent = (html: string): { html: string; sections: SectionRailItem[]
   normalizeFootnotes(doc);
   normalizeImageTriggers(doc);
   normalizeSectionDividers(doc);
+  linkGraduationIntro(doc, postTitle);
+  doc.querySelectorAll<HTMLAnchorElement>('a[href="https://murrah.dev/blog"]').forEach((link) => {
+    link.setAttribute('href', '/writing');
+  });
+  normalizeArticleBrandLinks(doc);
   const usedHeadingIds = new Map<string, number>([[ARTICLE_TITLE_ID, 1]]);
   const sections = Array.from(doc.querySelectorAll('h2, h3, h4')).map((heading, index) => {
     const label = heading.textContent?.trim() || `Section ${index + 1}`;
@@ -159,7 +217,7 @@ const cleanContent = (html: string): { html: string; sections: SectionRailItem[]
   });
   doc.querySelectorAll('a').forEach((link) => {
     const href = link.getAttribute('href');
-    if (!href || href.startsWith('#')) {
+    if (!href || href.startsWith('#') || (href.startsWith('/') && !href.startsWith('//'))) {
       link.removeAttribute('target');
       link.removeAttribute('rel');
       return;
@@ -177,7 +235,7 @@ const cleanContent = (html: string): { html: string; sections: SectionRailItem[]
 export default function PostView({ post, onBack }: PostViewProps) {
   const publishedOn = formatDate(post.pubDate);
   const rawContent = post.content || post.description || '';
-  const { html: content, sections } = useMemo(() => cleanContent(rawContent), [rawContent]);
+  const { html: content, sections } = useMemo(() => cleanContent(rawContent, post.title), [rawContent, post.title]);
   const contentMarkup = useMemo(() => ({ __html: content }), [content]);
   const railSections = useMemo<SectionRailItem[]>(
     () => [{ id: ARTICLE_TITLE_ID, label: post.title, depth: 0 }, ...sections],
@@ -297,7 +355,16 @@ export default function PostView({ post, onBack }: PostViewProps) {
                 rel="noopener noreferrer"
                 className="post-title-link link-underline"
               >
-                <span>{post.title}</span>
+                {post.title}
+                {'\u00a0'}
+                <SvgIcon
+                  src={ICONS.arrowUpRight}
+                  alt=""
+                  size="2xsmall"
+                  color="currentColor"
+                  hoverColor="currentColor"
+                  className="post-title-link__arrow"
+                />
               </a>
             ) : (
               <h1 className="post-title">{post.title}</h1>
@@ -333,6 +400,7 @@ export default function PostView({ post, onBack }: PostViewProps) {
             rel="noopener noreferrer"
             className="post-link-btn post-bottom-link inline-link"
           >
+            <InlineBrandIcon src={BRAND_ICONS.substack} />
             Read on Substack
           </a>
         )}

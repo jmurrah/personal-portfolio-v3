@@ -11,6 +11,9 @@ import ArrowRightIcon from '@/assets/icons/ArrowRightIcon.svg';
 import ArrowLeftIcon from '@/assets/icons/ArrowLeftIcon.svg';
 import ClockIcon from '@/assets/icons/ClockIcon.svg';
 import ResumeIcon from '@/assets/icons/ResumeIcon.svg';
+import GitHubBrandIcon from '@/assets/icons/GitHubBrandIcon.svg';
+import LinkedInBrandIcon from '@/assets/icons/LinkedInBrandIcon.webp';
+import SubstackBrandIcon from '@/assets/icons/SubstackBrandIcon.webp';
 
 import GraduationHeadshotPhoto from '@/assets/photos/GraduationHeadshot.webp';
 import SunsetPhoto from '@/assets/photos/sunset.webp';
@@ -19,6 +22,7 @@ import AttLogo from '@/assets/logos/att.png';
 import AuburnLogo from '@/assets/logos/auburn.png';
 import Is4sLogo from '@/assets/logos/is4s.webp';
 import EpicGamesLogo from '@/assets/logos/epic-games.webp';
+import GeorgiaTechLogo from '@/assets/logos/georgia-tech.png';
 
 export const ICONS = {
   calendar: CalendarIcon,
@@ -36,6 +40,12 @@ export const ICONS = {
   resume: ResumeIcon,
 } as const;
 
+export const BRAND_ICONS = {
+  gitHub: GitHubBrandIcon,
+  linkedIn: LinkedInBrandIcon,
+  substack: SubstackBrandIcon,
+} as const;
+
 export const PHOTOS = {
   graduationHeadshot: GraduationHeadshotPhoto,
   sunset: SunsetPhoto,
@@ -47,4 +57,5 @@ export const LOGOS = {
   auburn: AuburnLogo,
   is4s: Is4sLogo,
   epicGames: EpicGamesLogo,
+  georgiaTech: GeorgiaTechLogo,
 } as const;

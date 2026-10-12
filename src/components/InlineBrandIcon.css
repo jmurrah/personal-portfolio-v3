@@ -1,0 +1,13 @@
+.inline-brand-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.25em;
+  object-fit: contain;
+  vertical-align: -0.125em;
+  border-radius: 2px;
+}
+
+.inline-brand-icon--wide {
+  width: 1.25em;
+}

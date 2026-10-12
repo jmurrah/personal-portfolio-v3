@@ -1,20 +1,22 @@
 import { Link } from 'react-router-dom';
-import { ICONS, LOGOS, PHOTOS } from '@/assets';
+import { BRAND_ICONS, ICONS, LOGOS, PHOTOS } from '@/assets';
 import BlogFeed from '@/components/Blog/BlogFeed';
+import InlineBrandIcon from '@/components/InlineBrandIcon';
 import InteractiveImage from '@/components/InteractiveImage';
 import SectionDivider from '@/components/SectionDivider';
 import SectionRail, { type SectionRailItem } from '@/components/SectionRail';
 import SvgIcon from '@/components/SvgIcon';
 import ExperienceList, { type ExperienceItem } from './Home/ExperienceList';
+import './Home/HeroLinks.css';
 
-type HeroLink = { label: string; href: string; icon: string };
+type HeroLink = { label: string; href: string; icon: string; brandIcon?: boolean };
 
 const HERO_LINKS: HeroLink[] = [
   { label: 'Email', href: 'mailto:jacob@murrah.dev', icon: ICONS.mail },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacobmurrah/', icon: ICONS.linkedIn },
-  { label: 'GitHub', href: 'https://github.com/jmurrah', icon: ICONS.gitHub },
-  { label: 'Substack', href: 'https://jacobmurrah.substack.com/', icon: ICONS.substack },
-  { label: 'Résumé', href: '/JacobMurrahResume.pdf', icon: ICONS.resume },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacobmurrah/', icon: BRAND_ICONS.linkedIn, brandIcon: true },
+  { label: 'GitHub', href: 'https://github.com/jmurrah', icon: BRAND_ICONS.gitHub, brandIcon: true },
+  { label: 'Substack', href: 'https://jacobmurrah.substack.com/', icon: BRAND_ICONS.substack, brandIcon: true },
+  { label: 'Resume', href: '/JacobMurrahResume.pdf', icon: ICONS.resume },
 ];
 
 const HOME_SECTIONS: SectionRailItem[] = [
@@ -22,12 +24,6 @@ const HOME_SECTIONS: SectionRailItem[] = [
   { id: 'experience', label: 'Experience' },
   { id: 'writing', label: 'Writing' },
 ];
-
-const HERO_PROOF_ITEMS = [
-  { label: 'Software Engineer', image: LOGOS.att, imageAlt: 'AT&T' },
-  { label: 'M.S. CS', mark: 'GT' },
-  { label: 'B.E. Software Engineering', image: LOGOS.auburn, imageAlt: 'Auburn University' },
-] as const;
 
 const EXPERIENCES: ExperienceItem[] = [
   {
@@ -115,83 +111,76 @@ const EXPERIENCES: ExperienceItem[] = [
 function HeroSection() {
   return (
     <section id="about" className="section-rail-target mt-8 flex w-full flex-col">
-      <h1 className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span className="whitespace-nowrap text-4xl font-normal sm:text-5xl">Jacob Murrah</span>
-        <span className="flex items-baseline gap-4 whitespace-nowrap text-xl font-normal text-[var(--muted)] sm:text-2xl">
-          <span aria-hidden="true">/</span>
-          <span>Software Engineer</span>
-          <span aria-hidden="true">/</span>
-          <span>Atlanta</span>
-        </span>
-      </h1>
+      <h1 className="text-4xl font-normal sm:text-5xl">Jacob Murrah</h1>
+      <p className="ui-label mt-2 flex items-center gap-1.5 text-base text-[var(--muted)] sm:text-lg">
+        <SvgIcon src={ICONS.mapPin} alt="" size="2xsmall" color="currentColor" />
+        Atlanta, Georgia
+      </p>
 
       <p className="mt-6 max-w-2xl text-[var(--muted)]">
-        Software engineer at{' '}
+        Software Engineer at{' '}
         <a
           href="https://www.att.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="meta-link"
         >
+          <InlineBrandIcon src={LOGOS.att} />
           AT&T
         </a>{' '}
-        building network disaster-recovery and automation systems. Pursuing an M.S. in Computer
-        Science at{' '}
+        with a focus on automating manual systems. I’m pursuing a master’s at{' '}
         <a
           href="https://www.gatech.edu/"
           target="_blank"
           rel="noopener noreferrer"
           className="meta-link"
         >
+          <InlineBrandIcon src={LOGOS.georgiaTech} wide />
           Georgia Tech
-        </a>
+        </a>{' '}
+        and navigating fatherhood.
+      </p>
+      <p className="mt-4 max-w-2xl text-[var(--muted)]">
+        Curious about my standards? Read my{' '}
+        <Link className="inline-link" to="/signals">
+          signals
+        </Link>
         .
       </p>
 
-      <ul
-        className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3"
-        aria-label="Professional overview"
-      >
-        {HERO_PROOF_ITEMS.map((item) => (
-          <li
-            key={item.label}
-            className="ui-label flex items-center gap-2 text-sm font-normal text-[var(--muted)]"
-          >
-            <span className="flex h-4 w-4 shrink-0 items-center justify-center">
-              {'image' in item ? (
-                <img src={item.image} alt={item.imageAlt} className="h-4 w-4 object-contain" />
-              ) : (
-                <span className="ui-label text-[0.6rem] font-semibold" aria-hidden="true">
-                  {item.mark}
-                </span>
-              )}
-            </span>
-            <span>{item.label}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-7 flex flex-wrap items-center justify-start gap-5">
-        {HERO_LINKS.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-link inline-flex rounded p-1"
-            aria-label={link.label}
-            title={link.label}
-          >
-            <SvgIcon
-              src={link.icon}
-              alt=""
-              size="small"
-              color="currentColor"
-              hoverColor="currentColor"
-            />
-          </a>
-        ))}
-      </div>
+      <nav className="mt-7" aria-label="Contact and profiles">
+        <ul className="hero-links flex flex-wrap items-center justify-start gap-x-5 gap-y-3">
+          {HERO_LINKS.map((link) => (
+            <li key={link.label} className="ui-label text-base">
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-link external-text-link"
+              >
+                {link.brandIcon ? (
+                  <img
+                    src={link.icon}
+                    alt=""
+                    width={16}
+                    height={16}
+                    className="h-4 w-4 shrink-0 rounded-[2px] object-contain"
+                  />
+                ) : (
+                  <SvgIcon
+                    src={link.icon}
+                    alt=""
+                    size="2xsmall"
+                    color="currentColor"
+                    hoverColor="currentColor"
+                  />
+                )}
+                <span className="hero-link-label link-underline">{link.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
       <InteractiveImage
         src={PHOTOS.sunset}
         alt="Sunset over the ocean"
@@ -215,7 +204,15 @@ function ExperienceSection() {
             rel="noopener noreferrer"
             className="meta-link external-text-link"
           >
-            <span>resume</span>
+            <SvgIcon
+              src={ICONS.resume}
+              alt=""
+              size="2xsmall"
+              color="currentColor"
+              hoverColor="currentColor"
+              className="mr-1 align-[-0.125em]"
+            />
+            <span>Resume</span>
           </a>
           .
         </p>
@@ -238,6 +235,7 @@ function WritingSection() {
             target="_blank"
             rel="noopener noreferrer"
           >
+            <InlineBrandIcon src={BRAND_ICONS.substack} />
             Substack
           </a>
           . Read more on my{' '}

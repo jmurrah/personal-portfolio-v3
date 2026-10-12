@@ -53,6 +53,12 @@
   display: inline;
 }
 
+.post-title-link__arrow {
+  width: 0.7em;
+  height: 0.7em;
+  vertical-align: -0.03em;
+}
+
 .post-subtitle {
   font-size: 16px;
   color: var(--muted);
@@ -196,7 +202,7 @@
   padding: 0;
 }
 
-.post-content img {
+.post-content img:not(.inline-brand-icon) {
   max-width: 100%;
   height: auto;
   border-radius: 0;

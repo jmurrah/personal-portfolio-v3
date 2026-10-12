@@ -73,6 +73,16 @@
   background: var(--bg);
 }
 
+.timeline--signals .timeline__marker {
+  top: 0.95rem;
+}
+
+@media (min-width: 640px) {
+  .timeline--signals .timeline__marker {
+    top: 0.75rem;
+  }
+}
+
 .timeline__marker--filled {
   border-color: var(--text);
   background: var(--text);

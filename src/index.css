@@ -215,6 +215,10 @@ a {
   text-decoration-skip-ink: auto;
 }
 
+.site-header .nav-link-active {
+  color: var(--blue-hover) !important;
+}
+
 .nav-control {
   color: var(--muted);
   cursor: pointer;

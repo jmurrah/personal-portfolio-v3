@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ICONS } from '@/assets';
+import { BRAND_ICONS, ICONS } from '@/assets';
 import BlogContent from '@/components/Blog/BlogContent';
+import InlineBrandIcon from '@/components/InlineBrandIcon';
 import SvgIcon from '@/components/SvgIcon';
 
 export default function Blog() {
@@ -20,6 +21,7 @@ export default function Blog() {
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation?.()}
         >
+          <InlineBrandIcon src={BRAND_ICONS.substack} />
           Substack
         </a>
         , all posts are mirrored here.
