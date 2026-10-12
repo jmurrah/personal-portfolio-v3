@@ -112,11 +112,6 @@ function HeroSection() {
   return (
     <section id="about" className="section-rail-target mt-8 flex w-full flex-col">
       <h1 className="text-4xl font-normal sm:text-5xl">Jacob Murrah</h1>
-      <p className="ui-label mt-2 flex items-center gap-1.5 text-base text-[var(--muted)] sm:text-lg">
-        <SvgIcon src={ICONS.mapPin} alt="" size="2xsmall" color="currentColor" />
-        Atlanta, Georgia
-      </p>
-
       <p className="mt-6 max-w-2xl text-[var(--muted)]">
         Software Engineer at{' '}
         <a
