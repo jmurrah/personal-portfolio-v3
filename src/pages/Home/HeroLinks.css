@@ -28,10 +28,4 @@
 .hero-links .hero-link::after {
   content: '';
   align-self: center;
-  color: var(--muted);
-}
-
-.hero-links .hero-link:hover::after,
-.hero-links .hero-link:focus-visible::after {
-  color: var(--blue-hover);
 }
