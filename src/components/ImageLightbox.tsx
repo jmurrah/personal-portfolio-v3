@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useIsPresent, useReducedMotion } from 'framer-motion';
 
 type ImageBounds = {
   top: number;
@@ -23,6 +23,7 @@ type ImageLightboxProps = {
 };
 
 function ImageDialog({ image, onBackdropClick }: ImageLightboxProps & { image: LightboxImage }) {
+  const isPresent = useIsPresent();
   const prefersReducedMotion = useReducedMotion();
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const releaseSourceTimerRef = useRef<number | null>(null);
@@ -104,7 +105,7 @@ function ImageDialog({ image, onBackdropClick }: ImageLightboxProps & { image: L
   return (
     <div
       ref={dialogRef}
-      className="post-image-lightbox"
+      className={`post-image-lightbox${isPresent ? '' : ' post-image-lightbox--closing'}`}
       role="dialog"
       aria-modal="true"
       aria-label={`Enlarged image: ${image.alt}`}
@@ -140,12 +141,6 @@ function ImageDialog({ image, onBackdropClick }: ImageLightboxProps & { image: L
 }
 
 export default function ImageLightbox({ image, onBackdropClick }: ImageLightboxProps) {
-  useEffect(() => {
-    if (!image) return undefined;
-    document.body.classList.add('image-lightbox-open');
-    return () => document.body.classList.remove('image-lightbox-open');
-  }, [image]);
-
   return createPortal(
     <AnimatePresence>
       {image ? <ImageDialog key="image" image={image} onBackdropClick={onBackdropClick} /> : null}
